@@ -7,7 +7,7 @@ const constants = require("./js/constants");
 
 const client = new Discord.Client();
 
-const commandPrefix = "::";
+const commandPrefix = "!";
 
 client.on("message", function (message) {
     if (message.author.bot) return;
@@ -27,6 +27,28 @@ client.on("message", function (message) {
             const timeTaken = Date.now() - message.createdTimestamp;
             message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
             break;
+        case "info":
+            message.reply(`\nThe RSClan bot was created on 01/26/21.\nCurrent version: 1.0.1\nPlease report issues to Chadathan#0100\n`);
+            break;
+        case "help":
+            let response = '\n```';
+
+            response += `The RSClan Bot supports the following commands:\n
+${commandPrefix}ping                - Check bot latency
+${commandPrefix}info                - Displays bot info
+${commandPrefix}help                - Displays bot commands
+${commandPrefix}daily "username"    - Displays daily xp gain
+${commandPrefix}weekly "username"   - Displays weekly xp gain
+${commandPrefix}spooder             - Displays current Araxxor paths
+${commandPrefix}rago                - Displays current and next Vorago rotation
+${commandPrefix}alog "username"     - Displays user's Adventure Log
+${commandPrefix}vis                 - Displays current Rune combinations
+${commandPrefix}merch               - Displays current and future Travelling Merchant items\n`;
+            response += '```';
+
+            message.reply(response);
+            break;
+        case "daily":
         case "gainz":
             let gainzUser = '';
             for (i of args) {
