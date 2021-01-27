@@ -1,0 +1,19 @@
+{
+  "name": "rsclan-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord Bot for RuneScape Clans",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chad Hamdan",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "discord.js": "^12.5.1",
+    "puppeteer": "^5.5.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "runescape-api": "^2.1.3"
+  }
+}
