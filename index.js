@@ -64,7 +64,11 @@ client.on("message", function (message) {
             rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
                     const data = $('tr', html);
 
-                    message.reply(commands.daily(data, rsn));
+                    if (rsn === undefined) {
+                        message.reply('RSN not found, please add one or pass it in as an argument.');
+                    } else {
+                        message.reply(commands.daily(data, rsn));
+                    }
                 }).catch(function (err) {});
             break;
 
@@ -72,7 +76,11 @@ client.on("message", function (message) {
             rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
                 const data = $('tr', html);
 
-                message.reply(commands.yesterday(data, rsn));
+                if (rsn === undefined) {
+                    message.reply('RSN not found, please add one or pass it in as an argument.');
+                } else {
+                    message.reply(commands.yesterday(data, rsn));
+                }
             }).catch(function (err) {});
             break;
 
@@ -80,7 +88,11 @@ client.on("message", function (message) {
             rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
                 const data = $('tr', html);
 
-                message.reply(commands.weekly(data, rsn));
+                if (rsn === undefined) {
+                    message.reply('RSN not found, please add one or pass it in as an argument.');
+                } else {
+                    message.reply(commands.weekly(data, rsn));
+                }
             }).catch(function (err) {});
             break;
 
@@ -101,6 +113,11 @@ client.on("message", function (message) {
             break;
 
         case "alog":
+            if (rsn === undefined) {
+                message.reply('RSN not found, please add one or pass it in as an argument.');
+                break;
+            }
+
             rs.runemetrics.getProfile(rsn.replace('+', ' ')).then(data => {
                 message.reply(commands.log(data));
             })
