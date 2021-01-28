@@ -7,11 +7,13 @@ function help(prefix) {
 ${prefix}ping                - Check bot latency
 ${prefix}info                - Displays bot info
 ${prefix}help                - Displays bot commands
-${prefix}daily "username"    - Displays daily xp gain
-${prefix}weekly "username"   - Displays weekly xp gain
+${prefix}rsn "rsname"        - Add an RSN to your Discord account
+${prefix}daily "rsname"      - Displays daily xp gain
+${prefix}yesterday "rsname"  - Displays yesterday's xp gain
+${prefix}weekly "rsname"     - Displays weekly xp gain
 ${prefix}spooder             - Displays current Araxxor paths
 ${prefix}rago                - Displays current and next Vorago rotation
-${prefix}alog "username"     - Displays user's Adventure Log
+${prefix}alog "rsname"       - Displays user's Adventure Log
 ${prefix}vis                 - Displays current Rune combinations
 ${prefix}merch               - Displays current and future Travelling Merchant items\n\`\`\``;
 }
@@ -56,6 +58,30 @@ function weekly(data, user) {
 
     let result = '\n```';
     result += `----- ${user}'s Weekly Gainz -----\n`;
+    for (let i = 0; i < xp.length; i++) {
+        result += `${constants.skills[i]}\t${xp[i]} \n`;
+    }
+    result += '```';
+
+    return result;
+}
+
+// Yesterday Command
+function yesterday(data, user) {
+    let xp = [];
+
+    // Format user string
+    user = user.replace('+', ' ');
+    user = _.startCase(user);
+
+    // Row, Column, Value
+    // Daily Row = 4
+    for (let i = 1; i < 30; i++) {
+        xp.push(data[i].children[5].children[0].data);
+    }
+
+    let result = '\n```';
+    result += `----- ${user}'s Yesterday Gainz -----\n`;
     for (let i = 0; i < xp.length; i++) {
         result += `${constants.skills[i]}\t${xp[i]} \n`;
     }
@@ -251,6 +277,7 @@ function merch(data) {
 exports.help = help;
 exports.daily = daily;
 exports.weekly = weekly;
+exports.yesterday = yesterday;
 exports.spooder = spooder;
 exports.rago = rago;
 exports.log = log;

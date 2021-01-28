@@ -2,14 +2,18 @@ const Discord = require("discord.js");
 const rp = require('request-promise');
 const rs = require('runescape-api');
 const $ = require('cheerio');
+const _ = require('lodash');
 
 const pkg = require("./package.json");
 const config = require("./config.json");
 const commands = require("./js/commands");
+const userstore = require("./js/userstore");
 
 const client = new Discord.Client();
 
 const commandPrefix = "!";
+
+userstore.loadUsers();
 
 client.on("message", function (message) {
 
@@ -21,9 +25,19 @@ client.on("message", function (message) {
     const command = args.shift().toLowerCase();
 
     // Print Command Information to Console
-    console.log('Message: ' + message.content);
-    console.log('Command: ' + command);
-    console.log('Arguments: ' + args);
+    console.log(`Command: ${command} Args: ${args} - sent by ${message.author}`);
+
+    // Process RSN
+    let rsn = '';
+
+    if (args.length === 0) {
+        rsn = userstore.getUser(message.author);
+    } else {
+        for (i of args) {
+            rsn += `${i}+`;
+        }
+        rsn = rsn.slice(0, rsn.length - 1);
+    }
 
     switch (command) {
         case "ping":
@@ -39,30 +53,34 @@ client.on("message", function (message) {
             message.reply(commands.help(commandPrefix));
             break;
 
+        case "rsn":
+            userstore.saveUser(message.author, rsn);
+
+            message.reply(`\nAssigned ${_.startCase(rsn.replace('+', ' '))} to your discord account.`);
+            break;
+
         case "daily":
         case "gainz":
-            let gainzUser = '';
-            for (i of args) {
-                gainzUser += `${i}+`;
-            }
-            gainzUser = gainzUser.slice(0, gainzUser.length - 1);
-            rp(`https://www.runeclan.com/user/${gainzUser}`).then(function (html) {
+            rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
                     const data = $('tr', html);
 
-                    message.reply(commands.daily(data, gainzUser));
+                    message.reply(commands.daily(data, rsn));
                 }).catch(function (err) {});
             break;
 
-        case "weekly":
-            let weeklyUser = '';
-            for (i of args) {
-                weeklyUser += `${i}+`;
-            }
-            weeklyUser = weeklyUser.slice(0, weeklyUser.length - 1);
-            rp(`https://www.runeclan.com/user/${weeklyUser}`).then(function (html) {
+        case "yesterday":
+            rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
                 const data = $('tr', html);
 
-                message.reply(commands.weekly(data, weeklyUser));
+                message.reply(commands.yesterday(data, rsn));
+            }).catch(function (err) {});
+            break;
+
+        case "weekly":
+            rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
+                const data = $('tr', html);
+
+                message.reply(commands.weekly(data, rsn));
             }).catch(function (err) {});
             break;
 
@@ -83,12 +101,7 @@ client.on("message", function (message) {
             break;
 
         case "alog":
-            let alogUser = '';
-            for (i of args) {
-                alogUser += `${i}_`;
-            }
-            alogUser = alogUser.slice(0, alogUser.length - 1);
-            rs.runemetrics.getProfile(alogUser).then(data => {
+            rs.runemetrics.getProfile(rsn.replace('+', ' ')).then(data => {
                 message.reply(commands.log(data));
             })
             break;
