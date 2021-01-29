@@ -59,19 +59,22 @@ client.on("message", function (message) {
             break;
 
         case "daily":
+        case "gains":
         case "gainz":
+        case "yesterday":
+        case "weekly":
             rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
                     const data = $('tr', html);
 
                     if (rsn === undefined) {
                         message.reply('RSN not found, please add one or pass it in as an argument.');
                     } else {
-                        message.reply(commands.daily(data, rsn));
+                        message.channel.send(commands.daily(data, rsn));
                     }
                 }).catch(function (err) {});
             break;
 
-        case "yesterday":
+/*        case "yesterday":
             rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
                 const data = $('tr', html);
 
@@ -93,7 +96,7 @@ client.on("message", function (message) {
                     message.reply(commands.weekly(data, rsn));
                 }
             }).catch(function (err) {});
-            break;
+            break;*/
 
         case "spooder":
             rp('https://runescape.wiki/w/Araxxor').then(function (html) {

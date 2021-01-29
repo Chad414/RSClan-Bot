@@ -1,6 +1,6 @@
 {
   "name": "rsclan-discord-bot",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Discord Bot for RuneScape Clans",
   "main": "index.js",
   "scripts": {

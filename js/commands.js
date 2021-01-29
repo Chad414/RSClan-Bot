@@ -30,9 +30,10 @@ function help(prefix) {
             { name: `${prefix}info`, value: 'Displays bot info' },
             { name: `${prefix}help`, value: 'Displays bot commands' },
             { name: `${prefix}rsn "rsname"`, value: 'Assign a RSN to your Discord account' },
-            { name: `${prefix}daily "rsname"`, value: 'Displays daily xp gain' },
+            { name: `${prefix}gains "rsn"`, value: 'Display your Daily, Yesrday, and Weekly XP Gains' },
+/*            { name: `${prefix}daily "rsname"`, value: 'Displays daily xp gain' },
             { name: `${prefix}yesterday "rsname"`, value: 'Displays yesterday\'s xp gain' },
-            { name: `${prefix}weekly "rsname"`, value: 'Displays weekly xp gain' },
+            { name: `${prefix}weekly "rsname"`, value: 'Displays weekly xp gain' },*/
             { name: `${prefix}spooder`, value: 'Displays current Araxxor paths' },
             { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
             { name: `${prefix}alog "rsname"`, value: 'Displays user\'s Adventure Log' },
@@ -55,7 +56,9 @@ function rsn(rsn) {
 
 // Daily Command
 function daily(data, user) {
-    let xp = [];
+    let daily = [];
+    let yesterday = [];
+    let weekly = [];
     let url = `https://www.runeclan.com/user/${rsn}`;
 
     // Format user string
@@ -63,49 +66,73 @@ function daily(data, user) {
     user = _.startCase(user);
 
     // Row, Column, Value
-    // Daily Row = 4
+    // Daily Row
     for (let i = 1; i < 30; i++) {
-        xp.push(data[i].children[4].children[0].data);
+        daily.push(data[i].children[4].children[0].data);
     }
 
-    return new Discord.MessageEmbed()
-        .setColor(constants.embedColor)
-        .setTitle(`${user}'s Daily XP Gains`)
-        .setDescription(`Attack: ${xp[1]}
-            \nDefence: ${xp[2]}
-            \nStrength: ${xp[3]}
-            \nConstitution: ${xp[4]}
-            \nRanged: ${xp[5]}
-            \nPrayer: ${xp[6]}
-            \nMagic: ${xp[7]}
-            \nCooking: ${xp[8]}
-            \nWoodcutting: ${xp[9]}
-            \nFletching: ${xp[10]}
-            \nFishing: ${xp[11]}
-            \nFiremaking: ${xp[12]}
-            \nCrafting: ${xp[13]}
-            \nSmithing: ${xp[14]}
-            \nMining: ${xp[15]}
-            \nHerblore: ${xp[16]}
-            \nAgility: ${xp[17]}
-            \nThieving: ${xp[18]}
-            \nSlayer: ${xp[19]}
-            \nFarming: ${xp[20]}
-            \nRunecrafting: ${xp[21]}
-            \nHunter: ${xp[22]}
-            \nConstruction: ${xp[23]}
-            \nSummoning: ${xp[24]}
-            \nDungeoneering: ${xp[25]}
-            \nDivination: ${xp[26]}
-            \nInvention: ${xp[27]}
-            \nArchaeology: ${xp[28]}`)
-        .setThumbnail('https://i.imgur.com/XMgKR8S.png')
-        .addField('\u100b', '\u100b')
-        .addFields(
-            { name: `Overall: ${xp[0]}`, value: `Provided by RuneClan\n` },
-        )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+    // Yesterday Row
+    for (let i = 1; i < 30; i++) {
+        yesterday.push(data[i].children[5].children[0].data);
+    }
+
+    // Weekly Row
+    for (let i = 1; i < 30; i++) {
+        weekly.push(data[i].children[6].children[0].data);
+    }
+
+    // Format XP Labels
+    for (let i = 0; i < daily.length; i++) {
+        daily[i] = daily[i].replace(/\s+/g, '');
+        daily[i] = _.padStart(daily[i], 9, " ");
+    }
+
+    for (let i = 0; i < yesterday.length; i++) {
+        yesterday[i] = yesterday[i].replace(/\s+/g, '');
+        yesterday[i] = _.padStart(yesterday[i], 10, " ");
+    }
+
+    for (let i = 0; i < weekly.length; i++) {
+        weekly[i] = weekly[i].replace(/\s+/g, '');
+        weekly[i] = _.padStart(weekly[i], 10, " ");
+    }
+
+    let result = `**${user}'s XP Gains**\n\`\`\`swift\n`;
+    result += `✚--------------------------------------------------✚
+|     Skill     |  Today   | Yesterday | This Week |
+|---------------|----------|-----------|-----------|
+| Overall       |${daily[0]} |${yesterday[0]} |${weekly[0]} |
+| Attack        |${daily[1]} |${yesterday[1]} |${weekly[1]} |
+| Defence       |${daily[2]} |${yesterday[2]} |${weekly[2]} |
+| Strength      |${daily[3]} |${yesterday[3]} |${weekly[3]} |
+| Constitution  |${daily[4]} |${yesterday[4]} |${weekly[4]} |
+| Ranged        |${daily[5]} |${yesterday[5]} |${weekly[5]} |
+| Prayer        |${daily[6]} |${yesterday[6]} |${weekly[6]} |
+| Magic         |${daily[7]} |${yesterday[7]} |${weekly[7]} |
+| Cooking       |${daily[8]} |${yesterday[8]} |${weekly[8]} |
+| Woodcutting   |${daily[9]} |${yesterday[9]} |${weekly[9]} |
+| Fletching     |${daily[10]} |${yesterday[10]} |${weekly[10]} |
+| Fishing       |${daily[11]} |${yesterday[11]} |${weekly[11]} |
+| Firemaking    |${daily[12]} |${yesterday[12]} |${weekly[12]} |
+| Crafting      |${daily[13]} |${yesterday[13]} |${weekly[13]} |
+| Smithing      |${daily[14]} |${yesterday[14]} |${weekly[14]} |
+| Mining        |${daily[15]} |${yesterday[15]} |${weekly[15]} |
+| Herblore      |${daily[16]} |${yesterday[16]} |${weekly[16]} |
+| Agility       |${daily[17]} |${yesterday[17]} |${weekly[17]} |
+| Thieving      |${daily[18]} |${yesterday[18]} |${weekly[18]} |
+| Slayer        |${daily[19]} |${yesterday[19]} |${weekly[19]} |
+| Farming       |${daily[20]} |${yesterday[20]} |${weekly[20]} |
+| Runecrafting  |${daily[21]} |${yesterday[21]} |${weekly[21]} |
+| Construction  |${daily[22]} |${yesterday[22]} |${weekly[22]} |
+| Summoning     |${daily[23]} |${yesterday[23]} |${weekly[23]} |
+| Dungeoneering |${daily[24]} |${yesterday[24]} |${weekly[24]} |
+| Divination    |${daily[25]} |${yesterday[25]} |${weekly[25]} |
+| Invention     |${daily[26]} |${yesterday[26]} |${weekly[26]} |
+| Archaeology   |${daily[27]} |${yesterday[27]} |${weekly[27]} |
+✚--------------------------------------------------✚
+\`\`\``;
+
+    return result;
 }
 
 // Weekly Command
@@ -117,7 +144,7 @@ function weekly(data, user) {
     user = _.startCase(user);
 
     // Row, Column, Value
-    // Daily Row = 4
+    // Weekly Row
     for (let i = 1; i < 30; i++) {
         xp.push(data[i].children[6].children[0].data);
     }
@@ -171,7 +198,7 @@ function yesterday(data, user) {
     user = _.startCase(user);
 
     // Row, Column, Value
-    // Daily Row = 4
+    // Yesterday Row
     for (let i = 1; i < 30; i++) {
         xp.push(data[i].children[5].children[0].data);
     }
