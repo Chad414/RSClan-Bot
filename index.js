@@ -4,7 +4,6 @@ const rs = require('runescape-api');
 const $ = require('cheerio');
 const _ = require('lodash');
 
-const pkg = require("./package.json");
 const config = require("./config.json");
 const commands = require("./js/commands");
 const userstore = require("./js/userstore");
@@ -46,7 +45,7 @@ client.on("message", function (message) {
             break;
 
         case "info":
-            message.reply(`\nThe RSClan bot was created on 01/26/21.\nCurrent version: ${pkg.version}\nPlease report issues to Chadathan#0100\n`);
+            message.reply(commands.info());
             break;
 
         case "help":
@@ -56,7 +55,7 @@ client.on("message", function (message) {
         case "rsn":
             userstore.saveUser(message.author, rsn);
 
-            message.reply(`\nAssigned ${_.startCase(rsn.replace('+', ' '))} to your discord account.`);
+            message.reply(commands.rsn(rsn));
             break;
 
         case "daily":

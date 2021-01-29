@@ -5,7 +5,7 @@ let userDict = {};
 function saveUser(id, rsn) {
     userDict[id] = rsn;
 
-    const writeData = JSON.stringify(userDict);
+    const writeData = JSON.stringify(userDict, null, "\t");
 
     fs.writeFile('users.json', writeData, (err) => {
         if (err) {

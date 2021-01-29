@@ -1,3 +1,5 @@
+const embedColor = '1c22d4';
+
 const skills = [
     'Overall:      ',
     'Attack:       ',
@@ -30,4 +32,5 @@ const skills = [
     'Archaeology:  '
 ];
 
+exports.embedColor = embedColor;
 exports.skills = skills;

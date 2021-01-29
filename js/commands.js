@@ -1,26 +1,62 @@
+const Discord = require("discord.js");
 const _ = require('lodash');
+
+const pkg = require("../package.json");
 const constants = require("./constants");
+
+// Info Command
+function info() {
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle('RSClan Bot')
+        .setURL('https://github.com/Chad414/rsclan-discord-bot')
+        .setDescription('The RSClan bot was created on 01/26/21')
+        .setThumbnail('https://i.imgur.com/MJ5cEWu.png')
+        .addFields(
+            { name: `Version ${pkg.version}`, value: 'Please report issues to @Chadathan#0100' },
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+}
 
 // Help Command
 function help(prefix) {
-    return `\n\`\`\`The RSClan Bot supports the following commands:\n
-${prefix}ping                - Check bot latency
-${prefix}info                - Displays bot info
-${prefix}help                - Displays bot commands
-${prefix}rsn "rsname"        - Add an RSN to your Discord account
-${prefix}daily "rsname"      - Displays daily xp gain
-${prefix}yesterday "rsname"  - Displays yesterday's xp gain
-${prefix}weekly "rsname"     - Displays weekly xp gain
-${prefix}spooder             - Displays current Araxxor paths
-${prefix}rago                - Displays current and next Vorago rotation
-${prefix}alog "rsname"       - Displays user's Adventure Log
-${prefix}vis                 - Displays current Rune combinations
-${prefix}merch               - Displays current and future Travelling Merchant items\n\`\`\``;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle('RSClan Bot Commands')
+        .setDescription('The RSClan Bot supports the following commands')
+        .addFields(
+            { name: `${prefix}ping`, value: 'Check bot latency' },
+            { name: `${prefix}info`, value: 'Displays bot info' },
+            { name: `${prefix}help`, value: 'Displays bot commands' },
+            { name: `${prefix}rsn "rsname"`, value: 'Assign a RSN to your Discord account' },
+            { name: `${prefix}daily "rsname"`, value: 'Displays daily xp gain' },
+            { name: `${prefix}yesterday "rsname"`, value: 'Displays yesterday\'s xp gain' },
+            { name: `${prefix}weekly "rsname"`, value: 'Displays weekly xp gain' },
+            { name: `${prefix}spooder`, value: 'Displays current Araxxor paths' },
+            { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
+            { name: `${prefix}alog "rsname"`, value: 'Displays user\'s Adventure Log' },
+            { name: `${prefix}vis`, value: 'Displays current Rune combinations' },
+            { name: `${prefix}merch`, value: 'Displays current and future Travelling Merchant items' }
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+}
+
+// RSN Command
+function rsn(rsn) {
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle('RSN Assigned')
+        .setDescription(`Assigned ${_.startCase(rsn.replace('+', ' '))} to your discord account.`)
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Daily Command
 function daily(data, user) {
     let xp = [];
+    let url = `https://www.runeclan.com/user/${rsn}`;
 
     // Format user string
     user = user.replace('+', ' ');
@@ -32,14 +68,44 @@ function daily(data, user) {
         xp.push(data[i].children[4].children[0].data);
     }
 
-    let result = '\n```';
-    result += `----- ${user}'s Daily Gainz -----\n`;
-    for (let i = 0; i < xp.length; i++) {
-        result += `${constants.skills[i]}\t${xp[i]} \n`;
-    }
-    result += '```';
-
-    return result;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`${user}'s Daily XP Gains`)
+        .setDescription(`Attack: ${xp[1]}
+            \nDefence: ${xp[2]}
+            \nStrength: ${xp[3]}
+            \nConstitution: ${xp[4]}
+            \nRanged: ${xp[5]}
+            \nPrayer: ${xp[6]}
+            \nMagic: ${xp[7]}
+            \nCooking: ${xp[8]}
+            \nWoodcutting: ${xp[9]}
+            \nFletching: ${xp[10]}
+            \nFishing: ${xp[11]}
+            \nFiremaking: ${xp[12]}
+            \nCrafting: ${xp[13]}
+            \nSmithing: ${xp[14]}
+            \nMining: ${xp[15]}
+            \nHerblore: ${xp[16]}
+            \nAgility: ${xp[17]}
+            \nThieving: ${xp[18]}
+            \nSlayer: ${xp[19]}
+            \nFarming: ${xp[20]}
+            \nRunecrafting: ${xp[21]}
+            \nHunter: ${xp[22]}
+            \nConstruction: ${xp[23]}
+            \nSummoning: ${xp[24]}
+            \nDungeoneering: ${xp[25]}
+            \nDivination: ${xp[26]}
+            \nInvention: ${xp[27]}
+            \nArchaeology: ${xp[28]}`)
+        .setThumbnail('https://i.imgur.com/XMgKR8S.png')
+        .addField('\u100b', '\u100b')
+        .addFields(
+            { name: `Overall: ${xp[0]}`, value: `Provided by RuneClan\n` },
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Weekly Command
@@ -56,14 +122,44 @@ function weekly(data, user) {
         xp.push(data[i].children[6].children[0].data);
     }
 
-    let result = '\n```';
-    result += `----- ${user}'s Weekly Gainz -----\n`;
-    for (let i = 0; i < xp.length; i++) {
-        result += `${constants.skills[i]}\t${xp[i]} \n`;
-    }
-    result += '```';
-
-    return result;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`${user}'s Weekly XP Gains`)
+        .setDescription(`Attack: ${xp[1]}
+            \nDefence: ${xp[2]}
+            \nStrength: ${xp[3]}
+            \nConstitution: ${xp[4]}
+            \nRanged: ${xp[5]}
+            \nPrayer: ${xp[6]}
+            \nMagic: ${xp[7]}
+            \nCooking: ${xp[8]}
+            \nWoodcutting: ${xp[9]}
+            \nFletching: ${xp[10]}
+            \nFishing: ${xp[11]}
+            \nFiremaking: ${xp[12]}
+            \nCrafting: ${xp[13]}
+            \nSmithing: ${xp[14]}
+            \nMining: ${xp[15]}
+            \nHerblore: ${xp[16]}
+            \nAgility: ${xp[17]}
+            \nThieving: ${xp[18]}
+            \nSlayer: ${xp[19]}
+            \nFarming: ${xp[20]}
+            \nRunecrafting: ${xp[21]}
+            \nHunter: ${xp[22]}
+            \nConstruction: ${xp[23]}
+            \nSummoning: ${xp[24]}
+            \nDungeoneering: ${xp[25]}
+            \nDivination: ${xp[26]}
+            \nInvention: ${xp[27]}
+            \nArchaeology: ${xp[28]}`)
+        .setThumbnail('https://i.imgur.com/XMgKR8S.png')
+        .addField('\u100b', '\u100b')
+        .addFields(
+            { name: `Overall: ${xp[0]}`, value: `Provided by RuneClan\n` },
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Yesterday Command
@@ -80,37 +176,70 @@ function yesterday(data, user) {
         xp.push(data[i].children[5].children[0].data);
     }
 
-    let result = '\n```';
-    result += `----- ${user}'s Yesterday Gainz -----\n`;
-    for (let i = 0; i < xp.length; i++) {
-        result += `${constants.skills[i]}\t${xp[i]} \n`;
-    }
-    result += '```';
-
-    return result;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`${user}'s Yesterday XP Gains`)
+        .setDescription(`Attack: ${xp[1]}
+            \nDefence: ${xp[2]}
+            \nStrength: ${xp[3]}
+            \nConstitution: ${xp[4]}
+            \nRanged: ${xp[5]}
+            \nPrayer: ${xp[6]}
+            \nMagic: ${xp[7]}
+            \nCooking: ${xp[8]}
+            \nWoodcutting: ${xp[9]}
+            \nFletching: ${xp[10]}
+            \nFishing: ${xp[11]}
+            \nFiremaking: ${xp[12]}
+            \nCrafting: ${xp[13]}
+            \nSmithing: ${xp[14]}
+            \nMining: ${xp[15]}
+            \nHerblore: ${xp[16]}
+            \nAgility: ${xp[17]}
+            \nThieving: ${xp[18]}
+            \nSlayer: ${xp[19]}
+            \nFarming: ${xp[20]}
+            \nRunecrafting: ${xp[21]}
+            \nHunter: ${xp[22]}
+            \nConstruction: ${xp[23]}
+            \nSummoning: ${xp[24]}
+            \nDungeoneering: ${xp[25]}
+            \nDivination: ${xp[26]}
+            \nInvention: ${xp[27]}
+            \nArchaeology: ${xp[28]}`)
+        .setThumbnail('https://i.imgur.com/XMgKR8S.png')
+        .addField('\u100b', '\u100b')
+        .addFields(
+            { name: `Overall: ${xp[0]}`, value: `Provided by RuneClan\n` },
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Spooder Command
 function spooder(data) {
-    let result = '\n```';
 
-    result += `Path 1 (Minions):  ${data[0].children[0].children[1].children[0].children[0].data}\n`;
-    result += `Path 2 (Acid):     ${data[0].children[0].children[1].children[1].children[0].data}\n`;
-    result += `Path 3 (Darkness): ${data[0].children[0].children[1].children[2].children[0].data}\n`;
-    result += `${data[0].children[0].children[2].children[0].children[0].data}\n`;
-
-    result += '```';
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Araxxor's Current Rotation`)
+        .setDescription(`${data[0].children[0].children[2].children[0].children[0].data}`)
+        .setThumbnail('https://i.imgur.com/WNIlW3T.png')
+        .addFields(
+            { name: 'Path 1 (Minions)', value: `${data[0].children[0].children[1].children[0].children[0].data}`},
+            { name: 'Path 2 (Acid)', value: `${data[0].children[0].children[1].children[1].children[0].data}`},
+            { name: 'Path 3 (Darkness)', value: `${data[0].children[0].children[1].children[2].children[0].data}`},
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 
     return result;
 }
 
 // Rago Command
 function rago(data) {
-    let result = '\n```';
 
     // Get current rotation
     let currentRotation = data[0].children[0].data;
-    result += `Vorago Current:  ${currentRotation}\n`;
 
     // Find next rotation
     let nextRotation;
@@ -134,7 +263,6 @@ function rago(data) {
             nextRotation = 'Ceiling collapse';
             break;
     }
-    result += `Vorago Next:  ${nextRotation}\n`;
 
     // Find days left until rotation
     const d = new Date();
@@ -162,34 +290,44 @@ function rago(data) {
             daysLeft = 4;
             break;
     }
-    result += `Days Until Next Rotation: ${daysLeft}\n`;
 
-    result += '```';
-
-    return result;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Vorago's Current Rotation`)
+        .setDescription(`Days Until Next Rotation: ${daysLeft}`)
+        .setThumbnail('https://i.imgur.com/J4UZu2M.png')
+        .addFields(
+            { name: 'Vorago Current', value: `${currentRotation}`},
+            { name: 'Vorago Next', value: `${nextRotation}`},
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Adventure Log Command
 function log(data) {
-    let result = '\n```';
-
-    result += `----- ${data.name}'s Adventure Log -----\n`;
-
-    for (let i = data.activities.length - 1; i >= 8; i--) {
-        result += `${data.activities[i].date}\n\t${data.activities[i].title}\n\n`;
-    }
-
-    result += '```';
-
-    return result;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`${data.name}'s Adventure Log`)
+        .setThumbnail('https://i.imgur.com/LWcpp7Y.png')
+        .addFields(
+            { name: `${data.activities[0].title}`, value: `${data.activities[0].date}`},
+            { name: `${data.activities[1].title}`, value: `${data.activities[1].date}`},
+            { name: `${data.activities[2].title}`, value: `${data.activities[2].date}`},
+            { name: `${data.activities[3].title}`, value: `${data.activities[3].date}`},
+            { name: `${data.activities[4].title}`, value: `${data.activities[4].date}`},
+            { name: `${data.activities[5].title}`, value: `${data.activities[5].date}`},
+            { name: `${data.activities[6].title}`, value: `${data.activities[6].date}`},
+            { name: `${data.activities[7].title}`, value: `${data.activities[7].date}`},
+            { name: `${data.activities[8].title}`, value: `${data.activities[9].date}`},
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Vis Command
 function vis(data) {
-    let result = '\n```';
-
     let firstRune = data[0].children[1].children[2].children[0].children[2].attribs.alt;
-    result += `First Rune:\n\t${firstRune}\n`;
 
     let secondRune = [
         data[0].children[1].children[6].children[0].children[2].attribs.alt,
@@ -197,26 +335,27 @@ function vis(data) {
         data[0].children[1].children[6].children[2].children[2].attribs.alt
     ];
 
-    result += `Second Runes:\n\t${secondRune[0]}\n\t${secondRune[1]}\n\t${secondRune[2]}`;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Correct Rune Combinations`)
+        .setThumbnail('https://i.imgur.com/qsRI2mS.png')
+        .addFields(
+            { name: `First Rune`, value: `${firstRune}`},
+            { name: `Second Rune`, value: `${secondRune[0]}\n${secondRune[1]}\n${secondRune[2]}`},
 
-    result += '```';
-
-    return result;
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Merchant Command
 function merch(data) {
-    let result = '\n```';
 
     let currentItems = [
         data[0].children[0].children[1].children[1].children[0].attribs.title,
         data[0].children[0].children[1].children[2].children[0].attribs.title,
         data[0].children[0].children[1].children[3].children[0].attribs.title
     ];
-
-    result += `----- Travelling Merchant's Shop -----\n`;
-
-    result += `Current Items:\n\t${currentItems[0]} - ${currentItems[1]} - ${currentItems[2]}\n\n`;
 
     let futureItems = [
         [
@@ -263,18 +402,26 @@ function merch(data) {
         ]
     ];
 
-    result += `Future Items:\n`;
-    for (let i = 0; i < futureItems.length; i++) {
-        result += `${futureItems[i][0]}\n`
-        result += `\t${futureItems[i][1]} - ${futureItems[i][2]} - ${futureItems[i][3]}\n`;
-    }
-
-    result += '```';
-
-    return result;
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Travelling Merchant's Shop`)
+        .addFields(
+            { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}`},
+            { name: `${futureItems[0][0]}`, value: `${futureItems[0][1]}\n${futureItems[0][2]}\n${futureItems[0][3]}`},
+            { name: `${futureItems[1][0]}`, value: `${futureItems[1][1]}\n${futureItems[1][2]}\n${futureItems[1][3]}`},
+            { name: `${futureItems[2][0]}`, value: `${futureItems[2][1]}\n${futureItems[2][2]}\n${futureItems[2][3]}`},
+            { name: `${futureItems[3][0]}`, value: `${futureItems[3][1]}\n${futureItems[3][2]}\n${futureItems[3][3]}`},
+            { name: `${futureItems[4][0]}`, value: `${futureItems[4][1]}\n${futureItems[4][2]}\n${futureItems[4][3]}`},
+            { name: `${futureItems[5][0]}`, value: `${futureItems[5][1]}\n${futureItems[5][2]}\n${futureItems[5][3]}`},
+            { name: `${futureItems[6][0]}`, value: `${futureItems[6][1]}\n${futureItems[6][2]}\n${futureItems[6][3]}`},
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
+exports.info = info;
 exports.help = help;
+exports.rsn = rsn;
 exports.daily = daily;
 exports.weekly = weekly;
 exports.yesterday = yesterday;
