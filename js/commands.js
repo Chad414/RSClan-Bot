@@ -123,12 +123,13 @@ function daily(data, user) {
 | Slayer        |${daily[19]} |${yesterday[19]} |${weekly[19]} |
 | Farming       |${daily[20]} |${yesterday[20]} |${weekly[20]} |
 | Runecrafting  |${daily[21]} |${yesterday[21]} |${weekly[21]} |
-| Construction  |${daily[22]} |${yesterday[22]} |${weekly[22]} |
-| Summoning     |${daily[23]} |${yesterday[23]} |${weekly[23]} |
-| Dungeoneering |${daily[24]} |${yesterday[24]} |${weekly[24]} |
-| Divination    |${daily[25]} |${yesterday[25]} |${weekly[25]} |
-| Invention     |${daily[26]} |${yesterday[26]} |${weekly[26]} |
-| Archaeology   |${daily[27]} |${yesterday[27]} |${weekly[27]} |
+| Hunter        |${daily[22]} |${yesterday[22]} |${weekly[22]} |
+| Construction  |${daily[23]} |${yesterday[23]} |${weekly[23]} |
+| Summoning     |${daily[24]} |${yesterday[24]} |${weekly[24]} |
+| Dungeoneering |${daily[25]} |${yesterday[25]} |${weekly[25]} |
+| Divination    |${daily[26]} |${yesterday[26]} |${weekly[26]} |
+| Invention     |${daily[27]} |${yesterday[27]} |${weekly[27]} |
+| Archaeology   |${daily[28]} |${yesterday[28]} |${weekly[28]} |
 ✚--------------------------------------------------✚
 \`\`\``;
 

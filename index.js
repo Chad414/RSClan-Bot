@@ -74,30 +74,6 @@ client.on("message", function (message) {
                 }).catch(function (err) {});
             break;
 
-/*        case "yesterday":
-            rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
-                const data = $('tr', html);
-
-                if (rsn === undefined) {
-                    message.reply('RSN not found, please add one or pass it in as an argument.');
-                } else {
-                    message.reply(commands.yesterday(data, rsn));
-                }
-            }).catch(function (err) {});
-            break;
-
-        case "weekly":
-            rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
-                const data = $('tr', html);
-
-                if (rsn === undefined) {
-                    message.reply('RSN not found, please add one or pass it in as an argument.');
-                } else {
-                    message.reply(commands.weekly(data, rsn));
-                }
-            }).catch(function (err) {});
-            break;*/
-
         case "spooder":
             rp('https://runescape.wiki/w/Araxxor').then(function (html) {
                 const data = $('#reload', html);
