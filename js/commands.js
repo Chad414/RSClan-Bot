@@ -38,7 +38,8 @@ function help(prefix) {
             { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
             { name: `${prefix}alog "rsname"`, value: 'Displays user\'s Adventure Log' },
             { name: `${prefix}vis`, value: 'Displays current Rune combinations' },
-            { name: `${prefix}merch`, value: 'Displays current and future Travelling Merchant items' }
+            { name: `${prefix}merch`, value: 'Displays current and future Travelling Merchant items' },
+            { name: `${prefix}raven`, value: 'Check when the Raven will spawn in Prifddinas' }
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
@@ -447,6 +448,24 @@ function merch(data) {
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
+// Raven Command
+function raven(data) {
+    let raven;
+    if (data[1].children[2].data.includes("The next raven will spawn on")) {
+        raven = `The next raven will spawn on ${data[1].children[3].children[0].data}`;
+    } else {
+        raven = "The raven has spawned";
+    }
+
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Raven`)
+        .setThumbnail('https://i.imgur.com/sur96eP.png')
+        .setDescription(raven)
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+}
+
 exports.info = info;
 exports.help = help;
 exports.rsn = rsn;
@@ -458,3 +477,4 @@ exports.rago = rago;
 exports.log = log;
 exports.vis = vis;
 exports.merch = merch;
+exports.raven = raven;

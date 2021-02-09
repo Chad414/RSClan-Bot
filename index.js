@@ -67,7 +67,7 @@ client.on("message", function (message) {
                     const data = $('tr', html);
 
                     if (rsn === undefined) {
-                        message.reply('RSN not found, please add one or pass it in as an argument.');
+                        message.reply('RSN not found, please assign one with !rsn.');
                     } else {
                         message.channel.send(commands.daily(data, rsn));
                     }
@@ -92,7 +92,7 @@ client.on("message", function (message) {
 
         case "alog":
             if (rsn === undefined) {
-                message.reply('RSN not found, please add one or pass it in as an argument.');
+                message.reply('RSN not found, please assign one with !rsn.');
                 break;
             }
 
@@ -114,6 +114,13 @@ client.on("message", function (message) {
                 const data = $('.wikitable', html);
 
                 message.reply(commands.merch(data));
+            }).catch(function (err) {});
+            break;
+        case "raven":
+            rp('https://runescape.wiki/w/The_Ravensworn').then(function (html) {
+                const data = $("p", html);
+
+                message.reply(commands.raven(data));
             }).catch(function (err) {});
             break;
     }
