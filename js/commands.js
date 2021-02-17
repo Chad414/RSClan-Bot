@@ -31,15 +31,14 @@ function help(prefix) {
             { name: `${prefix}help`, value: 'Displays bot commands' },
             { name: `${prefix}rsn "rsname"`, value: 'Assign a RSN to your Discord account' },
             { name: `${prefix}gains "rsn"`, value: 'Display your Daily, Yesrday, and Weekly XP Gains' },
-/*            { name: `${prefix}daily "rsname"`, value: 'Displays daily xp gain' },
-            { name: `${prefix}yesterday "rsname"`, value: 'Displays yesterday\'s xp gain' },
-            { name: `${prefix}weekly "rsname"`, value: 'Displays weekly xp gain' },*/
             { name: `${prefix}spooder`, value: 'Displays current Araxxor paths' },
             { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
             { name: `${prefix}alog "rsname"`, value: 'Displays user\'s Adventure Log' },
             { name: `${prefix}vis`, value: 'Displays current Rune combinations' },
             { name: `${prefix}merch`, value: 'Displays current and future Travelling Merchant items' },
-            { name: `${prefix}raven`, value: 'Check when the Raven will spawn in Prifddinas' }
+            { name: `${prefix}raven`, value: 'Check when the Raven will spawn in Prifddinas' },
+            { name: `${prefix}nemi`, value: 'Displays current Nemi Forest Map' },
+            { name: `${prefix}portables`, value: 'Displays currently spawned portables' }
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
@@ -460,8 +459,47 @@ function raven(data) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Raven`)
+        .setURL('https://runescape.wiki/w/Raven_(Prifddinas)#Locations')
         .setThumbnail('https://i.imgur.com/sur96eP.png')
         .setDescription(raven)
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+}
+
+// Nemi Command
+function nemi(data) {
+
+    let title = data.data.children[0].data.title;
+    let imageURL = data.data.children[0].data.url_overridden_by_dest;
+
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`NemiForest`)
+        .setImage(imageURL)
+        .setDescription(title)
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+}
+
+// Portables Command
+function portables(data) {
+
+    //let testInfo = data.feed.entry[49].content;
+
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Portables`)
+        .setThumbnail('https://i.imgur.com/CALxf5l.png')
+        .setDescription("Information provided by Portables FC")
+        .addFields(
+            { name: `Fletcher`, value: `${data.feed.entry[12].content.$t}`},
+            { name: `Crafter`, value: `${data.feed.entry[13].content.$t}`},
+            { name: `Brazier`, value: `${data.feed.entry[14].content.$t}`},
+            { name: `Sawmill`, value: `${data.feed.entry[15].content.$t}`},
+            { name: `Range`, value: `${data.feed.entry[16].content.$t}`},
+            { name: `Well`, value: `${data.feed.entry[17].content.$t}`},
+            { name: `Workbench`, value: `${data.feed.entry[18].content.$t}`},
+        )
         .setTimestamp()
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
@@ -478,3 +516,5 @@ exports.log = log;
 exports.vis = vis;
 exports.merch = merch;
 exports.raven = raven;
+exports.nemi = nemi;
+exports.portables = portables;

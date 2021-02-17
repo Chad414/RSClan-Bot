@@ -123,6 +123,20 @@ client.on("message", function (message) {
                 message.reply(commands.raven(data));
             }).catch(function (err) {});
             break;
+        case "nemi":
+            rp('https://www.reddit.com/r/nemiforest/new.json?limit=1').then(function (html) {
+                const data = JSON.parse(html);
+
+                message.reply(commands.nemi(data));
+            }).catch(function (err) {});
+            break;
+        case "portables":
+            rp('https://spreadsheets.google.com/feeds/cells/16Yp-eLHQtgY05q6WBYA2MDyvQPmZ4Yr3RHYiBCBj2Hc/1/public/full?alt=json').then(function (html) {
+                const data = JSON.parse(html);
+
+                message.reply(commands.portables(data));
+            }).catch(function (err) {});
+            break;
     }
 });
 
