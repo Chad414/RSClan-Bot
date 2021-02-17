@@ -52,10 +52,16 @@ client.on("message", function (message) {
             message.reply(commands.help(commandPrefix));
             break;
 
+        case "setrsn":
         case "rsn":
-            userstore.saveUser(message.author, rsn);
+            if (rsn !== undefined) {
+                userstore.saveUser(message.author, rsn);
 
-            message.reply(commands.rsn(rsn));
+                message.reply(commands.rsn(rsn));
+            } else {
+                message.reply('Missing argument, please specify a RSN. Example: `!rsn ChadTek`');
+            }
+
             break;
 
         case "daily":
