@@ -26,10 +26,10 @@ function help(prefix) {
         .setTitle('RSClan Bot Commands')
         .setDescription('The RSClan Bot supports the following commands')
         .addFields(
-            { name: `${prefix}ping`, value: 'Check bot latency' },
             { name: `${prefix}info`, value: 'Displays bot info' },
             { name: `${prefix}help`, value: 'Displays bot commands' },
             { name: `${prefix}rsn "rsname"`, value: 'Assign a RSN to your Discord account' },
+            { name: `${prefix}stats "rsn"`, value: 'Display your account levels and experience points' },
             { name: `${prefix}gains "rsn"`, value: 'Display your Daily, Yesrday, and Weekly XP Gains' },
             { name: `${prefix}spooder`, value: 'Displays current Araxxor paths' },
             { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
@@ -435,8 +435,6 @@ function nemi(data) {
 // Portables Command
 function portables(data) {
 
-    //let testInfo = data.feed.entry[49].content;
-
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Portables`)
@@ -460,8 +458,6 @@ exports.help = help;
 exports.rsn = rsn;
 exports.stats = stats;
 exports.daily = daily;
-exports.weekly = weekly;
-exports.yesterday = yesterday;
 exports.spooder = spooder;
 exports.rago = rago;
 exports.log = log;
