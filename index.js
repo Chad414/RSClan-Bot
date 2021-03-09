@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const rp = require('request-promise');
-const rs = require('runescape-api');
 const $ = require('cheerio');
 const _ = require('lodash');
 
@@ -64,6 +63,22 @@ client.on("message", function (message) {
 
             break;
 
+        case "skills":
+        case "skillz":
+        case "stats":
+            if (rsn === undefined) {
+                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn ChadTek`');
+                break;
+            }
+
+            rp('https://apps.runescape.com/runemetrics/profile/profile?user=' + rsn + '&activities=10').then(function (html) {
+                const data = JSON.parse(html);
+
+                message.channel.send(commands.stats(data));
+            }).catch(function (err) {});
+
+            break;
+
         case "daily":
         case "gains":
         case "gainz":
@@ -73,7 +88,7 @@ client.on("message", function (message) {
                     const data = $('tr', html);
 
                     if (rsn === undefined) {
-                        message.reply('RSN not found, please assign one with !rsn.');
+                        message.reply('RSN not found, please assign one with !rsn. Example: `!rsn ChadTek`');
                     } else {
                         message.channel.send(commands.daily(data, rsn));
                     }
@@ -98,13 +113,15 @@ client.on("message", function (message) {
 
         case "alog":
             if (rsn === undefined) {
-                message.reply('RSN not found, please assign one with !rsn.');
+                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn ChadTek`');
                 break;
             }
 
-            rs.runemetrics.getProfile(rsn.replace('+', ' ')).then(data => {
+            rp('https://apps.runescape.com/runemetrics/profile/profile?user=' + rsn + '&activities=10').then(function (html) {
+                const data = JSON.parse(html);
+
                 message.reply(commands.log(data));
-            })
+            }).catch(function (err) {});
             break;
 
         case "vis":

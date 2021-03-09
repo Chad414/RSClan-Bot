@@ -54,6 +54,77 @@ function rsn(rsn) {
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
+function stats(data) {
+
+    let nf = new Intl.NumberFormat();
+
+    let totalSkill = data.totalskill.toString();
+    let totalExperience = data.totalxp.toString();
+
+    let levels = [];
+    let exp = [];
+    for (let i = 0; i < data.skillvalues.length; i++) {
+        levels[data.skillvalues[i].id] = data.skillvalues[i].level.toString();
+        exp[data.skillvalues[i].id] = data.skillvalues[i].xp.toString();
+    }
+
+    // // Format Labels
+    for (let i = 0; i < levels.length; i++) {
+        levels[i] = levels[i].replace(/\s+/g, '');
+        levels[i] = _.padStart(levels[i], 6, " ");
+
+        exp[i] = exp[i].slice(0, -1);
+        exp[i] = nf.format(exp[i]);
+        exp[i] = exp[i].replace(/\s+/g, '');
+        exp[i] = _.padStart(exp[i], 14, " ");
+    }
+
+    totalSkill = totalSkill.replace(/\s+/g, '');
+    totalSkill = _.padStart(totalSkill, 6, " ");
+
+    totalExperience = nf.format(totalExperience);
+    totalExperience = totalExperience.replace(/\s+/g, '');
+    totalExperience = _.padStart(totalExperience, 14, " ");
+
+    let result = `**${data.name}'s Stats**\n\`\`\`swift\n`;
+    result += `✚---------------------------------------✚
+|     Skill     | Level |   Experience   |
+|---------------|-------|----------------|
+| Overall       |${totalSkill} | ${totalExperience} |
+| Attack        |${levels[0]} | ${exp[0]} |
+| Defence       |${levels[1]} | ${exp[1]} |
+| Strength      |${levels[2]} | ${exp[2]} |
+| Constitution  |${levels[3]} | ${exp[3]} |
+| Ranged        |${levels[4]} | ${exp[4]} |
+| Prayer        |${levels[5]} | ${exp[5]} |
+| Magic         |${levels[6]} | ${exp[6]} |
+| Cooking       |${levels[7]} | ${exp[7]} |
+| Woodcutting   |${levels[8]} | ${exp[8]} |
+| Fletching     |${levels[9]} | ${exp[9]} |
+| Fishing       |${levels[10]} | ${exp[10]} |
+| Firemaking    |${levels[11]} | ${exp[11]} |
+| Crafting      |${levels[12]} | ${exp[12]} |
+| Smithing      |${levels[13]} | ${exp[13]} |
+| Mining        |${levels[14]} | ${exp[14]} |
+| Herblore      |${levels[15]} | ${exp[15]} |
+| Agility       |${levels[16]} | ${exp[16]} |
+| Thieving      |${levels[17]} | ${exp[17]} |
+| Slayer        |${levels[18]} | ${exp[18]} |
+| Farming       |${levels[19]} | ${exp[19]} |
+| Runecrafting  |${levels[20]} | ${exp[20]} |
+| Hunter        |${levels[21]} | ${exp[21]} |
+| Construction  |${levels[22]} | ${exp[22]} |
+| Summoning     |${levels[23]} | ${exp[23]} |
+| Dungeoneering |${levels[24]} | ${exp[24]} |
+| Divination    |${levels[25]} | ${exp[25]} |
+| Invention     |${levels[26]} | ${exp[26]} |
+| Archaeology   |${levels[27]} | ${exp[27]} |
+✚---------------------------------------✚
+\`\`\``;
+
+    return result;
+}
+
 // Daily Command
 function daily(data, user) {
     let daily = [];
@@ -69,15 +140,7 @@ function daily(data, user) {
     // Daily Row
     for (let i = 1; i < 30; i++) {
         daily.push(data[i].children[4].children[0].data);
-    }
-
-    // Yesterday Row
-    for (let i = 1; i < 30; i++) {
         yesterday.push(data[i].children[5].children[0].data);
-    }
-
-    // Weekly Row
-    for (let i = 1; i < 30; i++) {
         weekly.push(data[i].children[6].children[0].data);
     }
 
@@ -85,20 +148,16 @@ function daily(data, user) {
     for (let i = 0; i < daily.length; i++) {
         daily[i] = daily[i].replace(/\s+/g, '');
         daily[i] = _.padStart(daily[i], 9, " ");
-    }
 
-    for (let i = 0; i < yesterday.length; i++) {
         yesterday[i] = yesterday[i].replace(/\s+/g, '');
         yesterday[i] = _.padStart(yesterday[i], 10, " ");
-    }
 
-    for (let i = 0; i < weekly.length; i++) {
         weekly[i] = weekly[i].replace(/\s+/g, '');
         weekly[i] = _.padStart(weekly[i], 10, " ");
     }
 
     let result = `**${user}'s XP Gains**\n\`\`\`swift\n`;
-    result += `✚--------------------------------------------------✚
+    result += `✚-------------------------------------------------✚
 |     Skill     |  Today   | Yesterday | This Week |
 |---------------|----------|-----------|-----------|
 | Overall       |${daily[0]} |${yesterday[0]} |${weekly[0]} |
@@ -130,118 +189,10 @@ function daily(data, user) {
 | Divination    |${daily[26]} |${yesterday[26]} |${weekly[26]} |
 | Invention     |${daily[27]} |${yesterday[27]} |${weekly[27]} |
 | Archaeology   |${daily[28]} |${yesterday[28]} |${weekly[28]} |
-✚--------------------------------------------------✚
+✚-------------------------------------------------✚
 \`\`\``;
 
     return result;
-}
-
-// Weekly Command
-function weekly(data, user) {
-    let xp = [];
-
-    // Format user string
-    user = user.replace('+', ' ');
-    user = _.startCase(user);
-
-    // Row, Column, Value
-    // Weekly Row
-    for (let i = 1; i < 30; i++) {
-        xp.push(data[i].children[6].children[0].data);
-    }
-
-    return new Discord.MessageEmbed()
-        .setColor(constants.embedColor)
-        .setTitle(`${user}'s Weekly XP Gains`)
-        .setDescription(`Attack: ${xp[1]}
-            \nDefence: ${xp[2]}
-            \nStrength: ${xp[3]}
-            \nConstitution: ${xp[4]}
-            \nRanged: ${xp[5]}
-            \nPrayer: ${xp[6]}
-            \nMagic: ${xp[7]}
-            \nCooking: ${xp[8]}
-            \nWoodcutting: ${xp[9]}
-            \nFletching: ${xp[10]}
-            \nFishing: ${xp[11]}
-            \nFiremaking: ${xp[12]}
-            \nCrafting: ${xp[13]}
-            \nSmithing: ${xp[14]}
-            \nMining: ${xp[15]}
-            \nHerblore: ${xp[16]}
-            \nAgility: ${xp[17]}
-            \nThieving: ${xp[18]}
-            \nSlayer: ${xp[19]}
-            \nFarming: ${xp[20]}
-            \nRunecrafting: ${xp[21]}
-            \nHunter: ${xp[22]}
-            \nConstruction: ${xp[23]}
-            \nSummoning: ${xp[24]}
-            \nDungeoneering: ${xp[25]}
-            \nDivination: ${xp[26]}
-            \nInvention: ${xp[27]}
-            \nArchaeology: ${xp[28]}`)
-        .setThumbnail('https://i.imgur.com/XMgKR8S.png')
-        .addField('\u100b', '\u100b')
-        .addFields(
-            { name: `Overall: ${xp[0]}`, value: `Provided by RuneClan\n` },
-        )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
-}
-
-// Yesterday Command
-function yesterday(data, user) {
-    let xp = [];
-
-    // Format user string
-    user = user.replace('+', ' ');
-    user = _.startCase(user);
-
-    // Row, Column, Value
-    // Yesterday Row
-    for (let i = 1; i < 30; i++) {
-        xp.push(data[i].children[5].children[0].data);
-    }
-
-    return new Discord.MessageEmbed()
-        .setColor(constants.embedColor)
-        .setTitle(`${user}'s Yesterday XP Gains`)
-        .setDescription(`Attack: ${xp[1]}
-            \nDefence: ${xp[2]}
-            \nStrength: ${xp[3]}
-            \nConstitution: ${xp[4]}
-            \nRanged: ${xp[5]}
-            \nPrayer: ${xp[6]}
-            \nMagic: ${xp[7]}
-            \nCooking: ${xp[8]}
-            \nWoodcutting: ${xp[9]}
-            \nFletching: ${xp[10]}
-            \nFishing: ${xp[11]}
-            \nFiremaking: ${xp[12]}
-            \nCrafting: ${xp[13]}
-            \nSmithing: ${xp[14]}
-            \nMining: ${xp[15]}
-            \nHerblore: ${xp[16]}
-            \nAgility: ${xp[17]}
-            \nThieving: ${xp[18]}
-            \nSlayer: ${xp[19]}
-            \nFarming: ${xp[20]}
-            \nRunecrafting: ${xp[21]}
-            \nHunter: ${xp[22]}
-            \nConstruction: ${xp[23]}
-            \nSummoning: ${xp[24]}
-            \nDungeoneering: ${xp[25]}
-            \nDivination: ${xp[26]}
-            \nInvention: ${xp[27]}
-            \nArchaeology: ${xp[28]}`)
-        .setThumbnail('https://i.imgur.com/XMgKR8S.png')
-        .addField('\u100b', '\u100b')
-        .addFields(
-            { name: `Overall: ${xp[0]}`, value: `Provided by RuneClan\n` },
-        )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
 // Spooder Command
@@ -339,15 +290,15 @@ function log(data) {
         .setTitle(`${data.name}'s Adventure Log`)
         .setThumbnail('https://i.imgur.com/LWcpp7Y.png')
         .addFields(
-            { name: `${data.activities[0].title}`, value: `${data.activities[0].date}`},
-            { name: `${data.activities[1].title}`, value: `${data.activities[1].date}`},
-            { name: `${data.activities[2].title}`, value: `${data.activities[2].date}`},
-            { name: `${data.activities[3].title}`, value: `${data.activities[3].date}`},
-            { name: `${data.activities[4].title}`, value: `${data.activities[4].date}`},
-            { name: `${data.activities[5].title}`, value: `${data.activities[5].date}`},
-            { name: `${data.activities[6].title}`, value: `${data.activities[6].date}`},
-            { name: `${data.activities[7].title}`, value: `${data.activities[7].date}`},
-            { name: `${data.activities[8].title}`, value: `${data.activities[9].date}`},
+            { name: `${data.activities[0].text}`, value: `${data.activities[0].date}`},
+            { name: `${data.activities[1].text}`, value: `${data.activities[1].date}`},
+            { name: `${data.activities[2].text}`, value: `${data.activities[2].date}`},
+            { name: `${data.activities[3].text}`, value: `${data.activities[3].date}`},
+            { name: `${data.activities[4].text}`, value: `${data.activities[4].date}`},
+            { name: `${data.activities[5].text}`, value: `${data.activities[5].date}`},
+            { name: `${data.activities[6].text}`, value: `${data.activities[6].date}`},
+            { name: `${data.activities[7].text}`, value: `${data.activities[7].date}`},
+            { name: `${data.activities[8].text}`, value: `${data.activities[9].date}`},
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
@@ -507,6 +458,7 @@ function portables(data) {
 exports.info = info;
 exports.help = help;
 exports.rsn = rsn;
+exports.stats = stats;
 exports.daily = daily;
 exports.weekly = weekly;
 exports.yesterday = yesterday;
