@@ -133,8 +133,9 @@ client.on("message", function (message) {
             break;
 
         case "merch":
-            rp('https://runescape.wiki/w/Travelling_Merchant%27s_Shop/Future').then(function (html) {
-                const data = $('.wikitable', html);
+            // rp('https://runescape.wiki/w/Travelling_Merchant%27s_Shop/Future').then(function (html) {
+            rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (html) {
+                const data = JSON.parse(html);
 
                 message.reply(commands.merch(data));
             }).catch(function (err) {});

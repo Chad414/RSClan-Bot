@@ -31,5 +31,21 @@ const skills = [
     'Archaeology'
 ];
 
+const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+]
+
 exports.embedColor = embedColor;
 exports.skills = skills;
+exports.months = months;

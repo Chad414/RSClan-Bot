@@ -330,56 +330,95 @@ function vis(data) {
 // Merchant Command
 function merch(data) {
 
+    console.log(data);
+
+    let jsonData = data.parse.text["*"];
+    let merchData = [];
+
+    jsonData = jsonData.slice(jsonData.indexOf("{"));
+    jsonData = jsonData.slice(0, jsonData.lastIndexOf("}") + 1);
+
+    jsonData = jsonData.split('{"items":');
+    jsonData.shift();
+
+    for (let i = 0; i < jsonData.length; i++) {
+        jsonData[i] = '{"items":' + jsonData[i];
+        merchData[i] = JSON.parse(jsonData[i]);
+    }
+
+    let date = new Date();
+
+    let futureDates = [];
+
+    for(let i = 0; i < 7; i++) {
+        date = new Date();
+        futureDates[i] = date.setDate(date.getUTCDate() + i);
+    }
+
+    for(let i = 0; i < 7; i++) {
+        futureDates[i] = new Date(futureDates[i]);
+    }
+
     let currentItems = [
-        data[0].children[0].children[1].children[1].children[0].attribs.title,
-        data[0].children[0].children[1].children[2].children[0].attribs.title,
-        data[0].children[0].children[1].children[3].children[0].attribs.title
+        merchData[0].items[0].name,
+        merchData[0].items[1].name,
+        merchData[0].items[2].name
     ];
 
     let futureItems = [
         [
-            data[0].children[0].children[2].children[0].children[0].data,
-            data[0].children[0].children[2].children[1].children[0].attribs.title,
-            data[0].children[0].children[2].children[2].children[0].attribs.title,
-            data[0].children[0].children[2].children[3].children[0].attribs.title
+            `${futureDates[0].getUTCDate()} ${constants.months[futureDates[0].getUTCMonth()]} ${futureDates[0].getUTCFullYear()}`,
+            merchData[1].items[0].name,
+            merchData[1].items[1].name,
+            merchData[1].items[2].name
         ],
         [
-            data[0].children[0].children[3].children[0].children[0].data,
-            data[0].children[0].children[3].children[1].children[0].attribs.title,
-            data[0].children[0].children[3].children[2].children[0].attribs.title,
-            data[0].children[0].children[3].children[3].children[0].attribs.title
+            `${futureDates[1].getUTCDate()} ${constants.months[futureDates[1].getUTCMonth()]} ${futureDates[1].getUTCFullYear()}`,
+            merchData[2].items[0].name,
+            merchData[2].items[1].name,
+            merchData[2].items[2].name
         ],
         [
-            data[0].children[0].children[4].children[0].children[0].data,
-            data[0].children[0].children[4].children[1].children[0].attribs.title,
-            data[0].children[0].children[4].children[2].children[0].attribs.title,
-            data[0].children[0].children[4].children[3].children[0].attribs.title
+            `${futureDates[2].getUTCDate()} ${constants.months[futureDates[2].getUTCMonth()]} ${futureDates[2].getUTCFullYear()}`,
+            merchData[3].items[0].name,
+            merchData[3].items[1].name,
+            merchData[3].items[2].name
         ],
         [
-            data[0].children[0].children[5].children[0].children[0].data,
-            data[0].children[0].children[5].children[1].children[0].attribs.title,
-            data[0].children[0].children[5].children[2].children[0].attribs.title,
-            data[0].children[0].children[5].children[3].children[0].attribs.title
+            `${futureDates[3].getUTCDate()} ${constants.months[futureDates[3].getUTCMonth()]} ${futureDates[3].getUTCFullYear()}`,
+            merchData[4].items[0].name,
+            merchData[4].items[1].name,
+            merchData[4].items[2].name
         ],
         [
-            data[0].children[0].children[6].children[0].children[0].data,
-            data[0].children[0].children[6].children[1].children[0].attribs.title,
-            data[0].children[0].children[6].children[2].children[0].attribs.title,
-            data[0].children[0].children[6].children[3].children[0].attribs.title
+            `${futureDates[4].getUTCDate()} ${constants.months[futureDates[4].getUTCMonth()]} ${futureDates[4].getUTCFullYear()}`,
+            merchData[5].items[0].name,
+            merchData[5].items[1].name,
+            merchData[5].items[2].name
         ],
         [
-            data[0].children[0].children[7].children[0].children[0].data,
-            data[0].children[0].children[7].children[1].children[0].attribs.title,
-            data[0].children[0].children[7].children[2].children[0].attribs.title,
-            data[0].children[0].children[7].children[3].children[0].attribs.title
+            `${futureDates[5].getUTCDate()} ${constants.months[futureDates[5].getUTCMonth()]} ${futureDates[5].getUTCFullYear()}`,
+            merchData[6].items[0].name,
+            merchData[6].items[1].name,
+            merchData[6].items[2].name
         ],
         [
-            data[0].children[0].children[8].children[0].children[0].data,
-            data[0].children[0].children[8].children[1].children[0].attribs.title,
-            data[0].children[0].children[8].children[2].children[0].attribs.title,
-            data[0].children[0].children[8].children[3].children[0].attribs.title
+            `${futureDates[6].getUTCDate()} ${constants.months[futureDates[6].getUTCMonth()]} ${futureDates[6].getUTCFullYear()}`,
+            merchData[7].items[0].name,
+            merchData[7].items[1].name,
+            merchData[7].items[2].name
         ]
     ];
+
+    for(let i = 0; i < currentItems.length; i++) {
+        currentItems[i] = currentItems[i].replace('&amp;', '&');
+    }
+
+    for(let i = 0; i < 7; i++) {
+        for(let j = 0; j < 4; j++) {
+            futureItems[i][j] = futureItems[i][j].replace('&amp;', '&');
+        }
+    }
 
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
