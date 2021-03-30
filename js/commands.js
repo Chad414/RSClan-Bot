@@ -11,12 +11,12 @@ function info() {
         .setTitle('RSClan Bot')
         .setURL('https://github.com/Chad414/rsclan-discord-bot')
         .setDescription('The RSClan bot was created on 01/26/21')
-        .setThumbnail('https://i.imgur.com/MJ5cEWu.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
         .addFields(
             { name: `Version ${pkg.version}`, value: 'Please report issues to @Chadathan#0100' },
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // Help Command
@@ -42,7 +42,7 @@ function help(prefix) {
             { name: `${prefix}vos`, value: 'Displays current Voice of Seren' }
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // RSN Command
@@ -52,7 +52,7 @@ function rsn(rsn) {
         .setTitle('RSN Assigned')
         .setDescription(`Assigned ${_.startCase(rsn.replace('+', ' '))} to your discord account.`)
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 function stats(data) {
@@ -203,14 +203,14 @@ function spooder(data) {
         .setColor(constants.embedColor)
         .setTitle(`Araxxor's Current Rotation`)
         .setDescription(`${data[0].children[0].children[2].children[0].children[0].data}`)
-        .setThumbnail('https://i.imgur.com/WNIlW3T.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/spooder.png')
         .addFields(
             { name: 'Path 1 (Minions)', value: `${data[0].children[0].children[1].children[0].children[0].data}`},
             { name: 'Path 2 (Acid)', value: `${data[0].children[0].children[1].children[1].children[0].data}`},
             { name: 'Path 3 (Darkness)', value: `${data[0].children[0].children[1].children[2].children[0].data}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
     return result;
 }
@@ -275,13 +275,13 @@ function rago(data) {
         .setColor(constants.embedColor)
         .setTitle(`Vorago's Current Rotation`)
         .setDescription(`Days Until Next Rotation: ${daysLeft}`)
-        .setThumbnail('https://i.imgur.com/J4UZu2M.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/rago.png')
         .addFields(
             { name: 'Vorago Current', value: `${currentRotation}`},
             { name: 'Vorago Next', value: `${nextRotation}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // Adventure Log Command
@@ -289,7 +289,7 @@ function log(data) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.name}'s Adventure Log`)
-        .setThumbnail('https://i.imgur.com/LWcpp7Y.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/alog.png')
         .addFields(
             { name: `${data.activities[0].text}`, value: `${data.activities[0].date}`},
             { name: `${data.activities[1].text}`, value: `${data.activities[1].date}`},
@@ -302,7 +302,7 @@ function log(data) {
             { name: `${data.activities[8].text}`, value: `${data.activities[9].date}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // Vis Command
@@ -318,14 +318,14 @@ function vis(data) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Correct Rune Combinations`)
-        .setThumbnail('https://i.imgur.com/qsRI2mS.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/vis.png')
         .addFields(
             { name: `First Rune`, value: `${firstRune}`},
             { name: `Second Rune`, value: `${secondRune[0]}\n${secondRune[1]}\n${secondRune[2]}`},
 
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // Merchant Command
@@ -351,10 +351,7 @@ function merch(data) {
 
     for(let i = 0; i < 7; i++) {
         date = new Date();
-        futureDates[i] = date.setDate(date.getUTCDate() + i);
-    }
-
-    for(let i = 0; i < 7; i++) {
+        futureDates[i] = date.setDate(date.getDate() + (i + 1));
         futureDates[i] = new Date(futureDates[i]);
     }
 
@@ -433,7 +430,7 @@ function merch(data) {
             { name: `${futureItems[6][0]}`, value: `${futureItems[6][1]}\n${futureItems[6][2]}\n${futureItems[6][3]}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // Raven Command
@@ -449,10 +446,10 @@ function raven(data) {
         .setColor(constants.embedColor)
         .setTitle(`Raven`)
         .setURL('https://runescape.wiki/w/Raven_(Prifddinas)#Locations')
-        .setThumbnail('https://i.imgur.com/sur96eP.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/raven.png')
         .setDescription(raven)
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // Nemi Command
@@ -467,7 +464,7 @@ function nemi(data) {
         .setImage(imageURL)
         .setDescription(title)
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // Portables Command
@@ -476,7 +473,7 @@ function portables(data) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Portables`)
-        .setThumbnail('https://i.imgur.com/CALxf5l.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/portables.png')
         .setDescription("Information provided by Portables FC")
         .addFields(
             { name: `Fletcher`, value: `${data.feed.entry[12].content.$t}`},
@@ -488,7 +485,7 @@ function portables(data) {
             { name: `Workbench`, value: `${data.feed.entry[18].content.$t}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 // VoS Command
@@ -503,13 +500,13 @@ function vos(data) {
         .setColor(constants.embedColor)
         .setTitle(`Voice of Seren`)
         .setDescription(`Updated at ${updateTime} GMT`)
-        .setThumbnail('https://i.imgur.com/pwQMMRA.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/vos.png')
         .addFields(
             { name: `${data.district1}`, value: `District 1`},
             { name: `${data.district2}`, value: `District 2`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
 
 exports.info = info;
