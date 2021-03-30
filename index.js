@@ -161,6 +161,13 @@ client.on("message", function (message) {
                 message.reply(commands.portables(data));
             }).catch(function (err) {});
             break;
+        case "vos":
+            rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
+                const data = JSON.parse(html);
+
+                message.reply(commands.vos(data));
+            }).catch(function (err) { });
+            break;
     }
 });
 

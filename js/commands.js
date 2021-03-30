@@ -38,7 +38,8 @@ function help(prefix) {
             { name: `${prefix}merch`, value: 'Displays current and future Travelling Merchant items' },
             { name: `${prefix}raven`, value: 'Check when the Raven will spawn in Prifddinas' },
             { name: `${prefix}nemi`, value: 'Displays current Nemi Forest Map' },
-            { name: `${prefix}portables`, value: 'Displays currently spawned portables' }
+            { name: `${prefix}portables`, value: 'Displays currently spawned portables' },
+            { name: `${prefix}vos`, value: 'Displays current Voice of Seren' }
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
@@ -330,8 +331,6 @@ function vis(data) {
 // Merchant Command
 function merch(data) {
 
-    console.log(data);
-
     let jsonData = data.parse.text["*"];
     let merchData = [];
 
@@ -492,6 +491,27 @@ function portables(data) {
         .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
 }
 
+// VoS Command
+function vos(data) {
+
+    let updateTime = data.timestamp;
+
+    updateTime = updateTime.slice(updateTime.indexOf("T") + 1);
+    updateTime = updateTime.slice(0, updateTime.lastIndexOf(":"));
+
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Voice of Seren`)
+        .setDescription(`Updated at ${updateTime} GMT`)
+        .setThumbnail('https://i.imgur.com/pwQMMRA.png')
+        .addFields(
+            { name: `${data.district1}`, value: `District 1`},
+            { name: `${data.district2}`, value: `District 2`},
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://i.imgur.com/MJ5cEWu.png');
+}
+
 exports.info = info;
 exports.help = help;
 exports.rsn = rsn;
@@ -505,3 +525,4 @@ exports.merch = merch;
 exports.raven = raven;
 exports.nemi = nemi;
 exports.portables = portables;
+exports.vos = vos;
