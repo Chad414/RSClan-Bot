@@ -165,7 +165,6 @@ client.on("message", function (message) {
             rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
                 const data = JSON.parse(html);
 
-                // message.reply(commands.vos(data));
                 commands.vos(data, message);
             }).catch(function (err) { });
             break;

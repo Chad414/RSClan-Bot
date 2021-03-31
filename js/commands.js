@@ -498,17 +498,17 @@ function vos(data, message) {
 
     message.reply(new Discord.MessageEmbed()
         .setColor(constants.embedColor)
-        .setTitle(`VoS District 1`)
-        .setDescription(`${data.district1}`)
-        .setImage('https://i.imgur.com/wSTFkRM.png')
+        .setTitle(`${data.district1}`)
+        .setDescription(`District 1`)
+        .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district1}.png?raw=true`)
         .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
     );
 
     message.reply(new Discord.MessageEmbed()
         .setColor(constants.embedColor)
-        .setTitle(`VoS District 2`)
-        .setDescription(`${data.district2}`)
-        .setImage('https://i.imgur.com/wSTFkRM.png')
+        .setTitle(`${data.district2}`)
+        .setDescription(`District 2`)
+        .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district2}.png?raw=true`)
         .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
     );
 }
