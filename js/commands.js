@@ -489,24 +489,28 @@ function portables(data) {
 }
 
 // VoS Command
-function vos(data) {
+function vos(data, message) {
 
     let updateTime = data.timestamp;
 
     updateTime = updateTime.slice(updateTime.indexOf("T") + 1);
     updateTime = updateTime.slice(0, updateTime.lastIndexOf(":"));
 
-    return new Discord.MessageEmbed()
+    message.reply(new Discord.MessageEmbed()
         .setColor(constants.embedColor)
-        .setTitle(`Voice of Seren`)
-        .setDescription(`Updated at ${updateTime} GMT`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/vos.png')
-        .addFields(
-            { name: `${data.district1}`, value: `District 1`},
-            { name: `${data.district2}`, value: `District 2`},
-        )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setTitle(`VoS District 1`)
+        .setDescription(`${data.district1}`)
+        .setImage('https://i.imgur.com/wSTFkRM.png')
+        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
+    );
+
+    message.reply(new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`VoS District 2`)
+        .setDescription(`${data.district2}`)
+        .setImage('https://i.imgur.com/wSTFkRM.png')
+        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
+    );
 }
 
 exports.info = info;
