@@ -44,7 +44,7 @@ client.on("message", function (message) {
             break;
 
         case "info":
-            message.reply(commands.info());
+            message.reply(commands.info(client.guilds.cache.size));
             break;
 
         case "help":

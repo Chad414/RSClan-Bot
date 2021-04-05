@@ -5,12 +5,13 @@ const pkg = require("../package.json");
 const constants = require("./constants");
 
 // Info Command
-function info() {
+function info(serverCount) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle('RSClan Bot')
-        .setURL('https://github.com/Chad414/rsclan-discord-bot')
-        .setDescription('The RSClan bot was created on 01/26/21')
+        .setURL('https://github.com/Chad414/')
+        .setDescription(`Currently serving ${serverCount} RuneScape communities`)
+        // .setDescription('The RSClan bot was created on 01/26/21')
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
         .addFields(
             { name: `Version ${pkg.version}`, value: 'Please report issues to @Chadathan#0100' },
@@ -29,14 +30,14 @@ function help(prefix) {
             { name: `${prefix}info`, value: 'Displays bot info' },
             { name: `${prefix}help`, value: 'Displays bot commands' },
             { name: `${prefix}rsn "rsname"`, value: 'Assign a RSN to your Discord account' },
-            { name: `${prefix}stats "rsn"`, value: 'Display your account levels and experience points' },
-            { name: `${prefix}gains "rsn"`, value: 'Display your Daily, Yesrday, and Weekly XP Gains' },
+            { name: `${prefix}stats "rsn"`, value: 'Displays user\'s account levels and experience points' },
+            { name: `${prefix}gains "rsn"`, value: 'Displays user\'s Daily, Yesterday, and Weekly XP Gains' },
             { name: `${prefix}spooder`, value: 'Displays current Araxxor paths' },
             { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
             { name: `${prefix}alog "rsname"`, value: 'Displays user\'s Adventure Log' },
             { name: `${prefix}vis`, value: 'Displays current Rune combinations' },
             { name: `${prefix}merch`, value: 'Displays current and future Travelling Merchant items' },
-            { name: `${prefix}raven`, value: 'Check when the Raven will spawn in Prifddinas' },
+            { name: `${prefix}raven`, value: 'Displays when the Raven will spawn in Prifddinas' },
             { name: `${prefix}nemi`, value: 'Displays current Nemi Forest Map' },
             { name: `${prefix}portables`, value: 'Displays currently spawned portables' },
             { name: `${prefix}vos`, value: 'Displays current Voice of Seren' }
