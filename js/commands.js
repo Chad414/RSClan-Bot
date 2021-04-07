@@ -503,7 +503,9 @@ function vos(data, message) {
         .setDescription(`District 1`)
         .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district1}.png?raw=true`)
         .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
-    );
+    )
+        .then(() => { })
+        .catch(console.error);
 
     message.reply(new Discord.MessageEmbed()
         .setColor(constants.embedColor)
@@ -511,7 +513,9 @@ function vos(data, message) {
         .setDescription(`District 2`)
         .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district2}.png?raw=true`)
         .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
-    );
+    )
+        .then(() => { })
+        .catch(console.error);
 }
 
 exports.info = info;
