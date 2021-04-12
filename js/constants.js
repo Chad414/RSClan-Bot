@@ -1,5 +1,29 @@
 const embedColor = '1c22d4';
 
+const commands = [
+    "ping",
+    "info",
+    "setrsn",
+    "rsn",
+    "skills",
+    "skillz",
+    "stats",
+    "daily",
+    "gains",
+    "gainz",
+    "yesterday",
+    "weekly",
+    "spooder",
+    "rago",
+    "alog",
+    "vis",
+    "merch",
+    "raven",
+    "nemi",
+    "portables",
+    "vos"
+]
+
 const skills = [
     'Attack',
     'Defence',
@@ -47,5 +71,6 @@ const months = [
 ]
 
 exports.embedColor = embedColor;
+exports.commands = commands;
 exports.skills = skills;
 exports.months = months;

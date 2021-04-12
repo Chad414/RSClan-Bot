@@ -6,6 +6,7 @@ const _ = require('lodash');
 const config = require("./config.json");
 const commands = require("./js/commands");
 const userstore = require("./js/userstore");
+const constants = require("./js/constants");
 
 const client = new Discord.Client();
 
@@ -23,7 +24,11 @@ client.on("message", function (message) {
     const command = args.shift().toLowerCase();
 
     // Print Command Information to Console
-    console.log(`Command: ${command} Args: ${args} - sent by ${message.author.username}`);
+    let date = new Date()
+
+    if (constants.commands.includes(command)) {
+        console.log(`[${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] ${command} ${args} - sent by ${message.author.username}`);
+    }
 
     // Process RSN
     let rsn = '';
