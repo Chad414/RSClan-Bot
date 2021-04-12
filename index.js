@@ -27,7 +27,7 @@ client.on("message", function (message) {
     let date = new Date()
 
     if (constants.commands.includes(command)) {
-        console.log(`[${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] ${command} ${args} - sent by ${message.author.username}`);
+        console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] ${command} ${args} - sent by ${message.author.username}`);
     }
 
     // Process RSN

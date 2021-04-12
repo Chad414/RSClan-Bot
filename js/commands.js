@@ -9,7 +9,7 @@ function info(serverCount) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle('RSClan Bot')
-        .setURL('https://github.com/Chad414/')
+        .setURL('https://top.gg/bot/803690098839126016')
         .setDescription(`Currently serving ${serverCount} RuneScape communities`)
         // .setDescription('The RSClan bot was created on 01/26/21')
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
@@ -287,10 +287,14 @@ function rago(data) {
 
 // Adventure Log Command
 function log(data) {
+
+    let username = data.name.replace(' ', '+');
+
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.name}'s Adventure Log`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/alog.png')
+        // .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/alog.png')
+        .setThumbnail(`http://secure.runescape.com/m=avatar-rs/${username}/chat.png`)
         .addFields(
             { name: `${data.activities[0].text}`, value: `${data.activities[0].date}`},
             { name: `${data.activities[1].text}`, value: `${data.activities[1].date}`},
