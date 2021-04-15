@@ -11,7 +11,6 @@ function info(serverCount) {
         .setTitle('RSClan Bot')
         .setURL('https://top.gg/bot/803690098839126016')
         .setDescription(`Currently serving ${serverCount} RuneScape communities`)
-        // .setDescription('The RSClan bot was created on 01/26/21')
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
         .addFields(
             { name: `Version ${pkg.version}`, value: 'Please report issues to @Chadathan#0100' },
@@ -57,6 +56,10 @@ function rsn(rsn) {
 }
 
 function stats(data) {
+
+    if (data.error == 'PROFILE_PRIVATE') {
+        return constants.privateProfile;
+    }
 
     let nf = new Intl.NumberFormat();
 
@@ -287,6 +290,10 @@ function rago(data) {
 
 // Adventure Log Command
 function log(data) {
+
+    if (data.error == 'PROFILE_PRIVATE') {
+        return constants.privateProfile;
+    }
 
     let username = data.name.replace(' ', '+');
 
