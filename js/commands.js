@@ -58,6 +58,7 @@ function rsn(rsn) {
 function stats(data) {
 
     if (data.error == 'PROFILE_PRIVATE') {
+        console.log(`\t∟ RuneMetrics Profile is Private`)
         return constants.privateProfile;
     }
 
@@ -292,6 +293,7 @@ function rago(data) {
 function log(data) {
 
     if (data.error == 'PROFILE_PRIVATE') {
+        console.log(`\t∟ RuneMetrics Profile is Private`)
         return constants.privateProfile;
     }
 
@@ -516,7 +518,7 @@ function vos(data, message) {
         .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
     )
         .then(() => { })
-        .catch(console.error);
+        .catch(constants.handleError);
 
     message.reply(new Discord.MessageEmbed()
         .setColor(constants.embedColor)
@@ -526,7 +528,7 @@ function vos(data, message) {
         .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
     )
         .then(() => { })
-        .catch(console.error);
+        .catch(constants.handleError);
 }
 
 exports.info = info;

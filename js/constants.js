@@ -5,6 +5,7 @@ const embedColor = '1c22d4';
 const commands = [
     "ping",
     "info",
+    "help",
     "setrsn",
     "rsn",
     "skills",
@@ -72,11 +73,15 @@ const months = [
     'Dec'
 ]
 
+function handleError(error) {
+    console.log(`\t∟ ${error.name}: ${error.message}`);
+}
+
 const privateProfile = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('RuneMetrics Error')
     .setDescription(`Your RuneMetrics profile is set to private, please set it to public on the RuneScape website.`)
-    .setImage('https://i.imgur.com/bJpc8S2.png')
+    .setImage('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/runemetrics.png')
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
@@ -84,4 +89,5 @@ exports.embedColor = embedColor;
 exports.commands = commands;
 exports.skills = skills;
 exports.months = months;
+exports.handleError = handleError;
 exports.privateProfile = privateProfile;

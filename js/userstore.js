@@ -12,7 +12,7 @@ function saveUser(id, rsn) {
             console.log(err);
             throw err;
         }
-        console.log("RSN Saved to file.");
+        console.log("\t∟ RSN Saved to file");
     });
 }
 

@@ -47,19 +47,19 @@ client.on("message", function (message) {
             const timeTaken = Date.now() - message.createdTimestamp;
             message.reply(`Pong! This message had a latency of ${timeTaken}ms.`)
                 .then(() => { })
-                .catch(console.error);
+                .catch(constants.handleError);
             break;
 
         case "info":
             message.reply(commands.info(client.guilds.cache.size))
                 .then(() => { })
-                .catch(console.error);
+                .catch(constants.handleError);
             break;
 
         case "help":
             message.reply(commands.help(commandPrefix))
-                .then(() => {})
-                .catch(console.error);
+                .then(() => { })
+                .catch(constants.handleError);
             break;
 
         case "setrsn":
@@ -69,11 +69,11 @@ client.on("message", function (message) {
 
                 message.reply(commands.rsn(rsn))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             } else {
-                message.reply('Missing argument, please specify a RSN. Example: `!rsn ChadTek`')
+                message.reply('Missing argument, please specify a RSN. Example: `!rsn Zezima`')
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }
 
             break;
@@ -82,9 +82,9 @@ client.on("message", function (message) {
         case "skillz":
         case "stats":
             if (rsn === undefined) {
-                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn ChadTek`')
+                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn Zezima`')
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
                 break;
             }
 
@@ -93,7 +93,7 @@ client.on("message", function (message) {
 
                 message.channel.send(commands.stats(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
 
             break;
@@ -107,13 +107,13 @@ client.on("message", function (message) {
                     const data = $('tr', html);
 
                     if (rsn === undefined) {
-                        message.reply('RSN not found, please assign one with !rsn. Example: `!rsn ChadTek`')
+                        message.reply('RSN not found, please assign one with !rsn. Example: `!rsn Zezima`')
                             .then(() => { })
-                            .catch(console.error);
+                            .catch(constants.handleError);
                     } else {
                         message.channel.send(commands.daily(data, rsn))
                             .then(() => { })
-                            .catch(console.error);
+                            .catch(constants.handleError);
                     }
                 }).catch(function (err) {});
             break;
@@ -124,7 +124,7 @@ client.on("message", function (message) {
 
                 message.reply(commands.spooder(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
 
@@ -134,15 +134,15 @@ client.on("message", function (message) {
 
                 message.reply(commands.rago(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
 
         case "alog":
             if (rsn === undefined) {
-                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn ChadTek`')
+                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn Zezima`')
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
                 break;
             }
 
@@ -151,7 +151,7 @@ client.on("message", function (message) {
 
                 message.reply(commands.log(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
 
@@ -161,18 +161,17 @@ client.on("message", function (message) {
 
                 message.reply(commands.vis(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
 
         case "merch":
-            // rp('https://runescape.wiki/w/Travelling_Merchant%27s_Shop/Future').then(function (html) {
             rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (html) {
                 const data = JSON.parse(html);
 
                 message.reply(commands.merch(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
         case "raven":
@@ -181,7 +180,7 @@ client.on("message", function (message) {
 
                 message.reply(commands.raven(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
         case "nemi":
@@ -190,7 +189,7 @@ client.on("message", function (message) {
 
                 message.reply(commands.nemi(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
         case "portables":
@@ -199,7 +198,7 @@ client.on("message", function (message) {
 
                 message.reply(commands.portables(data))
                     .then(() => { })
-                    .catch(console.error);
+                    .catch(constants.handleError);
             }).catch(function (err) {});
             break;
         case "vos":
