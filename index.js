@@ -119,7 +119,8 @@ client.on("message", function (message) {
             break;
 
         case "spooder":
-            rp('https://runescape.wiki/w/Araxxor').then(function (html) {
+            // rp('https://runescape.wiki/w/Araxxor').then(function (html) {
+            rp('https://runescape.wiki/w/Template:Araxxor_rotation').then(function (html) {
                 const data = $('#reload', html);
 
                 message.reply(commands.spooder(data))

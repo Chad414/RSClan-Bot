@@ -207,12 +207,12 @@ function spooder(data) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Araxxor's Current Rotation`)
-        .setDescription(`${data[0].children[0].children[2].children[0].children[0].data}`)
+        .setDescription(`${data[0].children[0].children[3].children[0].children[0].data}`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/spooder.png')
         .addFields(
-            { name: 'Path 1 (Minions)', value: `${data[0].children[0].children[1].children[0].children[0].data}`},
-            { name: 'Path 2 (Acid)', value: `${data[0].children[0].children[1].children[1].children[0].data}`},
-            { name: 'Path 3 (Darkness)', value: `${data[0].children[0].children[1].children[2].children[0].data}`},
+            { name: 'Path 1 (Minions)', value: `${data[0].children[0].children[2].children[0].children[0].data}`},
+            { name: 'Path 2 (Acid)', value: `${data[0].children[0].children[2].children[1].children[0].data}`},
+            { name: 'Path 3 (Darkness)', value: `${data[0].children[0].children[2].children[2].children[0].data}`},
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
