@@ -544,25 +544,32 @@ function vos(data, message) {
     updateTime = updateTime.slice(updateTime.indexOf("T") + 1);
     updateTime = updateTime.slice(0, updateTime.lastIndexOf(":"));
 
-    message.reply(new Discord.MessageEmbed()
+    let district1Embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.district1}`)
         .setDescription(`District 1`)
         .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district1}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
-    )
-        .then(() => { })
-        .catch(constants.handleError);
+        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
-    message.reply(new Discord.MessageEmbed()
+    let district2Embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.district2}`)
         .setDescription(`District 2`)
         .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district2}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
-    )
-        .then(() => { })
-        .catch(constants.handleError);
+        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+
+    if (message) {
+        message.reply(district1Embed)
+            .then(() => { })
+            .catch(constants.handleError);
+
+        message.reply(district2Embed)
+            .then(() => { })
+            .catch(constants.handleError);
+    } else {
+        return {district1: district1Embed, district2: district2Embed};
+    }
+
 }
 
 exports.info = info;

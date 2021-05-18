@@ -73,6 +73,10 @@ const months = [
     'Dec'
 ]
 
+const vosChannels = [
+    "844326270418550804"
+]
+
 function handleError(error) {
     console.log(`\t∟ ${error.name}: ${error.message}`);
 }
@@ -89,5 +93,6 @@ exports.embedColor = embedColor;
 exports.commands = commands;
 exports.skills = skills;
 exports.months = months;
+exports.vosChannels = vosChannels;
 exports.handleError = handleError;
 exports.privateProfile = privateProfile;

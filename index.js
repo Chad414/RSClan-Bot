@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const rp = require('request-promise');
 const $ = require('cheerio');
 const _ = require('lodash');
+const cron = require('node-cron');
 
 const config = require("./data/config.json");
 const commands = require("./js/commands");
@@ -213,3 +214,22 @@ client.on("message", function (message) {
 });
 
 client.login(config.BOT_TOKEN);
+
+// Auto VOS
+// This feature is currently exclusive to Dark Perception
+cron.schedule('25 01 * * * *', () => {
+    let date = new Date()
+    console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Voice of Seren`);
+
+    rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
+        const data = JSON.parse(html);
+
+        for(let i = 0; i < constants.vosChannels.length; i++) {
+            let channel = client.channels.cache.get(constants.vosChannels[i]);
+            let embeds = commands.vos(data, null)
+
+            channel.send(embeds.district1);
+            channel.send(embeds.district2);
+        }
+    }).catch(function (err) { });
+});
