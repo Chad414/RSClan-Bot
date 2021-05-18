@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const $ = require('cheerio');
 const _ = require('lodash');
 
-const config = require("./config.json");
+const config = require("./data/config.json");
 const commands = require("./js/commands");
 const userstore = require("./js/userstore");
 const constants = require("./js/constants");
@@ -71,7 +71,7 @@ client.on("message", function (message) {
                     .then(() => { })
                     .catch(constants.handleError);
             } else {
-                message.reply('Missing argument, please specify a RSN. Example: `!rsn Zezima`')
+                message.reply('Missing argument: Please specify a RSN. \nExample: `!rsn Zezima`')
                     .then(() => { })
                     .catch(constants.handleError);
             }
@@ -82,7 +82,7 @@ client.on("message", function (message) {
         case "skillz":
         case "stats":
             if (rsn === undefined) {
-                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn Zezima`')
+                message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
                     .then(() => { })
                     .catch(constants.handleError);
                 break;
@@ -107,7 +107,7 @@ client.on("message", function (message) {
                     const data = $('tr', html);
 
                     if (rsn === undefined) {
-                        message.reply('RSN not found, please assign one with !rsn. Example: `!rsn Zezima`')
+                        message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
                             .then(() => { })
                             .catch(constants.handleError);
                     } else {
@@ -141,7 +141,7 @@ client.on("message", function (message) {
 
         case "alog":
             if (rsn === undefined) {
-                message.reply('RSN not found, please assign one with !rsn. Example: `!rsn Zezima`')
+                message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
                     .then(() => { })
                     .catch(constants.handleError);
                 break;

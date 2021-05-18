@@ -1,7 +1,7 @@
+.DS_Store
 .idea
 .vscode
-config.json
-users.json
+data/config.json
 
 # Logs
 logs

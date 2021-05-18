@@ -47,10 +47,14 @@ function help(prefix) {
 
 // RSN Command
 function rsn(rsn) {
+
+    // Format RSN if spaced
+    rsn = (rsn.includes('+')) ? _.startCase(rsn.replace('+', ' ')) : _.upperFirst(rsn)
+
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle('RSN Assigned')
-        .setDescription(`Assigned ${_.startCase(rsn.replace('+', ' '))} to your discord account.`)
+        .setDescription(`Assigned ${rsn} to your discord account.`)
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }
@@ -138,9 +142,8 @@ function daily(data, user) {
     let weekly = [];
     let url = `https://www.runeclan.com/user/${rsn}`;
 
-    // Format user string
-    user = user.replace('+', ' ');
-    user = _.startCase(user);
+    // Format RSN if spaced
+    user = (user.includes('+')) ? _.startCase(user.replace('+', ' ')) : _.upperFirst(user)
 
     // Row, Column, Value
     // Daily Row
@@ -299,21 +302,52 @@ function log(data) {
 
     let username = data.name.replace(' ', '+');
 
+    // Format log entries
+    let entries = [];
+    for(let i = 0; i <= 8; i++) {
+        let entry = data.activities[i].text
+
+        if (entry.includes("XP")) {
+            let xp = entry.slice(0, entry.indexOf('X'))
+            xp = xp.slice(0, xp.length - 6)
+
+            let skill = entry.slice(entry.indexOf(' '), entry.length)
+            entry = xp + " Million XP" + skill
+        }
+
+        entries[i] = entry
+    }
+
+    // Format log dates
+    // Number suffix solution from https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
+    function nth(n){return["st","nd","rd"][((n+90)%100-10)%10-1]||"th"}
+    let dates = [];
+    for(let i = 0; i <= 8; i++) {
+        let date = data.activities[i].date.replace(/-/g, ' ')
+        let time = date.slice(-5)
+        let day = date.slice(0, 2)
+        let month = date.slice(3, 6)
+        let year = date.slice(7, 11)
+
+        date = `${month} ${day + nth(day)} ${year} at ${time}`
+
+        dates[i] = date
+    }
+
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.name}'s Adventure Log`)
-        // .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/alog.png')
         .setThumbnail(`http://secure.runescape.com/m=avatar-rs/${username}/chat.png`)
         .addFields(
-            { name: `${data.activities[0].text}`, value: `${data.activities[0].date}`},
-            { name: `${data.activities[1].text}`, value: `${data.activities[1].date}`},
-            { name: `${data.activities[2].text}`, value: `${data.activities[2].date}`},
-            { name: `${data.activities[3].text}`, value: `${data.activities[3].date}`},
-            { name: `${data.activities[4].text}`, value: `${data.activities[4].date}`},
-            { name: `${data.activities[5].text}`, value: `${data.activities[5].date}`},
-            { name: `${data.activities[6].text}`, value: `${data.activities[6].date}`},
-            { name: `${data.activities[7].text}`, value: `${data.activities[7].date}`},
-            { name: `${data.activities[8].text}`, value: `${data.activities[9].date}`},
+            { name: `${entries[0]}`, value: `${dates[0]}`},
+            { name: `${entries[1]}`, value: `${dates[1]}`},
+            { name: `${entries[2]}`, value: `${dates[2]}`},
+            { name: `${entries[3]}`, value: `${dates[3]}`},
+            { name: `${entries[4]}`, value: `${dates[4]}`},
+            { name: `${entries[5]}`, value: `${dates[5]}`},
+            { name: `${entries[6]}`, value: `${dates[6]}`},
+            { name: `${entries[7]}`, value: `${dates[7]}`},
+            { name: `${entries[8]}`, value: `${dates[8]}`},
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
@@ -490,13 +524,13 @@ function portables(data) {
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/portables.png')
         .setDescription("Information provided by Portables FC")
         .addFields(
-            { name: `Fletcher`, value: `${data.feed.entry[12].content.$t}`},
-            { name: `Crafter`, value: `${data.feed.entry[13].content.$t}`},
-            { name: `Brazier`, value: `${data.feed.entry[14].content.$t}`},
-            { name: `Sawmill`, value: `${data.feed.entry[15].content.$t}`},
-            { name: `Range`, value: `${data.feed.entry[16].content.$t}`},
-            { name: `Well`, value: `${data.feed.entry[17].content.$t}`},
-            { name: `Workbench`, value: `${data.feed.entry[18].content.$t}`},
+            { name: `Fletcher`, value: `${data.feed.entry[12].content.$t.replace(/\*/g, '')}`},
+            { name: `Crafter`, value: `${data.feed.entry[13].content.$t.replace(/\*/g, '')}`},
+            { name: `Brazier`, value: `${data.feed.entry[14].content.$t.replace(/\*/g, '')}`},
+            { name: `Sawmill`, value: `${data.feed.entry[15].content.$t.replace(/\*/g, '')}`},
+            { name: `Range`, value: `${data.feed.entry[16].content.$t.replace(/\*/g, '')}`},
+            { name: `Well`, value: `${data.feed.entry[17].content.$t.replace(/\*/g, '')}`},
+            { name: `Workbench`, value: `${data.feed.entry[18].content.$t.replace(/\*/g, '')}`},
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
