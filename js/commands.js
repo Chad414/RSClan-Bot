@@ -300,7 +300,7 @@ function log(data) {
         return constants.privateProfile;
     }
 
-    let username = data.name.replace(' ', '+');
+    let username = data.name.replace(/ /g, '+');
 
     // Format log entries
     let entries = [];
