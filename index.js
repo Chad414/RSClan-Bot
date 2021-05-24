@@ -228,8 +228,17 @@ cron.schedule('25 01 * * * *', () => {
             let channel = client.channels.cache.get(constants.vosChannels[i]);
             let embeds = commands.vos(data, null)
 
-            channel.send(embeds.district1);
-            channel.send(embeds.district2);
+            // Remove previous VoS
+            channel.bulkDelete(4)
+                .then(() => { })
+                .catch(console.error);
+
+            // Send new VoS
+            channel.send(embeds.embed1);
+            channel.send(constants.vosRoles(embeds.embed1.title))
+
+            channel.send(embeds.embed2);
+            channel.send(constants.vosRoles(embeds.embed2.title))
         }
     }).catch(function (err) { });
 });

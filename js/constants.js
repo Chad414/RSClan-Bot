@@ -77,6 +77,27 @@ const vosChannels = [
     "844326270418550804"
 ]
 
+const vosRoles = (district) => {
+    switch (district) {
+        case 'Amlodd':
+            return '<@&825933177603489802>';
+        case 'Cadarn':
+            return '<@&846415448026775552>';
+        case 'Crwys':
+            return '<@&846416115608846366>';
+        case 'Hefin':
+            return '<@&846416282106331167>';
+        case 'Iorwerth':
+            return '<@&846416361089662986>';
+        case 'Ithell':
+            return '<@&846416421453955082>';
+        case 'Meilyr':
+            return '<@&846416491108761660>';
+        case 'Trahaearn':
+            return '<@&846416609069105172>';
+    }
+}
+
 function handleError(error) {
     console.log(`\t∟ ${error.name}: ${error.message}`);
 }
@@ -94,5 +115,6 @@ exports.commands = commands;
 exports.skills = skills;
 exports.months = months;
 exports.vosChannels = vosChannels;
+exports.vosRoles = vosRoles;
 exports.handleError = handleError;
 exports.privateProfile = privateProfile;

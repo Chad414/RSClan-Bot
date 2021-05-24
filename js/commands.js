@@ -567,7 +567,7 @@ function vos(data, message) {
             .then(() => { })
             .catch(constants.handleError);
     } else {
-        return {district1: district1Embed, district2: district2Embed};
+        return {embed1: district1Embed, embed2: district2Embed};
     }
 
 }
