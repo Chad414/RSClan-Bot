@@ -77,6 +77,10 @@ const vosChannels = [
     "844326270418550804"
 ]
 
+const merchChannels = [
+    "848927179714723870"
+]
+
 const vosRoles = (district) => {
     switch (district) {
         case 'Amlodd':
@@ -116,5 +120,6 @@ exports.skills = skills;
 exports.months = months;
 exports.vosChannels = vosChannels;
 exports.vosRoles = vosRoles;
+exports.merchChannels = merchChannels;
 exports.handleError = handleError;
 exports.privateProfile = privateProfile;

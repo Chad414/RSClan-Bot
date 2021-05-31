@@ -218,7 +218,7 @@ client.login(config.BOT_TOKEN);
 // Auto VOS
 // This feature is currently exclusive to Dark Perception
 cron.schedule('25 01 * * * *', () => {
-    let date = new Date()
+    let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Voice of Seren`);
 
     rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
@@ -235,10 +235,36 @@ cron.schedule('25 01 * * * *', () => {
 
             // Send new VoS
             channel.send(embeds.embed1);
-            channel.send(constants.vosRoles(embeds.embed1.title))
+            channel.send(constants.vosRoles(embeds.embed1.title));
 
             channel.send(embeds.embed2);
-            channel.send(constants.vosRoles(embeds.embed2.title))
+            channel.send(constants.vosRoles(embeds.embed2.title));
         }
     }).catch(function (err) { });
+});
+
+// Auto Merch
+// This feature is currently exclusive to Dark Perception
+cron.schedule('25 00 00 * * *', () => {
+    let date = new Date();
+    console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Merch`);
+
+    rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (html) {
+        const data = JSON.parse(html);
+        
+        for(let i = 0; i < constants.merchChannels.length; i++) {
+            let channel = client.channels.cache.get(constants.merchChannels[i]);
+            let embed = commands.merch(data);
+
+            // Remove previous Merch
+            channel.bulkDelete(1)
+                .then(() => { })
+                .catch(console.error);
+
+            // Send new Merch
+            channel.send(embed);
+        }
+    }).catch(function (err) { });
+},{
+    timezone: "Africa/Accra"
 });
