@@ -95,7 +95,7 @@ client.on("message", function (message) {
                 message.channel.send(commands.stats(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
 
             break;
 
@@ -105,29 +105,28 @@ client.on("message", function (message) {
         case "yesterday":
         case "weekly":
             rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
-                    const data = $('tr', html);
+                const data = $('tr', html);
 
-                    if (rsn === undefined) {
-                        message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
-                            .then(() => { })
-                            .catch(constants.handleError);
-                    } else {
-                        message.channel.send(commands.daily(data, rsn))
-                            .then(() => { })
-                            .catch(constants.handleError);
-                    }
-                }).catch(function (err) {});
+                if (rsn === undefined) {
+                    message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
+                        .then(() => { })
+                        .catch(constants.handleError);
+                } else {
+                    message.channel.send(commands.daily(data, rsn))
+                        .then(() => { })
+                        .catch(constants.handleError);
+                }
+            }).catch(function (err) { });
             break;
 
         case "spooder":
-            // rp('https://runescape.wiki/w/Araxxor').then(function (html) {
             rp('https://runescape.wiki/w/Template:Araxxor_rotation').then(function (html) {
                 const data = $('#reload', html);
 
                 message.reply(commands.spooder(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
 
         case "rago":
@@ -137,7 +136,7 @@ client.on("message", function (message) {
                 message.reply(commands.rago(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
 
         case "alog":
@@ -154,7 +153,7 @@ client.on("message", function (message) {
                 message.reply(commands.log(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
 
         case "vis":
@@ -164,17 +163,17 @@ client.on("message", function (message) {
                 message.reply(commands.vis(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
 
         case "merch":
             rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (html) {
                 const data = JSON.parse(html);
 
-                message.reply(commands.merch(data))
+                message.reply(commands.merch(data, true))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
         case "raven":
             rp('https://runescape.wiki/w/The_Ravensworn').then(function (html) {
@@ -183,7 +182,7 @@ client.on("message", function (message) {
                 message.reply(commands.raven(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
         case "nemi":
             rp('https://www.reddit.com/r/nemiforest/new.json?limit=1').then(function (html) {
@@ -192,7 +191,7 @@ client.on("message", function (message) {
                 message.reply(commands.nemi(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
         case "portables":
             rp('https://spreadsheets.google.com/feeds/cells/16Yp-eLHQtgY05q6WBYA2MDyvQPmZ4Yr3RHYiBCBj2Hc/1/public/full?alt=json').then(function (html) {
@@ -201,7 +200,7 @@ client.on("message", function (message) {
                 message.reply(commands.portables(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) {});
+            }).catch(function (err) { });
             break;
         case "vos":
             rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
@@ -224,7 +223,7 @@ cron.schedule('25 01 * * * *', () => {
     rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
         const data = JSON.parse(html);
 
-        for(let i = 0; i < constants.vosChannels.length; i++) {
+        for (let i = 0; i < constants.vosChannels.length; i++) {
             let channel = client.channels.cache.get(constants.vosChannels[i]);
             let embeds = commands.vos(data, null)
 
@@ -245,26 +244,68 @@ cron.schedule('25 01 * * * *', () => {
 
 // Auto Merch
 // This feature is currently exclusive to Dark Perception
-cron.schedule('25 00 00 * * *', () => {
+cron.schedule('45 00 00 * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Merch`);
 
     rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (html) {
         const data = JSON.parse(html);
-        
-        for(let i = 0; i < constants.merchChannels.length; i++) {
-            let channel = client.channels.cache.get(constants.merchChannels[i]);
-            let embed = commands.merch(data);
 
-            // Remove previous Merch
-            channel.bulkDelete(1)
-                .then(() => { })
-                .catch(console.error);
+        for (let i = 0; i < constants.dailyChannels.length; i++) {
+            let channel = client.channels.cache.get(constants.dailyChannels[i]);
+            let embed = commands.merch(data, false);
 
             // Send new Merch
             channel.send(embed);
         }
     }).catch(function (err) { });
-},{
+}, {
+    timezone: "Africa/Accra"
+});
+
+// Auto Vis
+// This feature is currently exclusive to Dark Perception
+cron.schedule('00 10 00 * * *', () => {
+    let date = new Date();
+    console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Vis`);
+
+    rp('https://warbandtracker.com/goldberg/').then(function (html) {
+        const data = $('.worldTable', html);
+
+        for (let i = 0; i < constants.dailyChannels.length; i++) {
+            let channel = client.channels.cache.get(constants.dailyChannels[i]);
+            let embed = commands.vis(data);
+
+            // Send new Vis
+            channel.send(embed);
+        }
+    }).catch(function (err) { });
+}, {
+    timezone: "Africa/Accra"
+});
+
+// Auto Spooder
+// This feature is currently exclusive to Dark Perception
+cron.schedule('25 00 00 * * *', () => {
+    let date = new Date();
+    console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Spooder`);
+
+    rp('https://runescape.wiki/w/Template:Araxxor_rotation').then(function (html) {
+        const data = $('#reload', html);
+
+        for (let i = 0; i < constants.dailyChannels.length; i++) {
+            let channel = client.channels.cache.get(constants.dailyChannels[i]);
+            let embed = commands.spooder(data);
+
+            // Remove previous auto Merch/Vis/Spooder
+            channel.bulkDelete(3)
+                .then(() => { })
+                .catch(console.error);
+
+            // Send new Vis
+            channel.send(embed);
+        }
+    }).catch(function (err) { });
+}, {
     timezone: "Africa/Accra"
 });

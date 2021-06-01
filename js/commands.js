@@ -377,7 +377,7 @@ function vis(data) {
 }
 
 // Merchant Command
-function merch(data) {
+function merch(data, future) {
 
     let jsonData = data.parse.text["*"];
     let merchData = [];
@@ -464,7 +464,8 @@ function merch(data) {
         }
     }
 
-    return new Discord.MessageEmbed()
+    if (future) {
+        return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Travelling Merchant's Shop`)
         .addFields(
@@ -479,6 +480,17 @@ function merch(data) {
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+    } else {
+        return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Travelling Merchant's Shop`)
+        .addFields(
+            { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}`},
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+    }
+
 }
 
 // Raven Command
