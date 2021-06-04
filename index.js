@@ -228,7 +228,7 @@ cron.schedule('25 01 * * * *', () => {
             let embeds = commands.vos(data, null)
 
             // Remove previous VoS
-            channel.bulkDelete(4)
+            channel.bulkDelete(10)
                 .then(() => { })
                 .catch(console.error);
 
@@ -265,7 +265,7 @@ cron.schedule('45 00 00 * * *', () => {
 
 // Auto Vis
 // This feature is currently exclusive to Dark Perception
-cron.schedule('00 10 00 * * *', () => {
+cron.schedule('00 30 00 * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Vis`);
 
@@ -298,11 +298,10 @@ cron.schedule('25 00 00 * * *', () => {
             let embed = commands.spooder(data);
 
             // Remove previous auto Merch/Vis/Spooder
-            channel.bulkDelete(3)
+            channel.bulkDelete(10)
                 .then(() => { })
                 .catch(console.error);
 
-            // Send new Vis
             channel.send(embed);
         }
     }).catch(function (err) { });
