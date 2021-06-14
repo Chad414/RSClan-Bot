@@ -481,14 +481,25 @@ function merch(data, future) {
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
     } else {
-        return new Discord.MessageEmbed()
-        .setColor(constants.embedColor)
-        .setTitle(`Travelling Merchant's Shop`)
-        .addFields(
-            { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}`},
-        )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        return {
+            embed: new Discord.MessageEmbed()
+                .setColor(constants.embedColor)
+                .setTitle(`Travelling Merchant's Shop`)
+                .addFields(
+                    { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}` },
+                )
+                .setTimestamp()
+                .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png'),
+            items: currentItems
+        }
+        // return new Discord.MessageEmbed()
+        // .setColor(constants.embedColor)
+        // .setTitle(`Travelling Merchant's Shop`)
+        // .addFields(
+        //     { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}`},
+        // )
+        // .setTimestamp()
+        // .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
     }
 
 }
@@ -579,7 +590,10 @@ function vos(data, message) {
             .then(() => { })
             .catch(constants.handleError);
     } else {
-        return {embed1: district1Embed, embed2: district2Embed};
+        return {
+            embed1: district1Embed,
+            embed2: district2Embed
+        };
     }
 
 }

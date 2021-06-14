@@ -253,10 +253,12 @@ cron.schedule('45 00 00 * * *', () => {
 
         for (let i = 0; i < constants.dailyChannels.length; i++) {
             let channel = client.channels.cache.get(constants.dailyChannels[i]);
-            let embed = commands.merch(data, false);
+            let merch = commands.merch(data, false);
+
+            console.log(merch.items)
 
             // Send new Merch
-            channel.send(embed);
+            channel.send(merch.embed);
         }
     }).catch(function (err) { });
 }, {
@@ -265,7 +267,7 @@ cron.schedule('45 00 00 * * *', () => {
 
 // Auto Vis
 // This feature is currently exclusive to Dark Perception
-cron.schedule('00 30 00 * * *', () => {
+cron.schedule('00 45 00 * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Vis`);
 

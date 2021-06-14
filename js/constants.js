@@ -81,6 +81,7 @@ const vosChannels = [
 // TODO: Move to config file
 const dailyChannels = [
     "848927179714723870"
+    //"848930714606370917"
 ]
 
 // TODO: Move to config file
