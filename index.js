@@ -255,10 +255,23 @@ cron.schedule('45 00 00 * * *', () => {
             let channel = client.channels.cache.get(constants.dailyChannels[i]);
             let merch = commands.merch(data, false);
 
-            console.log(merch.items)
-
             // Send new Merch
             channel.send(merch.embed);
+
+            for (let j = 0; j < merch.items.length; j++) {
+                if (merch.items[j].includes("Livid")) {
+                    channel.send(constants.merchRoles[0])
+                } else if (merch.items[j].includes("Deathtouched")) {
+                    channel.send(constants.merchRoles[1])
+                } else if (merch.items[j].includes("Reaper")) {
+                    channel.send(constants.merchRoles[2])
+                } else if (merch.items[j].includes("Unstable")) {
+                    channel.send(constants.merchRoles[3])
+                } else if (merch.items[j].includes("goebie")) {
+                    channel.send(constants.merchRoles[4])
+                }
+            }       
+
         }
     }).catch(function (err) { });
 }, {

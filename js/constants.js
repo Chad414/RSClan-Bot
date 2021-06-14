@@ -25,7 +25,7 @@ const commands = [
     "nemi",
     "portables",
     "vos"
-]
+];
 
 const skills = [
     'Attack',
@@ -71,18 +71,18 @@ const months = [
     'Oct',
     'Nov',
     'Dec'
-]
+];
 
 // TODO: Move to config file
 const vosChannels = [
     "844326270418550804"
-]
+];
 
 // TODO: Move to config file
 const dailyChannels = [
     "848927179714723870"
-    //"848930714606370917"
-]
+    // "848930714606370917"
+];
 
 // TODO: Move to config file
 const vosRoles = (district) => {
@@ -104,11 +104,20 @@ const vosRoles = (district) => {
         case 'Trahaearn':
             return '<@&846416609069105172>';
     }
-}
+};
+
+// TODO: Move to config file
+const merchRoles = [
+    '<@&854058240581304350>',
+    '<@&854058712691113994>',
+    '<@&854059181198802946>',
+    '<@&854058812411084816>',
+    '<@&854058942727323689>'
+];
 
 function handleError(error) {
     console.log(`\t∟ ${error.name}: ${error.message}`);
-}
+};
 
 const privateProfile = new Discord.MessageEmbed()
     .setColor(embedColor)
@@ -124,6 +133,7 @@ exports.skills = skills;
 exports.months = months;
 exports.vosChannels = vosChannels;
 exports.vosRoles = vosRoles;
+exports.merchRoles = merchRoles;
 exports.dailyChannels = dailyChannels;
 exports.handleError = handleError;
 exports.privateProfile = privateProfile;
