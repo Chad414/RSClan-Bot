@@ -267,7 +267,7 @@ cron.schedule('45 00 00 * * *', () => {
                     channel.send(constants.merchRoles[2])
                 } else if (merch.items[j].includes("Unstable")) {
                     channel.send(constants.merchRoles[3])
-                } else if (merch.items[j].includes("goebie")) {
+                } else if (merch.items[j].includes("goebie") || merch.items[j].includes("Goebie")) {
                     channel.send(constants.merchRoles[4])
                 }
             }       
@@ -280,7 +280,7 @@ cron.schedule('45 00 00 * * *', () => {
 
 // Auto Vis
 // This feature is currently exclusive to Dark Perception
-cron.schedule('00 45 00 * * *', () => {
+cron.schedule('00 00 01 * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Vis`);
 
