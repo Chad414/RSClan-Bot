@@ -73,6 +73,15 @@ const months = [
     'Dec'
 ];
 
+const voragoRotations = [
+    'Ceiling collapse',
+    'Scopulus',
+    'Vitalis',
+    'Green bomb',
+    'Team Split',
+    'The end'
+]
+
 // TODO: Move to config file
 const vosChannels = [
     "844326270418550804"
@@ -127,13 +136,22 @@ const privateProfile = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
+const noRSN = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('RSN Not Found')
+    .setDescription("Please set your RSN with !rsn \nExample: `!rsn Zezima`")
+    .setTimestamp()
+    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+
 exports.embedColor = embedColor;
 exports.commands = commands;
 exports.skills = skills;
 exports.months = months;
+exports.voragoRotations = voragoRotations;
 exports.vosChannels = vosChannels;
 exports.vosRoles = vosRoles;
 exports.merchRoles = merchRoles;
 exports.dailyChannels = dailyChannels;
 exports.handleError = handleError;
 exports.privateProfile = privateProfile;
+exports.noRSN = noRSN;

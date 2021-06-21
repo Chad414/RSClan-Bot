@@ -13,7 +13,7 @@ function info(serverCount) {
         .setDescription(`Currently serving ${serverCount} RuneScape communities`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
         .addFields(
-            { name: `Version ${pkg.version}`, value: 'Please report issues to @Chadathan#0100' },
+            { name: `Version ${pkg.version}`, value: 'Developed by Chadathan#0100 with support from Dark Perception' },
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
@@ -205,88 +205,59 @@ function daily(data, user) {
 }
 
 // Spooder Command
-function spooder(data) {
+function spooder() {
+
+    // Find Rotation
+    let firstRotationDate = new Date('June 11, 2021 00:00:00 GMT+0:00');
+
+    let currentDate = new Date();
+
+    let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
+    let daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+
+    let numberOfRotations = Math.floor(daysDifference / 4);
+
+    let closedPath = numberOfRotations % 3;
+
+    let daysUntilRotation = 4 - (daysDifference % 4);
 
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Araxxor's Current Rotation`)
-        .setDescription(`${data[0].children[0].children[3].children[0].children[0].data}`)
+        .setDescription(`Days until next rotation: ${daysUntilRotation}`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/spooder.png')
         .addFields(
-            { name: 'Path 1 (Minions)', value: `${data[0].children[0].children[2].children[0].children[0].data}`},
-            { name: 'Path 2 (Acid)', value: `${data[0].children[0].children[2].children[1].children[0].data}`},
-            { name: 'Path 3 (Darkness)', value: `${data[0].children[0].children[2].children[2].children[0].data}`},
+            { name: 'Path 1 (Minions)', value: `${(closedPath == 0) ? "Closed" : "Open"}` },
+            { name: 'Path 2 (Acid)', value: `${(closedPath == 1) ? "Closed" : "Open"}` },
+            { name: 'Path 3 (Darkness)', value: `${(closedPath == 2) ? "Closed" : "Open"}` },
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
-
-    return result;
 }
 
 // Rago Command
-function rago(data) {
+function rago() {
 
-    // Get current rotation
-    let currentRotation = data[0].children[0].data;
+    let firstRotationDate = new Date('June 2, 2021 00:00:00 GMT+0:00');
+    let currentDate = new Date();
 
-    // Find next rotation
-    let nextRotation;
-    switch (currentRotation) {
-        case 'Ceiling collapse':
-            nextRotation = 'Scopulus';
-            break;
-        case 'Scopulus':
-            nextRotation = 'Vitalis';
-            break;
-        case 'Vitalis':
-            nextRotation = 'Green bomb';
-            break;
-        case 'Green bomb':
-            nextRotation = 'Team Split';
-            break;
-        case 'Team Split':
-            nextRotation = 'The end';
-            break;
-        case 'The end':
-            nextRotation = 'Ceiling collapse';
-            break;
-    }
+    let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
+    let daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
-    // Find days left until rotation
-    const d = new Date();
-    let daysLeft;
-    switch (d.getUTCDay()) {
-        case 0:
-            daysLeft = 3;
-            break;
-        case 1:
-            daysLeft = 2;
-            break;
-        case 2:
-            daysLeft = 1;
-            break;
-        case 3:
-            daysLeft = 7;
-            break;
-        case 4:
-            daysLeft = 6;
-            break;
-        case 5:
-            daysLeft = 5;
-            break;
-        case 6:
-            daysLeft = 4;
-            break;
-    }
+    let numberOfRotations = Math.floor(daysDifference / 7);
+
+    let currentRotation = numberOfRotations % 6;
+
+    let daysUntilRotation = 7 - (daysDifference % 7);
 
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Vorago's Current Rotation`)
-        .setDescription(`Days Until Next Rotation: ${daysLeft}`)
+        .setDescription(`Days Until Next Rotation: ${daysUntilRotation}`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/rago.png')
         .addFields(
-            { name: 'Vorago Current', value: `${currentRotation}`},
-            { name: 'Vorago Next', value: `${nextRotation}`},
+            { name: 'Vorago Current', value: `${constants.voragoRotations[currentRotation]}` },
+            { name: 'Vorago Next', value: `${constants.voragoRotations[(currentRotation + 1) % 6]}` },
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
@@ -492,33 +463,29 @@ function merch(data, future) {
                 .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png'),
             items: currentItems
         }
-        // return new Discord.MessageEmbed()
-        // .setColor(constants.embedColor)
-        // .setTitle(`Travelling Merchant's Shop`)
-        // .addFields(
-        //     { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}`},
-        // )
-        // .setTimestamp()
-        // .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
     }
 
 }
 
 // Raven Command
-function raven(data) {
-    let raven;
-    if (data[1].children[2].data.includes("The next raven will spawn on")) {
-        raven = `The next raven will spawn on ${data[1].children[3].children[0].data}`;
-    } else {
-        raven = "The raven has spawned";
-    }
+function raven() {
+
+    let firstRotationDate = new Date('June 13, 2021 00:00:00 GMT+0:00');
+
+    let currentDate = new Date();
+  
+    let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
+    let daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+  
+    let isSpawned = (daysDifference % 13 === 0);
+  
+    let nextSpawn = 13 - (daysDifference % 13);
 
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Raven`)
-        .setURL('https://runescape.wiki/w/Raven_(Prifddinas)#Locations')
         .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/raven.png')
-        .setDescription(raven)
+        .setDescription((isSpawned) ? "The raven has spawned" : `The next raven will spawn in ${nextSpawn} days`)
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 }

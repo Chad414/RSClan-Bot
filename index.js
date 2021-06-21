@@ -72,7 +72,7 @@ client.on("message", function (message) {
                     .then(() => { })
                     .catch(constants.handleError);
             } else {
-                message.reply('Missing argument: Please specify a RSN. \nExample: `!rsn Zezima`')
+                message.reply(constants.noRSN)
                     .then(() => { })
                     .catch(constants.handleError);
             }
@@ -83,7 +83,7 @@ client.on("message", function (message) {
         case "skillz":
         case "stats":
             if (rsn === undefined) {
-                message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
+                message.reply(constants.noRSN)
                     .then(() => { })
                     .catch(constants.handleError);
                 break;
@@ -108,7 +108,7 @@ client.on("message", function (message) {
                 const data = $('tr', html);
 
                 if (rsn === undefined) {
-                    message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
+                    message.reply(constants.noRSN)
                         .then(() => { })
                         .catch(constants.handleError);
                 } else {
@@ -120,28 +120,21 @@ client.on("message", function (message) {
             break;
 
         case "spooder":
-            rp('https://runescape.wiki/w/Template:Araxxor_rotation').then(function (html) {
-                const data = $('#reload', html);
+            message.reply(commands.spooder())
+                .then(() => { })
+                .catch(constants.handleError);
 
-                message.reply(commands.spooder(data))
-                    .then(() => { })
-                    .catch(constants.handleError);
-            }).catch(function (err) { });
             break;
 
         case "rago":
-            rp('https://runescape.wiki/w/Vorago').then(function (html) {
-                const data = $('.table-bg-green', html);
-
-                message.reply(commands.rago(data))
-                    .then(() => { })
-                    .catch(constants.handleError);
-            }).catch(function (err) { });
+            message.reply(commands.rago())
+                .then(() => { })
+                .catch(constants.handleError);
             break;
 
         case "alog":
             if (rsn === undefined) {
-                message.reply('RSN not found: please assign one with !rsn. \nExample: `!rsn Zezima`')
+                message.reply(constants.noRSN)
                     .then(() => { })
                     .catch(constants.handleError);
                 break;
@@ -176,13 +169,9 @@ client.on("message", function (message) {
             }).catch(function (err) { });
             break;
         case "raven":
-            rp('https://runescape.wiki/w/The_Ravensworn').then(function (html) {
-                const data = $("p", html);
-
-                message.reply(commands.raven(data))
-                    .then(() => { })
-                    .catch(constants.handleError);
-            }).catch(function (err) { });
+            message.reply(commands.raven())
+                .then(() => { })
+                .catch(constants.handleError);
             break;
         case "nemi":
             rp('https://www.reddit.com/r/nemiforest/new.json?limit=1').then(function (html) {
@@ -244,7 +233,7 @@ cron.schedule('25 01 * * * *', () => {
 
 // Auto Merch
 // This feature is currently exclusive to Dark Perception
-cron.schedule('45 00 00 * * *', () => {
+cron.schedule('35 00 00 * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Merch`);
 
@@ -280,7 +269,8 @@ cron.schedule('45 00 00 * * *', () => {
 
 // Auto Vis
 // This feature is currently exclusive to Dark Perception
-cron.schedule('00 00 01 * * *', () => {
+// cron.schedule('00 00 01 * * *', () => {
+cron.schedule('55 00 * * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Vis`);
 
@@ -290,6 +280,14 @@ cron.schedule('00 00 01 * * *', () => {
         for (let i = 0; i < constants.dailyChannels.length; i++) {
             let channel = client.channels.cache.get(constants.dailyChannels[i]);
             let embed = commands.vis(data);
+
+            // Delete previous vis if not first vis of the day
+            let date = new Date();
+            if (date.getUTCHours() != 0) {
+                channel.bulkDelete(1)
+                    .then(() => { })
+                    .catch(console.error);
+            }
 
             // Send new Vis
             channel.send(embed);
@@ -305,21 +303,18 @@ cron.schedule('25 00 00 * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Spooder`);
 
-    rp('https://runescape.wiki/w/Template:Araxxor_rotation').then(function (html) {
-        const data = $('#reload', html);
+    for (let i = 0; i < constants.dailyChannels.length; i++) {
+        let channel = client.channels.cache.get(constants.dailyChannels[i]);
+        let embed = commands.spooder();
 
-        for (let i = 0; i < constants.dailyChannels.length; i++) {
-            let channel = client.channels.cache.get(constants.dailyChannels[i]);
-            let embed = commands.spooder(data);
+        // Remove previous auto Merch/Vis/Spooder
+        channel.bulkDelete(10)
+            .then(() => { })
+            .catch(console.error);
 
-            // Remove previous auto Merch/Vis/Spooder
-            channel.bulkDelete(10)
-                .then(() => { })
-                .catch(console.error);
+        channel.send(embed);
+    }
 
-            channel.send(embed);
-        }
-    }).catch(function (err) { });
 }, {
     timezone: "Africa/Accra"
 });
