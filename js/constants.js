@@ -124,6 +124,8 @@ const merchRoles = [
     '<@&854058942727323689>'
 ];
 
+const portRole = '<@858809588904099871>'
+
 function handleError(error) {
     console.log(`\t∟ ${error.name}: ${error.message}`);
 };
@@ -151,6 +153,7 @@ exports.voragoRotations = voragoRotations;
 exports.vosChannels = vosChannels;
 exports.vosRoles = vosRoles;
 exports.merchRoles = merchRoles;
+exports.portRole = portRole;
 exports.dailyChannels = dailyChannels;
 exports.handleError = handleError;
 exports.privateProfile = privateProfile;

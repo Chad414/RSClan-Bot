@@ -312,6 +312,8 @@ cron.schedule('25 00 00 * * *', () => {
             .then(() => { })
             .catch(console.error);
 
+        channel.send(`Reminder to do your ${constants.portRole}`);
+        
         channel.send(embed);
     }
 
