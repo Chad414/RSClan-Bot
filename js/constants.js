@@ -124,7 +124,7 @@ const merchRoles = [
     '<@&854058942727323689>'
 ];
 
-const portRole = '<@858809588904099871>'
+const portRole = '<@&858809588904099871>'
 
 function handleError(error) {
     console.log(`\t∟ ${error.name}: ${error.message}`);
