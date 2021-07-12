@@ -281,16 +281,20 @@ cron.schedule('55 00 * * * *', () => {
             let channel = client.channels.cache.get(constants.dailyChannels[i]);
             let embed = commands.vis(data);
 
-            // Delete previous vis if not first vis of the day
+            // Delete previous vis if not first vis of the day (1)
             let date = new Date();
-            if (date.getUTCHours() != 0) {
+            if (date.getUTCHours() > 1) {
                 channel.bulkDelete(1)
                     .then(() => { })
                     .catch(console.error);
             }
 
-            // Send new Vis
-            channel.send(embed);
+            // Do not send vis at reset, information would be inaccurate
+            if (date.getUTCHours() != 0) {
+                // Send new Vis
+                channel.send(embed);
+            }
+
         }
     }).catch(function (err) { });
 }, {

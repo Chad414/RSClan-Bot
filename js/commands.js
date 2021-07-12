@@ -529,10 +529,12 @@ function portables(data) {
 // VoS Command
 function vos(data, message) {
 
-    let updateTime = data.timestamp;
+    // let updateTime = data.timestamp;
+    // updateTime = updateTime.slice(updateTime.indexOf("T") + 1);
+    // updateTime = updateTime.slice(0, updateTime.lastIndexOf(":"));
 
-    updateTime = updateTime.slice(updateTime.indexOf("T") + 1);
-    updateTime = updateTime.slice(0, updateTime.lastIndexOf(":"));
+    let date = new Date();
+    let updateTime = `${date.getUTCHours()}:00`
 
     let district1Embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
