@@ -138,6 +138,13 @@ const privateProfile = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
+const runeMetricsUnavailable = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('RuneMetrics Error')
+    .setDescription(`RuneMetrics is currently unavailable or the user does not exist.`)
+    .setTimestamp()
+    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+
 const noRSN = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('RSN Not Found')
@@ -157,4 +164,5 @@ exports.portRole = portRole;
 exports.dailyChannels = dailyChannels;
 exports.handleError = handleError;
 exports.privateProfile = privateProfile;
+exports.runeMetricsUnavailable = runeMetricsUnavailable;
 exports.noRSN = noRSN;

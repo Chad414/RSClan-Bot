@@ -269,6 +269,9 @@ function log(data) {
     if (data.error == 'PROFILE_PRIVATE') {
         console.log(`\t∟ RuneMetrics Profile is Private`)
         return constants.privateProfile;
+    } else if (data.error == 'NO_PROFILE') {
+        console.log(`\t∟ RuneMetrics Unavailable`)
+        return constants.runeMetricsUnavailable;
     }
 
     let username = data.name.replace(/ /g, '+');
