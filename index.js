@@ -289,8 +289,10 @@ cron.schedule('55 00 * * * *', () => {
                     .catch(console.error);
             }
 
-            // Do not send vis at reset, information would be inaccurate
-            if (date.getUTCHours() != 0) {
+            // Update at these hours of the day
+            let visHours = [1, 2, 3, 6, 9, 15, 21];
+
+            if (visHours.includes(date.getUTCHours())) {
                 // Send new Vis
                 channel.send(embed);
             }
