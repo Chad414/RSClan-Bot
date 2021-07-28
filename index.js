@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const rp = require('request-promise');
-const $ = require('cheerio');
+const cheerio = require('cheerio');
 const _ = require('lodash');
 const cron = require('node-cron');
 
@@ -121,7 +121,8 @@ client.on("message", function (message) {
         case "yesterday":
         case "weekly":
             rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
-                const data = $('tr', html);
+                const $ = cheerio.load(html)
+                const data = $('tr');
 
                 if (rsn === undefined) {
                     message.reply(constants.noRSN)
@@ -167,7 +168,8 @@ client.on("message", function (message) {
 
         case "vis":
             rp('https://warbandtracker.com/goldberg/').then(function (html) {
-                const data = $('.worldTable', html);
+                const $ = cheerio.load(html)
+                const data = $('.worldTable');
 
                 message.reply(commands.vis(data))
                     .then(() => { })
@@ -305,7 +307,8 @@ cron.schedule('55 00 * * * *', () => {
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Vis`);
 
     rp('https://warbandtracker.com/goldberg/').then(function (html) {
-        const data = $('.worldTable', html);
+        const $ = cheerio.load(html)
+        const data = $('.worldTable');
 
         for (let i = 0; i < constants.dailyChannels.length; i++) {
             let channel = client.channels.cache.get(constants.dailyChannels[i]);
