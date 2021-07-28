@@ -11,12 +11,12 @@ function info(serverCount) {
         .setTitle('RSClan Bot')
         .setURL('https://top.gg/bot/803690098839126016')
         .setDescription(`Currently serving ${serverCount} RuneScape communities`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png')
         .addFields(
             { name: `Version ${pkg.version}`, value: 'Developed by Chadathan#0100 with support from Dark Perception' },
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Help Command
@@ -42,7 +42,7 @@ function help(prefix) {
             { name: `${prefix}vos`, value: 'Displays current Voice of Seren' }
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // RSN Command
@@ -56,7 +56,7 @@ function rsn(rsn) {
         .setTitle('RSN Assigned')
         .setDescription(`Assigned ${rsn} to your discord account.`)
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 function stats(data) {
@@ -225,14 +225,14 @@ function spooder() {
         .setColor(constants.embedColor)
         .setTitle(`Araxxor's Current Rotation`)
         .setDescription(`Days until next rotation: ${daysUntilRotation}`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/spooder.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/spooder.png')
         .addFields(
             { name: 'Path 1 (Minions)', value: `${(closedPath == 0) ? "Closed" : "Open"}` },
             { name: 'Path 2 (Acid)', value: `${(closedPath == 1) ? "Closed" : "Open"}` },
             { name: 'Path 3 (Darkness)', value: `${(closedPath == 2) ? "Closed" : "Open"}` },
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Rago Command
@@ -254,13 +254,13 @@ function rago() {
         .setColor(constants.embedColor)
         .setTitle(`Vorago's Current Rotation`)
         .setDescription(`Days Until Next Rotation: ${daysUntilRotation}`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/rago.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/rago.png')
         .addFields(
             { name: 'Vorago Current', value: `${constants.voragoRotations[currentRotation]}` },
             { name: 'Vorago Next', value: `${constants.voragoRotations[(currentRotation + 1) % 6]}` },
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Adventure Log Command
@@ -324,7 +324,7 @@ function log(data) {
             { name: `${entries[8]}`, value: `${dates[8]}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Vis Command
@@ -340,14 +340,14 @@ function vis(data) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Correct Rune Combinations`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/vis.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/vis.png')
         .addFields(
             { name: `First Rune`, value: `${firstRune}`},
             { name: `Second Rune`, value: `${secondRune[0]}\n${secondRune[1]}\n${secondRune[2]}`},
 
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Merchant Command
@@ -453,7 +453,7 @@ function merch(data, future) {
             { name: `${futureItems[6][0]}`, value: `${futureItems[6][1]}\n${futureItems[6][2]}\n${futureItems[6][3]}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
     } else {
         return {
             embed: new Discord.MessageEmbed()
@@ -463,7 +463,7 @@ function merch(data, future) {
                     { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}` },
                 )
                 .setTimestamp()
-                .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png'),
+                .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png'),
             items: currentItems
         }
     }
@@ -487,10 +487,10 @@ function raven() {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Raven`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/raven.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/raven.png')
         .setDescription((isSpawned) ? "The raven has spawned" : `The next raven will spawn in ${nextSpawn} days`)
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Nemi Command
@@ -505,7 +505,7 @@ function nemi(data) {
         .setImage(imageURL)
         .setDescription(title)
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Portables Command
@@ -514,7 +514,7 @@ function portables(data) {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Portables`)
-        .setThumbnail('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/portables.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/portables.png')
         .setDescription("Information provided by Portables FC")
         .addFields(
             { name: `Fletcher`, value: `${data.feed.entry[12].content.$t.replace(/\*/g, '')}`},
@@ -526,7 +526,7 @@ function portables(data) {
             { name: `Workbench`, value: `${data.feed.entry[18].content.$t.replace(/\*/g, '')}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // VoS Command
@@ -543,15 +543,15 @@ function vos(data, message) {
         .setColor(constants.embedColor)
         .setTitle(`${data.district1}`)
         .setDescription(`District 1`)
-        .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district1}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district1}.png?raw=true`)
+        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 
     let district2Embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.district2}`)
         .setDescription(`District 2`)
-        .setImage(`https://github.com/Chad414/rsclan-discord-bot/blob/main/img/vos/${data.district2}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+        .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district2}.png?raw=true`)
+        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 
     if (message) {
         message.reply(district1Embed)
@@ -570,6 +570,38 @@ function vos(data, message) {
 
 }
 
+// GE Command
+function ge(data) {
+
+    // Comma separators solution from https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+    function numberWithCommas(x) {return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+
+    if (data.error != undefined) {
+        return constants.noItem;
+    }
+    
+    let itemName;
+    let priceData;
+    for (const i in data) {
+        itemName = i;
+    }
+
+    priceData = data[itemName];
+
+    let updated = new Date(priceData[priceData.length - 1].timestamp);
+
+    return new Discord.MessageEmbed()
+    .setColor(constants.embedColor)
+    .setTitle(`${itemName}`)
+    .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/ge.png')
+    .setDescription("Current Guide Price")
+    .addFields(
+        { name: `${numberWithCommas(priceData[priceData.length - 1].price)} GP`, value: `Upated ${constants.months[updated.getMonth()]} ${updated.getDate()} at ${updated.getHours()}:00 GMT`},
+    )
+    .setTimestamp()
+    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+}
+
 exports.info = info;
 exports.help = help;
 exports.rsn = rsn;
@@ -584,3 +616,4 @@ exports.raven = raven;
 exports.nemi = nemi;
 exports.portables = portables;
 exports.vos = vos;
+exports.ge = ge;

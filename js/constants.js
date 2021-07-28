@@ -24,7 +24,8 @@ const commands = [
     "raven",
     "nemi",
     "portables",
-    "vos"
+    "vos",
+    "ge"
 ];
 
 const skills = [
@@ -152,6 +153,13 @@ const noRSN = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
+const noItem = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('Item not found')
+    .setDescription("Please make sure you enter the item exactly as it's shown in-game")
+    .setTimestamp()
+    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+
 exports.embedColor = embedColor;
 exports.commands = commands;
 exports.skills = skills;
@@ -166,3 +174,4 @@ exports.handleError = handleError;
 exports.privateProfile = privateProfile;
 exports.runeMetricsUnavailable = runeMetricsUnavailable;
 exports.noRSN = noRSN;
+exports.noItem = noItem;

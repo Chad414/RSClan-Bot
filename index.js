@@ -31,17 +31,33 @@ client.on("message", function (message) {
         console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] ${command} ${args} - sent by ${message.author.username}`);
     }
 
-    // Process RSN
-    let rsn = '';
+    let rsnCommands = ["setrsn", "rsn", "skills", "skillz", "stats", "daily", "gains", "gainz", "yesterday", "weekly", "alog"];
+    let itemCommands = ["ge"];
 
-    if (args.length === 0) {
-        rsn = userstore.getUser(message.author);
-    } else {
-        for (i of args) {
-            rsn += `${i}+`;
+    // Process RSN if command requires it
+    if (rsnCommands.includes(command)) {
+        var rsn = '';
+
+        // If no RSN was passed we need to check if one is saved
+        if (args.length === 0) {
+            rsn = userstore.getUser(message.author);
+        } else {
+            for (i of args) {
+                rsn += `${i}+`;
+            }
+            rsn = rsn.slice(0, rsn.length - 1);
         }
-        rsn = rsn.slice(0, rsn.length - 1);
     }
+
+    if (itemCommands.includes(command) && args.length > 0) {
+        var item = '';
+
+        for (i of args) {
+            item += `${i} `;
+        }
+        item = item.slice(0, item.length - 1);
+    }
+
 
     switch (command) {
         case "ping":
@@ -89,8 +105,8 @@ client.on("message", function (message) {
                 break;
             }
 
-            rp('https://apps.runescape.com/runemetrics/profile/profile?user=' + rsn + '&activities=10').then(function (html) {
-                const data = JSON.parse(html);
+            rp('https://apps.runescape.com/runemetrics/profile/profile?user=' + rsn + '&activities=10').then(function (json) {
+                const data = JSON.parse(json);
 
                 message.channel.send(commands.stats(data))
                     .then(() => { })
@@ -140,8 +156,8 @@ client.on("message", function (message) {
                 break;
             }
 
-            rp('https://apps.runescape.com/runemetrics/profile/profile?user=' + rsn + '&activities=10').then(function (html) {
-                const data = JSON.parse(html);
+            rp('https://apps.runescape.com/runemetrics/profile/profile?user=' + rsn + '&activities=10').then(function (json) {
+                const data = JSON.parse(json);
 
                 message.reply(commands.log(data))
                     .then(() => { })
@@ -160,8 +176,8 @@ client.on("message", function (message) {
             break;
 
         case "merch":
-            rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (html) {
-                const data = JSON.parse(html);
+            rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (json) {
+                const data = JSON.parse(json);
 
                 message.reply(commands.merch(data, true))
                     .then(() => { })
@@ -174,8 +190,8 @@ client.on("message", function (message) {
                 .catch(constants.handleError);
             break;
         case "nemi":
-            rp('https://www.reddit.com/r/nemiforest/new.json?limit=1').then(function (html) {
-                const data = JSON.parse(html);
+            rp('https://www.reddit.com/r/nemiforest/new.json?limit=1').then(function (json) {
+                const data = JSON.parse(json);
 
                 message.reply(commands.nemi(data))
                     .then(() => { })
@@ -183,8 +199,8 @@ client.on("message", function (message) {
             }).catch(function (err) { });
             break;
         case "portables":
-            rp('https://spreadsheets.google.com/feeds/cells/16Yp-eLHQtgY05q6WBYA2MDyvQPmZ4Yr3RHYiBCBj2Hc/1/public/full?alt=json').then(function (html) {
-                const data = JSON.parse(html);
+            rp('https://spreadsheets.google.com/feeds/cells/16Yp-eLHQtgY05q6WBYA2MDyvQPmZ4Yr3RHYiBCBj2Hc/1/public/full?alt=json').then(function (json) {
+                const data = JSON.parse(json);
 
                 message.reply(commands.portables(data))
                     .then(() => { })
@@ -192,10 +208,26 @@ client.on("message", function (message) {
             }).catch(function (err) { });
             break;
         case "vos":
-            rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
-                const data = JSON.parse(html);
+            rp('https://api.weirdgloop.org/runescape/vos').then(function (json) {
+                const data = JSON.parse(json);
 
                 commands.vos(data, message);
+            }).catch(function (err) { });
+            break;
+        case "ge":
+            if (item === undefined) {
+                message.reply(constants.noItem)
+                    .then(() => { })
+                    .catch(constants.handleError);
+                break;
+            }
+
+            rp('https://api.weirdgloop.org/exchange/history/rs/last90d?name=' + item).then(function (json) {
+                const data = JSON.parse(json);
+
+                message.reply(commands.ge(data))
+                    .then(() => { })
+                    .catch(constants.handleError);
             }).catch(function (err) { });
             break;
     }
@@ -209,8 +241,8 @@ cron.schedule('25 01 * * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Voice of Seren`);
 
-    rp('https://api.weirdgloop.org/runescape/vos').then(function (html) {
-        const data = JSON.parse(html);
+    rp('https://api.weirdgloop.org/runescape/vos').then(function (json) {
+        const data = JSON.parse(json);
 
         for (let i = 0; i < constants.vosChannels.length; i++) {
             let channel = client.channels.cache.get(constants.vosChannels[i]);
@@ -237,8 +269,8 @@ cron.schedule('35 00 00 * * *', () => {
     let date = new Date();
     console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Merch`);
 
-    rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (html) {
-        const data = JSON.parse(html);
+    rp('https://runescape.wiki/api.php?action=parse&disablelimitreport=1&format=json&prop=text&text=%7B%7BTravelling+Merchant%2Fapi%7Cformat%3Djson%7D%7D%7B%7BTravelling_Merchant%2Fapi%7Coffset%3D1%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D2%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D3%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D4%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D5%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D6%7Cformat%3Djson%7D%7D%7B%7BTravelling+Merchant%2Fapi%7Coffset%3D7%7Cformat%3Djson%7D%7D').then(function (json) {
+        const data = JSON.parse(json);
 
         for (let i = 0; i < constants.dailyChannels.length; i++) {
             let channel = client.channels.cache.get(constants.dailyChannels[i]);
