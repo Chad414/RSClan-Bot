@@ -21,6 +21,7 @@ Discord bot for RuneScape 3 communities with up to date information on XP gains,
 - `rsn {rsn}` - Assign a RSN to your Discord account
 - `stats {rsn}` - Display user's account levels and experience points
 - `gains {rsn}` - Display user's Daily, Yesterday, and Weekly XP Gains
+- `ge {item}` - Displays item's current and previous Grand Exchange price
 - `spooder` - Displays current Araxxor paths
 - `rago` - Displays current and next Vorago rotation
 - `alog {rsn}` - Displays user's Adventure Log

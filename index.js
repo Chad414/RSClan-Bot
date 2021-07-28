@@ -225,9 +225,7 @@ client.on("message", function (message) {
             rp('https://api.weirdgloop.org/exchange/history/rs/last90d?name=' + item).then(function (json) {
                 const data = JSON.parse(json);
 
-                message.reply(commands.ge(data))
-                    .then(() => { })
-                    .catch(constants.handleError);
+                commands.ge(data, message);
             }).catch(function (err) { });
             break;
     }
