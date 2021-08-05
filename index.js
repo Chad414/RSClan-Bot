@@ -222,6 +222,10 @@ client.on("message", function (message) {
                     .then(() => { })
                     .catch(constants.handleError);
                 break;
+            } else {
+                while(item.includes('+')) {
+                    item = item.replace("+", "%2B");
+                }
             }
 
             rp('https://api.weirdgloop.org/exchange/history/rs/last90d?name=' + item).then(function (json) {
