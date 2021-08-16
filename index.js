@@ -207,7 +207,7 @@ client.on("message", function (message) {
                 message.reply(commands.portables(data))
                     .then(() => { })
                     .catch(constants.handleError);
-            }).catch(function (err) { });
+            }).catch(function (err) { message.reply(constants.portablesError) });
             break;
         case "vos":
             rp('https://api.weirdgloop.org/runescape/vos').then(function (json) {

@@ -160,6 +160,13 @@ const noItem = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
+const portablesError = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('Portables Error')
+    .setDescription(`Unable to retrieve Portables data.`)
+    .setTimestamp()
+    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+
 exports.embedColor = embedColor;
 exports.commands = commands;
 exports.skills = skills;
@@ -175,3 +182,4 @@ exports.privateProfile = privateProfile;
 exports.runeMetricsUnavailable = runeMetricsUnavailable;
 exports.noRSN = noRSN;
 exports.noItem = noItem;
+exports.portablesError = portablesError;
