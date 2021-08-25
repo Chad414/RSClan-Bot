@@ -514,19 +514,22 @@ function nemi(data) {
 // Portables Command
 function portables(data) {
 
+    let rows = data.table.rows;
+
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Portables`)
+        .setURL('https://docs.google.com/spreadsheets/d/16Yp-eLHQtgY05q6WBYA2MDyvQPmZ4Yr3RHYiBCBj2Hc/')
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/portables.png')
         .setDescription("Information provided by Portables FC")
         .addFields(
-            { name: `Fletcher`, value: `${data.feed.entry[12].content.$t.replace(/\*/g, '')}`},
-            { name: `Crafter`, value: `${data.feed.entry[13].content.$t.replace(/\*/g, '')}`},
-            { name: `Brazier`, value: `${data.feed.entry[14].content.$t.replace(/\*/g, '')}`},
-            { name: `Sawmill`, value: `${data.feed.entry[15].content.$t.replace(/\*/g, '')}`},
-            { name: `Range`, value: `${data.feed.entry[16].content.$t.replace(/\*/g, '')}`},
-            { name: `Well`, value: `${data.feed.entry[17].content.$t.replace(/\*/g, '')}`},
-            { name: `Workbench`, value: `${data.feed.entry[18].content.$t.replace(/\*/g, '')}`},
+            { name: `Fletcher`, value: `${rows[4].c[1].v.replace(/\*/g, '')}`},
+            { name: `Crafter`, value: `${rows[5].c[1].v.replace(/\*/g, '')}`},
+            { name: `Brazier`, value: `${rows[6].c[1].v.replace(/\*/g, '')}`},
+            { name: `Sawmill`, value: `${rows[7].c[1].v.replace(/\*/g, '')}`},
+            { name: `Range`, value: `${rows[8].c[1].v.replace(/\*/g, '')}`},
+            { name: `Well`, value: `${rows[9].c[1].v.replace(/\*/g, '')}`},
+            { name: `Workbench`, value: `${rows[10].c[1].v.replace(/\*/g, '')}`},
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');

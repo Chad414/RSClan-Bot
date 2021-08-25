@@ -201,7 +201,9 @@ client.on("message", function (message) {
             }).catch(function (err) { });
             break;
         case "portables":
-            rp('https://spreadsheets.google.com/feeds/cells/16Yp-eLHQtgY05q6WBYA2MDyvQPmZ4Yr3RHYiBCBj2Hc/1/public/full?alt=json').then(function (json) {
+            rp('https://docs.google.com/spreadsheets/d/16Yp-eLHQtgY05q6WBYA2MDyvQPmZ4Yr3RHYiBCBj2Hc/gviz/tq?tqx=out:json').then(function (json) {
+                json = json.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\)/)[1];
+
                 const data = JSON.parse(json);
 
                 message.reply(commands.portables(data))
