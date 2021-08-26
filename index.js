@@ -133,7 +133,7 @@ client.on("message", function (message) {
                         .then(() => { })
                         .catch(constants.handleError);
                 }
-            }).catch(function (err) { });
+            }).catch(function (err) { message.reply(constants.runeClanError) });
             break;
 
         case "spooder":

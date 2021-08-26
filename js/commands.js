@@ -476,6 +476,9 @@ function merch(data, future) {
 // Raven Command
 function raven() {
 
+    // Number suffix solution from https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
+    function nth(n){return["st","nd","rd"][((n+90)%100-10)%10-1]||"th"}
+
     let firstRotationDate = new Date('June 13, 2021 00:00:00 GMT+0:00');
 
     let currentDate = new Date();
@@ -485,13 +488,16 @@ function raven() {
   
     let isSpawned = (daysDifference % 13 === 0);
   
-    let nextSpawn = 13 - (daysDifference % 13);
+    let daysUntilRotation = 13 - (daysDifference % 13);
+
+    let nextSpawnDate = new Date(currentDate);
+    nextSpawnDate.setDate(nextSpawnDate.getDate() + daysUntilRotation);
 
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Raven`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/raven.png')
-        .setDescription((isSpawned) ? "The raven has spawned" : `The next raven will spawn in ${nextSpawn} days`)
+        .setDescription((isSpawned) ? "The raven has spawned" : `The next raven will spawn in ${daysUntilRotation} days on ${constants.months[nextSpawnDate.getUTCMonth()]} ${nextSpawnDate.getUTCDate()}${nth(nextSpawnDate.getUTCDate())}`)
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }

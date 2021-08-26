@@ -131,6 +131,14 @@ function handleError(error) {
     console.log(`\t∟ ${error.name}: ${error.message}`);
 };
 
+const runeClanError = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('RuneClan Error')
+    .setURL('https://www.runeclan.com/')
+    .setDescription(`Please make sure you're being tracked by RuneClan`)
+    .setTimestamp()
+    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+
 const privateProfile = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('RuneMetrics Error')
@@ -178,6 +186,7 @@ exports.merchRoles = merchRoles;
 exports.portRole = portRole;
 exports.dailyChannels = dailyChannels;
 exports.handleError = handleError;
+exports.runeClanError = runeClanError;
 exports.privateProfile = privateProfile;
 exports.runeMetricsUnavailable = runeMetricsUnavailable;
 exports.noRSN = noRSN;
