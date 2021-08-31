@@ -7,7 +7,7 @@ const pkg = require("../package.json");
 const constants = require("./constants");
 
 // Info Command
-function info(serverCount) {
+exports.info = (serverCount) => {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle('RSClan Bot')
@@ -22,7 +22,7 @@ function info(serverCount) {
 }
 
 // Help Command
-function help(prefix) {
+exports.help = (prefix) => {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle('RSClan Bot Commands')
@@ -49,7 +49,7 @@ function help(prefix) {
 }
 
 // RSN Command
-function rsn(rsn) {
+exports.rsn = (rsn) => {
 
     // Format RSN if spaced
     rsn = (rsn.includes('+')) ? _.startCase(rsn.replace('+', ' ')) : _.upperFirst(rsn)
@@ -62,11 +62,14 @@ function rsn(rsn) {
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
-function stats(data) {
+exports.stats = (data) => {
 
     if (data.error == 'PROFILE_PRIVATE') {
-        console.log(`\t∟ RuneMetrics Profile is Private`)
+        console.log(`\t∟ RuneMetrics Profile is Private`);
         return constants.privateProfile;
+    } else if (data.error == 'NO_PROFILE') {
+        console.log(`\t∟ RuneMetrics Profile not found`);
+        return constants.runeMetricsUnavailable;
     }
 
     let nf = new Intl.NumberFormat();
@@ -139,11 +142,10 @@ function stats(data) {
 }
 
 // Daily Command
-function daily(data, user) {
+exports.daily = (data, user) => {
     let daily = [];
     let yesterday = [];
     let weekly = [];
-    let url = `https://www.runeclan.com/user/${rsn}`;
 
     // Format RSN if spaced
     user = (user.includes('+')) ? _.startCase(user.replace('+', ' ')) : _.upperFirst(user)
@@ -208,7 +210,7 @@ function daily(data, user) {
 }
 
 // Spooder Command
-function spooder() {
+exports.spooder = () => {
 
     // Find Rotation
     let firstRotationDate = new Date('June 11, 2021 00:00:00 GMT+0:00');
@@ -239,7 +241,7 @@ function spooder() {
 }
 
 // Rago Command
-function rago() {
+exports.rago = () => {
 
     let firstRotationDate = new Date('June 2, 2021 00:00:00 GMT+0:00');
     let currentDate = new Date();
@@ -267,7 +269,7 @@ function rago() {
 }
 
 // Adventure Log Command
-function log(data) {
+exports.log = (data) => {
 
     if (data.error == 'PROFILE_PRIVATE') {
         console.log(`\t∟ RuneMetrics Profile is Private`)
@@ -297,9 +299,9 @@ function log(data) {
 
     // Format log dates
     // Number suffix solution from https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
-    function nth(n){return["st","nd","rd"][((n+90)%100-10)%10-1]||"th"}
+    function nth(n) { return ["st", "nd", "rd"][((n + 90) % 100 - 10) % 10 - 1] || "th" }
     let dates = [];
-    for(let i = 0; i <= 8; i++) {
+    for (let i = 0; i <= 8; i++) {
         let date = data.activities[i].date.replace(/-/g, ' ')
         let time = date.slice(-5)
         let day = date.slice(0, 2)
@@ -331,7 +333,7 @@ function log(data) {
 }
 
 // Vis Command
-function vis(data) {
+exports.vis = (data) => {
     let firstRune = data[0].children[1].children[2].children[0].children[2].attribs.alt;
 
     let secondRune = [
@@ -354,7 +356,7 @@ function vis(data) {
 }
 
 // Merchant Command
-function merch(data, future) {
+exports.merch = (data, future) => {
 
     let jsonData = data.parse.text["*"];
     let merchData = [];
@@ -474,7 +476,7 @@ function merch(data, future) {
 }
 
 // Raven Command
-function raven() {
+exports.raven = () => {
 
     // Number suffix solution from https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
     function nth(n){return["st","nd","rd"][((n+90)%100-10)%10-1]||"th"}
@@ -503,7 +505,7 @@ function raven() {
 }
 
 // Nemi Command
-function nemi(data) {
+exports.nemi = (data) => {
 
     let title = data.data.children[0].data.title;
     let imageURL = data.data.children[0].data.url_overridden_by_dest;
@@ -518,7 +520,7 @@ function nemi(data) {
 }
 
 // Portables Command
-function portables(data) {
+exports.portables = (data) => {
 
     let rows = data.table.rows;
 
@@ -542,7 +544,7 @@ function portables(data) {
 }
 
 // VoS Command
-function vos(data, message) {
+exports.vos = (data, message) => {
 
     // let updateTime = data.timestamp;
     // updateTime = updateTime.slice(updateTime.indexOf("T") + 1);
@@ -583,7 +585,7 @@ function vos(data, message) {
 }
 
 // GE Command
-function ge(data, message) {
+exports.ge = (data, message) => {
 
     // Comma separators solution from https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
     function numberWithCommas(x) {return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
@@ -677,19 +679,3 @@ function ge(data, message) {
         msg.reply(attachment);
     })();
 }
-
-exports.info = info;
-exports.help = help;
-exports.rsn = rsn;
-exports.stats = stats;
-exports.daily = daily;
-exports.spooder = spooder;
-exports.rago = rago;
-exports.log = log;
-exports.vis = vis;
-exports.merch = merch;
-exports.raven = raven;
-exports.nemi = nemi;
-exports.portables = portables;
-exports.vos = vos;
-exports.ge = ge;

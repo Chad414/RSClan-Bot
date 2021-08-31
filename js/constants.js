@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
 
 const embedColor = '1c22d4';
+exports.embedColor = embedColor;
 
-const commands = [
+exports.commands = [
     "ping",
     "info",
     "help",
@@ -28,7 +29,7 @@ const commands = [
     "ge"
 ];
 
-const skills = [
+exports.skills = [
     'Attack',
     'Defence',
     'Strength',
@@ -59,7 +60,7 @@ const skills = [
     'Archaeology'
 ];
 
-const months = [
+exports.months = [
     'Jan',
     'Feb',
     'Mar',
@@ -74,7 +75,7 @@ const months = [
     'Dec'
 ];
 
-const voragoRotations = [
+exports.voragoRotations = [
     'Ceiling collapse',
     'Scopulus',
     'Vitalis',
@@ -84,18 +85,18 @@ const voragoRotations = [
 ]
 
 // TODO: Move to config file
-const vosChannels = [
+exports.vosChannels = [
     "844326270418550804"
 ];
 
 // TODO: Move to config file
-const dailyChannels = [
+exports.dailyChannels = [
     "848927179714723870"
     // "848930714606370917"
 ];
 
 // TODO: Move to config file
-const vosRoles = (district) => {
+exports.vosRoles = (district) => {
     switch (district) {
         case 'Amlodd':
             return '<@&825933177603489802>';
@@ -117,7 +118,7 @@ const vosRoles = (district) => {
 };
 
 // TODO: Move to config file
-const merchRoles = [
+exports.merchRoles = [
     '<@&854058240581304350>',
     '<@&854058712691113994>',
     '<@&854059181198802946>',
@@ -125,13 +126,13 @@ const merchRoles = [
     '<@&854058942727323689>'
 ];
 
-const portRole = '<@&858809588904099871>'
+exports.portRole = '<@&858809588904099871>'
 
-function handleError(error) {
+exports.handleError = (error) => {
     console.log(`\t∟ ${error.name}: ${error.message}`);
 };
 
-const runeClanError = new Discord.MessageEmbed()
+exports.runeClanError = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('RuneClan Error')
     .setURL('https://www.runeclan.com/')
@@ -139,7 +140,7 @@ const runeClanError = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
-const privateProfile = new Discord.MessageEmbed()
+exports.privateProfile = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('RuneMetrics Error')
     .setDescription(`Your RuneMetrics profile is set to private, please set it to public on the RuneScape website.`)
@@ -147,48 +148,37 @@ const privateProfile = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
-const runeMetricsUnavailable = new Discord.MessageEmbed()
+exports.runeMetricsUnavailable = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('RuneMetrics Error')
     .setDescription(`RuneMetrics is currently unavailable or the user does not exist.`)
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
-const noRSN = new Discord.MessageEmbed()
+exports.noRSN = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('RSN Not Found')
     .setDescription("Please set your RSN with !rsn \nExample: `!rsn Zezima`")
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
-const noItem = new Discord.MessageEmbed()
+exports.badArgument = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('Invalid Argument')
+    .setDescription("Please don't put braces `{}` around your command argument \nExample: `!rsn Zezima`")
+    .setTimestamp()
+    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
+
+exports.noItem = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('Item not found')
     .setDescription("Please make sure you enter the item exactly as it's shown in-game")
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
-const portablesError = new Discord.MessageEmbed()
+exports.portablesError = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('Portables Error')
     .setDescription(`Unable to retrieve Portables data.`)
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
-
-exports.embedColor = embedColor;
-exports.commands = commands;
-exports.skills = skills;
-exports.months = months;
-exports.voragoRotations = voragoRotations;
-exports.vosChannels = vosChannels;
-exports.vosRoles = vosRoles;
-exports.merchRoles = merchRoles;
-exports.portRole = portRole;
-exports.dailyChannels = dailyChannels;
-exports.handleError = handleError;
-exports.runeClanError = runeClanError;
-exports.privateProfile = privateProfile;
-exports.runeMetricsUnavailable = runeMetricsUnavailable;
-exports.noRSN = noRSN;
-exports.noItem = noItem;
-exports.portablesError = portablesError;

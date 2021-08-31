@@ -15,7 +15,7 @@ const commandPrefix = "!";
 
 userstore.loadUsers();
 
-client.on("message", function (message) {
+client.on("message", (message) => {
 
     if (message.author.bot) return;
     if (!message.content.startsWith(commandPrefix)) return;
@@ -33,6 +33,18 @@ client.on("message", function (message) {
 
     let rsnCommands = ["setrsn", "rsn", "skills", "skillz", "stats", "daily", "gains", "gainz", "yesterday", "weekly", "alog"];
     let itemCommands = ["ge"];
+
+    // Make sure argument doesn't include invalid characters
+    for (i of args) {
+        if (i.includes('{') || i.includes('}')) {
+            constants.handleError({
+                name: "Args Error",
+                message: "Invalid characters used in argument",
+            });
+            message.reply(constants.badArgument);
+            return;
+        }
+    }
 
     // Process RSN if command requires it
     if (rsnCommands.includes(command)) {
@@ -133,7 +145,13 @@ client.on("message", function (message) {
                         .then(() => { })
                         .catch(constants.handleError);
                 }
-            }).catch(function (err) { message.reply(constants.runeClanError) });
+            }).catch(function (err) {
+                message.reply(constants.runeClanError);
+                constants.handleError({
+                    name: "RuneClan",
+                    message: "User not found/tracked",
+                });
+            });
             break;
 
         case "spooder":
