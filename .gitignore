@@ -3,6 +3,7 @@
 .vscode
 data/config.json
 data/users.json
+log/
 
 # Logs
 logs

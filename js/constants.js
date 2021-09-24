@@ -128,13 +128,13 @@ exports.merchRoles = [
 
 exports.portRole = '<@&858809588904099871>'
 
-exports.handleError = (error) => {
+exports.logError = (error) => {
     console.log(`\t∟ ${error.name}: ${error.message}`);
 };
 
 exports.runeClanError = new Discord.MessageEmbed()
     .setColor(embedColor)
-    .setTitle('RuneClan Error')
+    .setTitle('❌ RuneClan Error')
     .setURL('https://www.runeclan.com/')
     .setDescription(`Please make sure you're being tracked by RuneClan`)
     .setTimestamp()
@@ -142,7 +142,7 @@ exports.runeClanError = new Discord.MessageEmbed()
 
 exports.privateProfile = new Discord.MessageEmbed()
     .setColor(embedColor)
-    .setTitle('RuneMetrics Error')
+    .setTitle('❌ RuneMetrics Error')
     .setDescription(`Your RuneMetrics profile is set to private, please set it to public on the RuneScape website.`)
     .setImage('https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/runemetrics.png')
     .setTimestamp()
@@ -150,35 +150,28 @@ exports.privateProfile = new Discord.MessageEmbed()
 
 exports.runeMetricsUnavailable = new Discord.MessageEmbed()
     .setColor(embedColor)
-    .setTitle('RuneMetrics Error')
+    .setTitle('❌ RuneMetrics Error')
     .setDescription(`RuneMetrics is currently unavailable or the user does not exist.`)
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
 exports.noRSN = new Discord.MessageEmbed()
     .setColor(embedColor)
-    .setTitle('RSN Not Found')
+    .setTitle('❌ RSN Not Found')
     .setDescription("Please set your RSN with !rsn \nExample: `!rsn Zezima`")
-    .setTimestamp()
-    .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
-
-exports.badArgument = new Discord.MessageEmbed()
-    .setColor(embedColor)
-    .setTitle('Invalid Argument')
-    .setDescription("Please don't put braces `{}` around your command argument \nExample: `!rsn Zezima`")
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
 exports.noItem = new Discord.MessageEmbed()
     .setColor(embedColor)
-    .setTitle('Item not found')
-    .setDescription("Please make sure you enter the item exactly as it's shown in-game")
+    .setTitle('❌ Item not found')
+    .setDescription("Please make sure you enter an item exactly as it's shown in-game \nExample: `!ge Ascension Crossbow`")
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
 exports.portablesError = new Discord.MessageEmbed()
     .setColor(embedColor)
-    .setTitle('Portables Error')
+    .setTitle('❌ Portables Error')
     .setDescription(`Unable to retrieve Portables data.`)
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');

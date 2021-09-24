@@ -34,18 +34,18 @@ client.on("message", (message) => {
     let rsnCommands = ["setrsn", "rsn", "skills", "skillz", "stats", "daily", "gains", "gainz", "yesterday", "weekly", "alog"];
     let itemCommands = ["ge"];
 
-    // Make sure argument doesn't include invalid characters
-    for (i of args) {
-        if (i.includes('{') || i.includes('}')) {
-            constants.handleError({
-                name: "Args Error",
-                message: "Invalid characters used in argument",
-            });
-            message.reply(constants.badArgument);
-            return;
+    // Remove unwanted characters from argument
+    let cleanArgument = (s) => {
+        while (s.includes('"')) {
+            s = s.replace('"', '');
         }
+        while (s.includes('{') || s.includes('}')) {
+            s = s.replace('{', '');
+            s = s.replace('}', '');
+        }
+        return s;
     }
-
+    
     // Process RSN if command requires it
     if (rsnCommands.includes(command)) {
         var rsn = '';
@@ -54,20 +54,19 @@ client.on("message", (message) => {
         if (args.length === 0) {
             rsn = userstore.getUser(message.author);
         } else {
-            for (i of args) {
-                rsn += `${i}+`;
-            }
-            rsn = rsn.slice(0, rsn.length - 1);
+            // Process RSN argument
+            rsn = args.join('+');
+
+            rsn = cleanArgument(rsn);
         }
     }
 
     if (itemCommands.includes(command) && args.length > 0) {
         var item = '';
 
-        for (i of args) {
-            item += `${i} `;
-        }
-        item = item.slice(0, item.length - 1);
+        item = args.join(' ')
+
+        item = cleanArgument(item);
     }
 
 
@@ -76,19 +75,19 @@ client.on("message", (message) => {
             const timeTaken = Date.now() - message.createdTimestamp;
             message.reply(`Pong! This message had a latency of ${timeTaken}ms.`)
                 .then(() => { })
-                .catch(constants.handleError);
+                .catch(constants.logError);
             break;
 
         case "info":
             message.reply(commands.info(client.guilds.cache.size))
                 .then(() => { })
-                .catch(constants.handleError);
+                .catch(constants.logError);
             break;
 
         case "help":
             message.reply(commands.help(commandPrefix))
                 .then(() => { })
-                .catch(constants.handleError);
+                .catch(constants.logError);
             break;
 
         case "setrsn":
@@ -98,11 +97,11 @@ client.on("message", (message) => {
 
                 message.reply(commands.rsn(rsn))
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             } else {
                 message.reply(constants.noRSN)
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             }
 
             break;
@@ -113,7 +112,7 @@ client.on("message", (message) => {
             if (rsn === undefined) {
                 message.reply(constants.noRSN)
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
                 break;
             }
 
@@ -122,7 +121,7 @@ client.on("message", (message) => {
 
                 message.channel.send(commands.stats(data))
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             }).catch(function (err) { });
 
             break;
@@ -139,15 +138,15 @@ client.on("message", (message) => {
                 if (rsn === undefined) {
                     message.reply(constants.noRSN)
                         .then(() => { })
-                        .catch(constants.handleError);
+                        .catch(constants.logError);
                 } else {
                     message.channel.send(commands.daily(data, rsn))
                         .then(() => { })
-                        .catch(constants.handleError);
+                        .catch(constants.logError);
                 }
             }).catch(function (err) {
                 message.reply(constants.runeClanError);
-                constants.handleError({
+                constants.logError({
                     name: "RuneClan",
                     message: "User not found/tracked",
                 });
@@ -157,21 +156,21 @@ client.on("message", (message) => {
         case "spooder":
             message.reply(commands.spooder())
                 .then(() => { })
-                .catch(constants.handleError);
+                .catch(constants.logError);
 
             break;
 
         case "rago":
             message.reply(commands.rago())
                 .then(() => { })
-                .catch(constants.handleError);
+                .catch(constants.logError);
             break;
 
         case "alog":
             if (rsn === undefined) {
                 message.reply(constants.noRSN)
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
                 break;
             }
 
@@ -180,7 +179,7 @@ client.on("message", (message) => {
 
                 message.reply(commands.log(data))
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             }).catch(function (err) { });
             break;
 
@@ -191,7 +190,7 @@ client.on("message", (message) => {
 
                 message.reply(commands.vis(data))
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             }).catch(function (err) { });
             break;
 
@@ -201,13 +200,13 @@ client.on("message", (message) => {
 
                 message.reply(commands.merch(data, true))
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             }).catch(function (err) { });
             break;
         case "raven":
             message.reply(commands.raven())
                 .then(() => { })
-                .catch(constants.handleError);
+                .catch(constants.logError);
             break;
         case "nemi":
             rp('https://www.reddit.com/r/nemiforest/new.json?limit=1').then(function (json) {
@@ -215,7 +214,7 @@ client.on("message", (message) => {
 
                 message.reply(commands.nemi(data))
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             }).catch(function (err) { });
             break;
         case "portables":
@@ -226,7 +225,7 @@ client.on("message", (message) => {
 
                 message.reply(commands.portables(data))
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
             }).catch(function (err) { message.reply(constants.portablesError) });
             break;
         case "vos":
@@ -240,7 +239,11 @@ client.on("message", (message) => {
             if (item === undefined) {
                 message.reply(constants.noItem)
                     .then(() => { })
-                    .catch(constants.handleError);
+                    .catch(constants.logError);
+                constants.logError({
+                    name: "Grand Exchange",
+                    message: "Item not found",
+                });
                 break;
             } else {
                 while(item.includes('+')) {
@@ -252,7 +255,12 @@ client.on("message", (message) => {
                 const data = JSON.parse(json);
 
                 commands.ge(data, message);
-            }).catch(function (err) { });
+            }).catch(
+                constants.logError({
+                    name: "Grand Exchange",
+                    message: "Item not found",
+                })
+            );
             break;
     }
 });

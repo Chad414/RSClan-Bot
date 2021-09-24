@@ -56,8 +56,8 @@ exports.rsn = (rsn) => {
 
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
-        .setTitle('RSN Assigned')
-        .setDescription(`Assigned ${rsn} to your discord account.`)
+        .setTitle('✅ RSN Assigned')
+        .setDescription(`Assigned ${rsn} to your Discord account.`)
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
@@ -545,11 +545,6 @@ exports.portables = (data) => {
 
 // VoS Command
 exports.vos = (data, message) => {
-
-    // let updateTime = data.timestamp;
-    // updateTime = updateTime.slice(updateTime.indexOf("T") + 1);
-    // updateTime = updateTime.slice(0, updateTime.lastIndexOf(":"));
-
     let date = new Date();
     let updateTime = `${date.getUTCHours()}:00`
 
