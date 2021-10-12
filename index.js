@@ -166,6 +166,12 @@ client.on("message", (message) => {
                 .catch(constants.logError);
             break;
 
+        case "rots":
+            message.reply(commands.rots())
+                .then(() => { })
+                .catch(constants.logError);
+            break;
+
         case "alog":
             if (rsn === undefined) {
                 message.reply(constants.noRSN)

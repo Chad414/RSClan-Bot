@@ -36,6 +36,7 @@ exports.help = (prefix) => {
             { name: `${prefix}ge "item"`, value: 'Displays item\'s current and previous Grand Exchange price' },
             { name: `${prefix}spooder`, value: 'Displays current Araxxor paths' },
             { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
+            { name: `${prefix}rots`, value: 'Displays current and next Rots rotation' },
             { name: `${prefix}alog "rsname"`, value: 'Displays user\'s Adventure Log' },
             { name: `${prefix}vis`, value: 'Displays current Rune combinations' },
             { name: `${prefix}merch`, value: 'Displays current and future Travelling Merchant items' },
@@ -263,6 +264,33 @@ exports.rago = () => {
         .addFields(
             { name: 'Vorago Current', value: `${constants.voragoRotations[currentRotation]}` },
             { name: 'Vorago Next', value: `${constants.voragoRotations[(currentRotation + 1) % 6]}` },
+        )
+        .setTimestamp()
+        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+}
+
+// Rots Command
+exports.rots = () => {
+
+    let firstRotationDate = new Date('October 1, 2021 00:00:00 GMT+0:00');
+    let currentDate = new Date();
+
+    let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
+    let daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+
+    let index = daysDifference % 20;
+
+    let rotation = constants.rotsRotations[index]
+    let t_rotation = constants.rotsRotations[(index + 1) % 20]
+
+    return new Discord.MessageEmbed()
+        .setColor(constants.embedColor)
+        .setTitle(`Rots Current Rotation`)
+        .setThumbnail('https://cdn.discordapp.com/attachments/840392097638907914/896579984888561704/unknown.png')
+        .addFields(
+            { name: 'West', value: `${rotation[0][0]}\n${rotation[0][1]}\n${rotation[0][2]}`, inline: true },
+            { name: 'East', value: `${rotation[1][0]}\n${rotation[1][1]}\n${rotation[1][2]}`, inline: true },
+            { name: 'Next Rotation', value: `**W:** ${t_rotation[0][0]}, ${t_rotation[0][1]}, ${t_rotation[0][2]}\n**E:** ${t_rotation[1][0]}, ${t_rotation[1][1]}, ${t_rotation[1][2]}`},
         )
         .setTimestamp()
         .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');

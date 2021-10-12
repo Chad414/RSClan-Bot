@@ -24,6 +24,7 @@ Discord bot for RuneScape 3 communities with up to date information on XP gains,
 - `ge {item}` - Displays item's current and previous Grand Exchange price
 - `spooder` - Displays current Araxxor paths
 - `rago` - Displays current and next Vorago rotation
+- `rots` - Displays current and next Rots rotation
 - `alog {rsn}` - Displays user's Adventure Log
 - `vis` - Displays current Rune combinations
 - `merch` - Displays current and future Travelling Merchant stock
