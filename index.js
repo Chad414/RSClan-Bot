@@ -153,8 +153,9 @@ client.on("message", (message) => {
             });
             break;
 
+        case "rax":
         case "spooder":
-            message.reply(commands.spooder())
+            message.reply(commands.rax())
                 .then(() => { })
                 .catch(constants.logError);
 
@@ -374,24 +375,27 @@ cron.schedule('55 00 * * * *', () => {
     timezone: "Africa/Accra"
 });
 
-// Auto Spooder
+// Auto Boss Rotation
 // This feature is currently exclusive to Dark Perception
 cron.schedule('25 00 00 * * *', () => {
     let date = new Date();
-    console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Spooder`);
+    console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Rotation`);
 
     for (let i = 0; i < constants.dailyChannels.length; i++) {
         let channel = client.channels.cache.get(constants.dailyChannels[i]);
-        let embed = commands.spooder();
+        let raxEmbed = commands.rax();
+        let rotsEmbed = commands.rots();
 
-        // Remove previous auto Merch/Vis/Spooder
+        // Remove previous auto Merch/Vis/Rax
         channel.bulkDelete(10)
             .then(() => { })
             .catch(console.error);
 
         channel.send(`Reminder to do your ${constants.portRole}`);
         
-        channel.send(embed);
+        channel.send(raxEmbed);
+
+        channel.send(rotsEmbed);
     }
 
 }, {

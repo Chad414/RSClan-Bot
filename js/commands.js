@@ -34,7 +34,7 @@ exports.help = (prefix) => {
             { name: `${prefix}stats "rsn"`, value: 'Displays user\'s account levels and experience points' },
             { name: `${prefix}gains "rsn"`, value: 'Displays user\'s Daily, Yesterday, and Weekly XP Gains' },
             { name: `${prefix}ge "item"`, value: 'Displays item\'s current and previous Grand Exchange price' },
-            { name: `${prefix}spooder`, value: 'Displays current Araxxor paths' },
+            { name: `${prefix}rax`, value: 'Displays current Araxxor paths' },
             { name: `${prefix}rago`, value: 'Displays current and next Vorago rotation' },
             { name: `${prefix}rots`, value: 'Displays current and next Rots rotation' },
             { name: `${prefix}alog "rsname"`, value: 'Displays user\'s Adventure Log' },
@@ -210,8 +210,8 @@ exports.daily = (data, user) => {
     return result;
 }
 
-// Spooder Command
-exports.spooder = () => {
+// Rax Command
+exports.rax = () => {
 
     // Find Rotation
     let firstRotationDate = new Date('June 11, 2021 00:00:00 GMT+0:00');
@@ -286,7 +286,7 @@ exports.rots = () => {
     return new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`Rots Current Rotation`)
-        .setThumbnail('https://cdn.discordapp.com/attachments/840392097638907914/896579984888561704/unknown.png')
+        .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/rots.png')
         .addFields(
             { name: 'West', value: `${rotation[0][0]}\n${rotation[0][1]}\n${rotation[0][2]}`, inline: true },
             { name: 'East', value: `${rotation[1][0]}\n${rotation[1][1]}\n${rotation[1][2]}`, inline: true },

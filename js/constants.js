@@ -17,6 +17,7 @@ exports.commands = [
     "gainz",
     "yesterday",
     "weekly",
+    "rax",
     "spooder",
     "rago",
     "rots",
