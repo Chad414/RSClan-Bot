@@ -272,7 +272,7 @@ exports.rago = () => {
 // Rots Command
 exports.rots = () => {
 
-    let firstRotationDate = new Date('October 1, 2021 00:00:00 GMT+0:00');
+    let firstRotationDate = new Date('September 30, 2021 00:00:00 GMT+0:00');
     let currentDate = new Date();
 
     let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
