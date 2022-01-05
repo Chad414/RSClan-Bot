@@ -7,8 +7,8 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('info')
         .setDescription('Displays Bot Info'),
-    async execute(interaction, client) {
-      let serverCount = client.guilds.cache.size;
+    async execute(interaction) {
+      let serverCount = interaction.client.guilds.cache.size;
       let embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle('RSClan Bot')
