@@ -183,14 +183,14 @@ exports.runeMetricsUnavailable = new Discord.MessageEmbed()
 exports.noRSN = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('❌ RSN Not Found')
-    .setDescription("Please set your RSN with !rsn \nExample: `!rsn Zezima`")
+    .setDescription("Please set your RSN with /setrsn \nExample: `/setrsn Zezima`")
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 
 exports.noItem = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('❌ Item not found')
-    .setDescription("Please make sure you enter an item exactly as it's shown in-game \nExample: `!ge Ascension Crossbow`")
+    .setDescription("Please make sure you enter an item exactly as it's shown in-game \nExample: `/ge Ascension Crossbow`")
     .setTimestamp()
     .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/rsclan-discord-bot/main/img/icon.png');
 

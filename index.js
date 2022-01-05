@@ -1,4 +1,5 @@
 const config = require("./data/config.json");
+const userstore = require("./js/userstore");
 const fs = require('fs');
 const {
   REST
@@ -19,6 +20,8 @@ const client = new Client({
 });
 
 const TOKEN = config.BOT_TOKEN;
+
+userstore.loadUsers();
 
 const commandFiles = fs.readdirSync('./js/commands').filter(file => file.endsWith('.js'));
 
