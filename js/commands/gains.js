@@ -22,7 +22,7 @@ module.exports = {
       rsn = userstore.getUser(userID);
 
       if (rsn == undefined) {
-        interaction.reply({ embeds: [constants.noRSN]});
+        interaction.reply({ embeds: [constants.noRSN] });
         return;
       }
     }
@@ -34,30 +34,30 @@ module.exports = {
       let daily = [];
       let yesterday = [];
       let weekly = [];
-  
+
       // Format RSN if spaced
       rsn = (rsn.includes('+')) ? _.startCase(rsn.replace('+', ' ')) : _.upperFirst(rsn)
-  
+
       // Row, Column, Value
       // Daily Row
       for (let i = 1; i < 30; i++) {
-          daily.push(data[i].children[4].children[0].data);
-          yesterday.push(data[i].children[5].children[0].data);
-          weekly.push(data[i].children[6].children[0].data);
+        daily.push(data[i].children[4].children[0].data);
+        yesterday.push(data[i].children[5].children[0].data);
+        weekly.push(data[i].children[6].children[0].data);
       }
-  
+
       // Format XP Labels
       for (let i = 0; i < daily.length; i++) {
-          daily[i] = daily[i].replace(/\s+/g, '');
-          daily[i] = _.padStart(daily[i], 9, " ");
-  
-          yesterday[i] = yesterday[i].replace(/\s+/g, '');
-          yesterday[i] = _.padStart(yesterday[i], 10, " ");
-  
-          weekly[i] = weekly[i].replace(/\s+/g, '');
-          weekly[i] = _.padStart(weekly[i], 10, " ");
+        daily[i] = daily[i].replace(/\s+/g, '');
+        daily[i] = _.padStart(daily[i], 9, " ");
+
+        yesterday[i] = yesterday[i].replace(/\s+/g, '');
+        yesterday[i] = _.padStart(yesterday[i], 10, " ");
+
+        weekly[i] = weekly[i].replace(/\s+/g, '');
+        weekly[i] = _.padStart(weekly[i], 10, " ");
       }
-  
+
       let result = `**${rsn}'s XP Gains**\n\`\`\`swift\n`;
       result += `✚-------------------------------------------------✚
 |     Skill     |  Today   | Yesterday | This Week |
@@ -97,7 +97,7 @@ module.exports = {
       interaction.reply({ content: result });
 
     }).catch(function (err) {
-      interaction.reply({ embeds: [constants.runeClanError]});
+      interaction.reply({ embeds: [constants.runeClanError] });
       constants.logError({
         name: "RuneClan",
         message: "User not found/tracked",
