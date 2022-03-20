@@ -17,8 +17,8 @@ exports.info = (serverCount) => {
         .addFields(
             { name: `Version ${pkg.version}`, value: 'Developed by Chadathan#0100 with support from Dark Perception' },
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Help Command
@@ -45,8 +45,8 @@ exports.help = (prefix) => {
             { name: `${prefix}portables`, value: 'Displays currently spawned portables' },
             { name: `${prefix}vos`, value: 'Displays current Voice of Seren' }
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // RSN Command
@@ -59,8 +59,8 @@ exports.rsn = (rsn) => {
         .setColor(constants.embedColor)
         .setTitle('✅ RSN Assigned')
         .setDescription(`Assigned ${rsn} to your Discord account.`)
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 exports.stats = (data) => {
@@ -137,6 +137,7 @@ exports.stats = (data) => {
 | Invention     |${levels[26]} | ${exp[26]} |
 | Archaeology   |${levels[27]} | ${exp[27]} |
 ✚---------------------------------------✚
+"RSClan is Migrating to Slash Commands on April 2nd"
 \`\`\``;
 
     return result;
@@ -205,6 +206,7 @@ exports.daily = (data, user) => {
 | Invention     |${daily[27]} |${yesterday[27]} |${weekly[27]} |
 | Archaeology   |${daily[28]} |${yesterday[28]} |${weekly[28]} |
 ✚-------------------------------------------------✚
+"RSClan is Migrating to Slash Commands on April 2nd"
 \`\`\``;
 
     return result;
@@ -237,8 +239,8 @@ exports.rax = () => {
             { name: 'Path 2 (Acid)', value: `${(closedPath == 1) ? "Closed" : "Open"}` },
             { name: 'Path 3 (Darkness)', value: `${(closedPath == 2) ? "Closed" : "Open"}` },
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Rago Command
@@ -265,8 +267,8 @@ exports.rago = () => {
             { name: 'Vorago Current', value: `${constants.voragoRotations[currentRotation]}` },
             { name: 'Vorago Next', value: `${constants.voragoRotations[(currentRotation + 1) % 6]}` },
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Rots Command
@@ -292,8 +294,8 @@ exports.rots = () => {
             { name: 'East', value: `${rotation[1][0]}\n${rotation[1][1]}\n${rotation[1][2]}`, inline: true },
             { name: 'Next Rotation', value: `**W:** ${t_rotation[0][0]}, ${t_rotation[0][1]}, ${t_rotation[0][2]}\n**E:** ${t_rotation[1][0]}, ${t_rotation[1][1]}, ${t_rotation[1][2]}`},
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Adventure Log Command
@@ -356,8 +358,8 @@ exports.log = (data) => {
             { name: `${entries[7]}`, value: `${dates[7]}`},
             { name: `${entries[8]}`, value: `${dates[8]}`},
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Vis Command
@@ -379,8 +381,8 @@ exports.vis = (data) => {
             { name: `Second Rune`, value: `${secondRune[0]}\n${secondRune[1]}\n${secondRune[2]}`},
 
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Merchant Command
@@ -485,8 +487,8 @@ exports.merch = (data, future) => {
             { name: `${futureItems[5][0]}`, value: `${futureItems[5][1]}\n${futureItems[5][2]}\n${futureItems[5][3]}`},
             { name: `${futureItems[6][0]}`, value: `${futureItems[6][1]}\n${futureItems[6][2]}\n${futureItems[6][3]}`},
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
     } else {
         return {
             embed: new Discord.MessageEmbed()
@@ -495,8 +497,8 @@ exports.merch = (data, future) => {
                 .addFields(
                     { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}` },
                 )
-                .setTimestamp()
-                .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png'),
+                // .setTimestamp()
+                .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png'),
             items: currentItems
         }
     }
@@ -528,8 +530,8 @@ exports.raven = () => {
         .setTitle(`Raven`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/raven.png')
         .setDescription((isSpawned) ? "The raven has spawned" : `The next raven will spawn in ${daysUntilRotation} days on ${constants.months[nextSpawnDate.getUTCMonth()]} ${nextSpawnDate.getUTCDate()}${nth(nextSpawnDate.getUTCDate())}`)
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Nemi Command
@@ -543,8 +545,8 @@ exports.nemi = (data) => {
         .setTitle(`NemiForest`)
         .setImage(imageURL)
         .setDescription(title)
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // Portables Command
@@ -567,8 +569,8 @@ exports.portables = (data) => {
             { name: `Well`, value: `${rows[9].c[1].v.replace(/\*/g, '')}`},
             { name: `Workbench`, value: `${rows[10].c[1].v.replace(/\*/g, '')}`},
         )
-        .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        // .setTimestamp()
+        .setFooter('RSClan is Migrating to Slash Commands on April 2nd', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
 }
 
 // VoS Command
