@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require("discord.js");
 const constants = require("../constants");
-const userstore = require("../userstore");
 const _ = require('lodash');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
