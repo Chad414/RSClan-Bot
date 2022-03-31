@@ -43,7 +43,7 @@ module.exports = {
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/raven.png')
         .setDescription((isSpawned) ? "The raven has spawned" : `The next raven will spawn in ${daysUntilRotation} days on ${constants.months[nextSpawnDate.getUTCMonth()]} ${nextSpawnDate.getUTCDate()}${nth(nextSpawnDate.getUTCDate())}`)
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
     interaction.reply({ embeds: [embed] });
   }

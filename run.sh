@@ -1,7 +1,13 @@
-mkdir -p log
+while true
 
-date=`date +"%y-%m-%d_%H.%M.%S"`
+do
 
 printf 'Starting RSClan...\n'
 
-node index.js > log/RSCLog-${date}.log
+node index.js
+
+printf 'Restarting Bot in 2 Seconds...\n'
+
+sleep 2
+
+done

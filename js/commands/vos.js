@@ -20,14 +20,14 @@ module.exports = {
         .setTitle(`${data.district1}`)
         .setDescription(`District 1`)
         .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district1}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: `RSClan • Updated at ${updateTime} GMT`, iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
       let district2Embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.district2}`)
         .setDescription(`District 2`)
         .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district2}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: `RSClan • Updated at ${updateTime} GMT`, iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
       interaction.reply({ embeds: [district1Embed, district2Embed] });
 

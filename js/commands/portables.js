@@ -31,7 +31,7 @@ module.exports = {
           { name: `Workbench`, value: `${rows[10].c[1].v.replace(/\*/g, '')}` },
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
       interaction.reply({ embeds: [embed] });
 

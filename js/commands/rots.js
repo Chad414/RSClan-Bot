@@ -23,7 +23,7 @@ module.exports = {
 
     let embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
-        .setTitle(`Rots Current Rotation`)
+        .setTitle(`RotS Current Rotation`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/rots.png')
         .addFields(
             { name: 'West', value: `${rotation[0][0]}\n${rotation[0][1]}\n${rotation[0][2]}`, inline: true },
@@ -31,7 +31,7 @@ module.exports = {
             { name: 'Next Rotation', value: `**W:** ${t_rotation[0][0]}, ${t_rotation[0][1]}, ${t_rotation[0][2]}\n**E:** ${t_rotation[1][0]}, ${t_rotation[1][1]}, ${t_rotation[1][2]}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
     interaction.reply({ embeds: [embed] });
   }

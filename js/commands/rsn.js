@@ -30,7 +30,7 @@ module.exports = {
       .setTitle('✅ RSN Assigned')
       .setDescription(`Assigned ${rsn} to your Discord account.`)
       .setTimestamp()
-      .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+      .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
     interaction.reply({ embeds: [embed] })
 

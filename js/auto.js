@@ -30,7 +30,7 @@ exports.rax = () => {
             { name: 'Path 3 (Darkness)', value: `${(closedPath == 2) ? "Closed" : "Open"}` },
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 }
 
 // Rots Command
@@ -57,7 +57,7 @@ exports.rots = () => {
             { name: 'Next Rotation', value: `**W:** ${t_rotation[0][0]}, ${t_rotation[0][1]}, ${t_rotation[0][2]}\n**E:** ${t_rotation[1][0]}, ${t_rotation[1][1]}, ${t_rotation[1][2]}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 }
 
 // Vis Command
@@ -80,7 +80,7 @@ exports.vis = (data) => {
 
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 }
 
 // Merchant Command
@@ -186,7 +186,7 @@ exports.merch = (data, future) => {
             { name: `${futureItems[6][0]}`, value: `${futureItems[6][1]}\n${futureItems[6][2]}\n${futureItems[6][3]}`},
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
     } else {
         return {
             embed: new Discord.MessageEmbed()
@@ -196,7 +196,7 @@ exports.merch = (data, future) => {
                     { name: `Current Items`, value: `${currentItems[0]}\n${currentItems[1]}\n${currentItems[2]}` },
                 )
                 .setTimestamp()
-                .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png'),
+                .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' }),
             items: currentItems
         }
     }
@@ -213,14 +213,14 @@ exports.vos = (data, message) => {
         .setTitle(`${data.district1}`)
         .setDescription(`District 1`)
         .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district1}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: `RSClan • Updated at ${updateTime} GMT`, iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
     let district2Embed = new Discord.MessageEmbed()
         .setColor(constants.embedColor)
         .setTitle(`${data.district2}`)
         .setDescription(`District 2`)
         .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district2}.png?raw=true`)
-        .setFooter(`ChadTek • Updated at ${updateTime} GMT`, 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: `RSClan • Updated at ${updateTime} GMT`, iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
     if (message) {
         message.reply(district1Embed)

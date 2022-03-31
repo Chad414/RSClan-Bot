@@ -10,6 +10,7 @@ module.exports = {
   async execute(interaction) {
     let serverCount = interaction.client.guilds.cache.size;
     let embed = new Discord.MessageEmbed()
+      .setAuthor({ name: 'Chadathan#0100', iconURL: constants.authorAvatar, url: 'https://discord.gg/9YqrzJex7d' })
       .setColor(constants.embedColor)
       .setTitle('RSClan Bot')
       .setURL('https://top.gg/bot/803690098839126016')
@@ -19,7 +20,7 @@ module.exports = {
         { name: `Version ${pkg.version}`, value: 'Developed by Chadathan#0100 with support from Dark Perception' },
       )
       .setTimestamp()
-      .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+      .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
     interaction.reply({ embeds: [embed] })
 

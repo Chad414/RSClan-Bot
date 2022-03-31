@@ -104,7 +104,7 @@ module.exports = {
           { name: `${entries[8]}`, value: `${dates[8]}` },
         )
         .setTimestamp()
-        .setFooter('ChadTek', 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png');
+        .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
       interaction.reply({ embeds: [embed] })
 
