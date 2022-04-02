@@ -5,6 +5,7 @@ const userstore = require("../userstore");
 const _ = require('lodash');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
+const { createCanvas, Canvas } = require('canvas')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -58,8 +59,8 @@ module.exports = {
         weekly[i] = _.padStart(weekly[i], 10, " ");
       }
 
-      let result = `**${rsn}'s XP Gains**\n\`\`\`swift\n`;
-      result += `✚-------------------------------------------------✚
+      let title = `${rsn}'s XP Gains`;
+      let result = `
 |     Skill     |  Today   | Yesterday | This Week |
 |---------------|----------|-----------|-----------|
 | Overall       |${daily[0]} |${yesterday[0]} |${weekly[0]} |
@@ -90,11 +91,29 @@ module.exports = {
 | Dungeoneering |${daily[25]} |${yesterday[25]} |${weekly[25]} |
 | Divination    |${daily[26]} |${yesterday[26]} |${weekly[26]} |
 | Invention     |${daily[27]} |${yesterday[27]} |${weekly[27]} |
-| Archaeology   |${daily[28]} |${yesterday[28]} |${weekly[28]} |
-✚-------------------------------------------------✚
-\`\`\``;
+| Archaeology   |${daily[28]} |${yesterday[28]} |${weekly[28]} |`;
 
-      interaction.reply({ content: result });
+      const width = 800
+      const height = 1000
+
+      const canvas = createCanvas(width, height);
+      const context = canvas.getContext('2d');
+
+      context.fillStyle = '#fff'
+      context.fillRect(0, 0, width, height)
+
+      context.font = 'bold 18pt Courier New'
+      context.textAlign = 'center'
+      context.fillStyle = '#000'
+      context.fillText(result, 400, 100)
+
+      context.font = 'bold 24pt Courier New'
+      context.textAlign = 'center'
+      context.fillStyle = '#000'
+      context.fillText(title, 400, 60)
+
+      // interaction.reply({ content: result });
+      interaction.reply({ files: [canvas.toBuffer()] });
 
     }).catch(function (err) {
       interaction.reply({ embeds: [constants.runeClanError] });
