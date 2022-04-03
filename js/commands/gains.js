@@ -25,6 +25,10 @@ module.exports = {
         interaction.reply({ embeds: [constants.noRSN] });
         return;
       }
+    } else {
+      while (rsn.includes(' ')) {
+        rsn = rsn.replace(' ', '+');
+      }
     }
 
     await rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
