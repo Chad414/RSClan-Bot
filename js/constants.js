@@ -109,6 +109,15 @@ exports.rotsRotations = [
     [['Karil', 'Dharok', 'Verac'], ['Ahrim', 'Torag', 'Guthan']]
 ];
 
+exports.nonVirtualSkillIDs = [
+    15,
+    18,
+    19,
+    24,
+    26,
+    27
+];
+
 // TODO: Move to config file
 exports.vosChannels = [
     "844326270418550804"
