@@ -219,3 +219,10 @@ exports.portablesError = new Discord.MessageEmbed()
     .setDescription(`Unable to retrieve Portables data.`)
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
+
+exports.vosError = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('❌ VoS Error')
+    .setDescription(`Unable to retrieve VoS data.`)
+    .setTimestamp()
+    .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });

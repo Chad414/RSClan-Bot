@@ -9,7 +9,10 @@ module.exports = {
     .setName('vos')
     .setDescription(`Displays current Voice of Seren`),
   async execute(interaction) {
-    await rp('https://api.weirdgloop.org/runescape/vos').then(function (json) {
+    await rp('https://api.weirdgloop.org/runescape/vos', {
+      headers: {
+          'User-Agent': 'Request-Promise'
+      }}).then(function (json) {
       const data = JSON.parse(json);
 
       let date = new Date();
@@ -32,7 +35,7 @@ module.exports = {
       interaction.reply({ embeds: [district1Embed, district2Embed] });
 
     }).catch(function (err) {
-      interaction.reply({ embeds: [constants.portablesError] });
+      interaction.reply({ embeds: [constants.vosError] });
       constants.logError({
         name: "Vos",
         message: "Vos Command Error" + err,
