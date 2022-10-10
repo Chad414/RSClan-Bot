@@ -176,6 +176,14 @@ exports.runeClanError = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
+exports.runeClanOffline = new Discord.MessageEmbed()
+    .setColor(embedColor)
+    .setTitle('❌ RuneClan Error')
+    .setURL('https://www.runeclan.com/')
+    .setDescription(`RuneClan is currently offline.`)
+    .setTimestamp()
+    .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
+
 exports.privateProfile = new Discord.MessageEmbed()
     .setColor(embedColor)
     .setTitle('❌ RuneMetrics Error')

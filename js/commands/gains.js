@@ -31,6 +31,9 @@ module.exports = {
       }
     }
 
+    interaction.reply({ embeds: [constants.runeClanOffline] });
+    return;
+
     await rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
       const $ = cheerio.load(html);
       const data = $('tr');

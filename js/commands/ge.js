@@ -20,7 +20,10 @@ module.exports = {
       item = item.replace("+", "%2B");
     }
 
-    await rp('https://api.weirdgloop.org/exchange/history/rs/last90d?name=' + item).then(function (json) {
+    await rp('https://api.weirdgloop.org/exchange/history/rs/last90d?name=' + item, {
+      headers: {
+          'User-Agent': 'Request-Promise'
+      }}).then(function (json) {
       const data = JSON.parse(json);
 
       // Comma separators solution from https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
