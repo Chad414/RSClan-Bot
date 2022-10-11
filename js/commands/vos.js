@@ -11,7 +11,7 @@ module.exports = {
   async execute(interaction) {
     await rp('https://api.weirdgloop.org/runescape/vos', {
       headers: {
-          'User-Agent': 'Request-Promise'
+        'User-Agent': 'Request-Promise'
       }}).then(function (json) {
       const data = JSON.parse(json);
 

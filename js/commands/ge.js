@@ -22,7 +22,7 @@ module.exports = {
 
     await rp('https://api.weirdgloop.org/exchange/history/rs/last90d?name=' + item, {
       headers: {
-          'User-Agent': 'Request-Promise'
+        'User-Agent': 'Request-Promise'
       }}).then(function (json) {
       const data = JSON.parse(json);
 
