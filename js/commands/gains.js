@@ -4,7 +4,6 @@ const constants = require("../constants");
 const userstore = require("../userstore");
 const _ = require('lodash');
 const rp = require('request-promise');
-const cheerio = require('cheerio');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,48 +24,55 @@ module.exports = {
         interaction.reply({ embeds: [constants.noRSN] });
         return;
       }
-    } else {
-      while (rsn.includes(' ')) {
-        rsn = rsn.replace(' ', '+');
-      }
     }
 
-    interaction.reply({ embeds: [constants.runeClanOffline] });
-    return;
+    while (rsn.includes(' ') || rsn.includes('+')) {
+      rsn = rsn.replace(' ', '-');
+      rsn = rsn.replace('+', '-');
+    }
 
-    await rp(`https://www.runeclan.com/user/${rsn}`).then(function (html) {
-      const $ = cheerio.load(html);
-      const data = $('tr');
+    await rp(`https://runepixels.com:5000/players/${rsn}`).then(async function (playerJSON) {
+      const playerData = JSON.parse(playerJSON);
+      let playerID = playerData.id;
 
-      let daily = [];
-      let yesterday = [];
-      let weekly = [];
+      await rp(`https://runepixels.com:5000/players/${playerID}/xp?timeperiod=1`).then(async function (yesterdayJSON) {
+        const yesterdayData = JSON.parse(yesterdayJSON);
 
-      // Format RSN if spaced
-      rsn = (rsn.includes('+')) ? _.startCase(rsn.replace('+', ' ')) : _.upperFirst(rsn)
+        await rp(`https://runepixels.com:5000/players/${playerID}/xp?timeperiod=2`).then(function (weeklyJSON) {
+          const weeklyData = JSON.parse(weeklyJSON);
+          let yesterdayData = this.yesterdayData
+          let playerData = this.playerData
 
-      // Row, Column, Value
-      // Daily Row
-      for (let i = 1; i < 30; i++) {
-        daily.push(data[i].children[4].children[0].data);
-        yesterday.push(data[i].children[5].children[0].data);
-        weekly.push(data[i].children[6].children[0].data);
-      }
+          let daily = [];
+          let yesterday = [];
+          let weekly = [];
+    
+          // Format RSN if spaced
+          rsn = (rsn.includes('-')) ? _.startCase(rsn.replace('-', ' ')) : _.upperFirst(rsn)
+    
+          for (let i = 0; i < 29; i++) {
+            if (i == 0) {
+              daily.push(playerData.overall.xpDelta);
+              yesterday.push(yesterdayData[i].xp);
+              weekly.push(weeklyData[i].xp);
+            } else {
+              daily.push(playerData.skills[i - 1].xpDelta);
+              yesterday.push(yesterdayData[i].xp);
+              weekly.push(weeklyData[i].xp);
+            }
+          }
 
-      // Format XP Labels
-      for (let i = 0; i < daily.length; i++) {
-        daily[i] = daily[i].replace(/\s+/g, '');
-        daily[i] = _.padStart(daily[i], 9, " ");
-
-        yesterday[i] = yesterday[i].replace(/\s+/g, '');
-        yesterday[i] = _.padStart(yesterday[i], 10, " ");
-
-        weekly[i] = weekly[i].replace(/\s+/g, '');
-        weekly[i] = _.padStart(weekly[i], 10, " ");
-      }
-
-      let result = `**${rsn}'s XP Gains**\n\`\`\`swift\n`;
-      result += `✚-------------------------------------------------✚
+          let nf = new Intl.NumberFormat();
+    
+          // Format XP Labels
+          for (let i = 0; i < daily.length; i++) {
+            daily[i] = _.padStart(nf.format(daily[i]), 9, " ");
+            yesterday[i] = _.padStart(nf.format(yesterday[i]), 10, " ");
+            weekly[i] = _.padStart(nf.format(weekly[i]), 10, " ");
+          }
+    
+          let result = `**${rsn}'s XP Gains**\n\`\`\`swift\n`;
+          result += `✚-------------------------------------------------✚
 |     Skill     |  Today   | Yesterday | This Week |
 |---------------|----------|-----------|-----------|
 | Overall       |${daily[0]} |${yesterday[0]} |${weekly[0]} |
@@ -99,14 +105,30 @@ module.exports = {
 | Invention     |${daily[27]} |${yesterday[27]} |${weekly[27]} |
 | Archaeology   |${daily[28]} |${yesterday[28]} |${weekly[28]} |
 ✚-------------------------------------------------✚
-\`\`\``;
+    \`\`\``;
+    
+          interaction.reply({ content: result });
 
-      interaction.reply({ content: result });
-
+        }.bind({ playerData: playerData, yesterdayData: yesterdayData })
+        ).catch(function (err) {
+          interaction.reply({ embeds: [constants.runeClanError] });
+          constants.logError({
+            name: "RunePixels",
+            message: "User not found/tracked",
+          });
+        });
+      }.bind({ playerData: playerData })
+      ).catch(function (err) {
+        interaction.reply({ embeds: [constants.runeClanError] });
+        constants.logError({
+          name: "RunePixels",
+          message: "User not found/tracked",
+        });
+      });
     }).catch(function (err) {
       interaction.reply({ embeds: [constants.runeClanError] });
       constants.logError({
-        name: "RuneClan",
+        name: "RunePixels",
         message: "User not found/tracked",
       });
     });
