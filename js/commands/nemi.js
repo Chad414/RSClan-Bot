@@ -9,13 +9,16 @@ module.exports = {
     .setName('nemi')
     .setDescription(`Displays current Nemi Forest Map`),
   async execute(interaction) {
-    await rp('https://www.reddit.com/r/nemiforest/new.json?limit=1').then(function (json) {
+    await rp('https://www.reddit.com/r/nemiforest/new.json?limit=1', {
+      headers: {
+        'User-Agent': 'Request-Promise'
+      }}).then(function (json) {
       const data = JSON.parse(json);
 
       let title = data.data.children[0].data.title;
-      let imageURL = data.data.children[0].data.url_overridden_by_dest;
+      let imageURL = data.data.children[0].data.url;
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`NemiForest`)
         .setImage(imageURL)

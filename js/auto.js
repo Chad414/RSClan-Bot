@@ -19,7 +19,7 @@ exports.rax = () => {
 
     let daysUntilRotation = 4 - (daysDifference % 4);
 
-    return new Discord.MessageEmbed()
+    return new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Araxxor's Current Rotation`)
         .setDescription(`Days until next rotation: ${daysUntilRotation}`)
@@ -47,7 +47,7 @@ exports.rots = () => {
     let rotation = constants.rotsRotations[index]
     let t_rotation = constants.rotsRotations[(index + 1) % 20]
 
-    return new Discord.MessageEmbed()
+    return new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Rots Current Rotation`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/rots.png')
@@ -70,7 +70,7 @@ exports.vis = (data) => {
         data[0].children[1].children[6].children[2].children[2].attribs.alt
     ];
 
-    return new Discord.MessageEmbed()
+    return new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Correct Rune Combinations`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/vis.png')
@@ -172,7 +172,7 @@ exports.merch = (data, future) => {
     }
 
     if (future) {
-        return new Discord.MessageEmbed()
+        return new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Travelling Merchant's Shop`)
         .addFields(
@@ -189,7 +189,7 @@ exports.merch = (data, future) => {
         .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
     } else {
         return {
-            embed: new Discord.MessageEmbed()
+            embed: new Discord.EmbedBuilder()
                 .setColor(constants.embedColor)
                 .setTitle(`Travelling Merchant's Shop`)
                 .addFields(
@@ -208,14 +208,14 @@ exports.vos = (data, message) => {
     let date = new Date();
     let updateTime = `${date.getUTCHours()}:00`
 
-    let district1Embed = new Discord.MessageEmbed()
+    let district1Embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`${data.district1}`)
         .setDescription(`District 1`)
         .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district1}.png?raw=true`)
         .setFooter({ text: `RSClan • Updated at ${updateTime} GMT`, iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-    let district2Embed = new Discord.MessageEmbed()
+    let district2Embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`${data.district2}`)
         .setDescription(`District 2`)

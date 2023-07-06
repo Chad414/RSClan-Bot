@@ -37,7 +37,7 @@ module.exports = {
     let nextSpawnDate = new Date(currentDate);
     nextSpawnDate.setDate(nextSpawnDate.getDate() + daysUntilRotation);
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Raven`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/raven.png')

@@ -22,7 +22,7 @@ module.exports = {
         data[0].children[1].children[6].children[2].children[2].attribs.alt
       ];
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Correct Rune Combinations`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/vis.png')

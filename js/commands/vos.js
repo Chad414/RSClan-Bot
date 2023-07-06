@@ -18,14 +18,14 @@ module.exports = {
       let date = new Date();
       let updateTime = `${date.getUTCHours()}:00`
 
-      let district1Embed = new Discord.MessageEmbed()
+      let district1Embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`${data.district1}`)
         .setDescription(`District 1`)
         .setImage(`https://github.com/Chad414/RSClan-Bot/blob/main/img/vos/${data.district1}.png?raw=true`)
         .setFooter({ text: `RSClan • Updated at ${updateTime} GMT`, iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-      let district2Embed = new Discord.MessageEmbed()
+      let district2Embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`${data.district2}`)
         .setDescription(`District 2`)

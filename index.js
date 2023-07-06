@@ -15,13 +15,13 @@ const {
 
 const {
   Client,
-  Intents,
+  GatewayIntentBits,
   Collection
 } = require('discord.js');
 
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS]
+  intents: [GatewayIntentBits.Guilds]
 });
 
 const TOKEN = config.BOT_TOKEN;

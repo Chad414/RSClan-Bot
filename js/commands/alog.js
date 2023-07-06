@@ -88,7 +88,7 @@ module.exports = {
         dates[i] = date
       }
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`${data.name}'s Adventure Log`)
         .setThumbnail(`http://secure.runescape.com/m=avatar-rs/${username}/chat.png`)

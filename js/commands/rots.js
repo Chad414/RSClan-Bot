@@ -21,7 +21,7 @@ module.exports = {
     let rotation = constants.rotsRotations[index]
     let t_rotation = constants.rotsRotations[(index + 1) % 20]
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`RotS Current Rotation`)
         .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/rots.png')

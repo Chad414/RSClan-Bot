@@ -9,7 +9,7 @@ module.exports = {
     .setDescription('Displays Bot Info'),
   async execute(interaction) {
     let serverCount = interaction.client.guilds.cache.size;
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setAuthor({ name: 'Chadathan#0100', iconURL: constants.authorAvatar, url: 'https://discord.gg/9YqrzJex7d' })
       .setColor(constants.embedColor)
       .setTitle('RSClan Bot')

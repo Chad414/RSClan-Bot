@@ -25,7 +25,7 @@ module.exports = {
     // Format RSN for display
     rsn = (rsn.includes('+')) ? _.startCase(rsn.replace('+', ' ')) : _.upperFirst(rsn)
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setColor(constants.embedColor)
       .setTitle('✅ RSN Assigned')
       .setDescription(`Assigned ${rsn} to your Discord account.`)

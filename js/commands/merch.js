@@ -101,7 +101,7 @@ module.exports = {
       }
 
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Travelling Merchant's Shop`)
         .addFields(

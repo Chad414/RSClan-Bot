@@ -168,7 +168,7 @@ exports.logError = (error) => {
     console.log(`\t∟ ${error.name}: ${error.message}`);
 };
 
-exports.runeClanError = new Discord.MessageEmbed()
+exports.runeClanError = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ Gains Error')
     .setURL('https://runepixels.com')
@@ -176,7 +176,7 @@ exports.runeClanError = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-exports.privateProfile = new Discord.MessageEmbed()
+exports.privateProfile = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ RuneMetrics Error')
     .setDescription(`Your RuneMetrics profile is set to private, please set it to public on the RuneScape website.`)
@@ -184,35 +184,35 @@ exports.privateProfile = new Discord.MessageEmbed()
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-exports.runeMetricsUnavailable = new Discord.MessageEmbed()
+exports.runeMetricsUnavailable = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ RuneMetrics Error')
     .setDescription(`RuneMetrics is currently unavailable or the user does not exist.`)
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-exports.noRSN = new Discord.MessageEmbed()
+exports.noRSN = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ RSN Not Found')
     .setDescription("Please set your RSN with /setrsn \nExample: `/setrsn Zezima`")
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-exports.noItem = new Discord.MessageEmbed()
+exports.noItem = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ Item not found')
     .setDescription("Please make sure you enter an item exactly as it's shown in-game \nExample: `/ge Ascension Crossbow`")
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-exports.portablesError = new Discord.MessageEmbed()
+exports.portablesError = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ Portables Error')
     .setDescription(`Unable to retrieve Portables data.`)
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
-exports.vosError = new Discord.MessageEmbed()
+exports.vosError = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ VoS Error')
     .setDescription(`Unable to retrieve VoS data.`)

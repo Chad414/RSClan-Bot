@@ -22,7 +22,7 @@ module.exports = {
 
     let daysUntilRotation = 7 - (daysDifference % 7);
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setColor(constants.embedColor)
       .setTitle(`Vorago's Current Rotation`)
       .setDescription(`Days Until Next Rotation: ${daysUntilRotation}`)

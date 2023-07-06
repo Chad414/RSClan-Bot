@@ -23,7 +23,7 @@ module.exports = {
 
     let daysUntilRotation = 4 - (daysDifference % 4);
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setColor(constants.embedColor)
         .setTitle(`Araxxor's Current Rotation`)
         .setDescription(`Days until next rotation: ${daysUntilRotation}`)
