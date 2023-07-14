@@ -238,3 +238,24 @@ exports.vos = (data, message) => {
     }
 
 }
+
+// Wilderness Flash Events Command
+exports.nextevent = () => {
+    let firstRotationDate = new Date('July 14, 2023 17:00:00 GMT+0:00')
+    let currentDate = new Date();
+    let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
+    let hoursDifference = Math.floor(timeDifference / (1000 * 3600));
+    let currentRotation = hoursDifference % 12;
+
+    let nextEventTime = (currentDate.getUTCHours() + 1) % 24
+
+    return embed = new Discord.EmbedBuilder()
+      .setColor(constants.embedColor)
+      .setTitle(`Next Wilderness Flash Event`)
+      .addFields(
+        { name: `${constants.wildyEvents[currentRotation]}`, value: `at ${nextEventTime}:00 GMT` }
+      )
+      .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/wilderness.png')
+      .setTimestamp()
+      .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
+}

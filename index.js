@@ -208,3 +208,20 @@ cron.schedule('25 00 00 * * *', () => {
 }, {
   timezone: "Africa/Accra"
 });
+
+// Auto Wilderness Flash Events
+// This feature is currently exclusive to Dark Perception
+cron.schedule('00 55 * * * *', () => {
+  let date = new Date();
+  console.log(`[${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}] Sending auto Flash Events`);
+
+  for (let i = 0; i < constants.eventChannels.length; i++) {
+    let channel = client.channels.cache.get(constants.eventChannels[i]);
+    let nextEventEmbed = auto.nextevent();
+
+    channel.send({ embeds: [nextEventEmbed] });
+  }
+
+}, {
+  timezone: "Africa/Accra"
+});

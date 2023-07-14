@@ -129,6 +129,10 @@ exports.dailyChannels = [
     // "848930714606370917"
 ];
 
+exports.eventChannels = [
+    "1122577008900198541"
+]
+
 // TODO: Move to config file
 exports.vosRoles = (district) => {
     switch (district) {
@@ -150,6 +154,22 @@ exports.vosRoles = (district) => {
             return '<@&846416609069105172>';
     }
 };
+
+exports.wildyEvents = [
+    "Spider Swarm",
+    "Unnatural Outcrop",
+    "Demon Stragglers",
+    "Butterfly Swarm",
+    "King Black Dragon Rampage",
+    "Forgotten Soldiers",
+    "Surprising Seedlings",
+    "Hellhound Pack",
+    "Infernal Star",
+    "Lost Souls",
+    "Ramokee Incursion",
+    "Displaced Energy",
+    "Evil Bloodwood Tree"
+];
 
 // TODO: Move to config file
 exports.merchRoles = [
