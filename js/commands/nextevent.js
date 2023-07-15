@@ -24,7 +24,7 @@ module.exports = {
       .addFields(
         { name: `${constants.wildyEvents[currentRotation]}`, value: `at ${nextEventTime}:00 GMT` }
       )
-      .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/wilderness.png')
+      .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/version_2/img/wilderness.png')
       .setTimestamp()
       .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
