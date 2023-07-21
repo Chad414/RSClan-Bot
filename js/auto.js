@@ -240,7 +240,7 @@ exports.vos = (data, message) => {
 }
 
 // Wilderness Flash Events Command
-exports.nextevent = () => {
+exports.nextEventEmbed = () => {
     let firstRotationDate = new Date('July 17, 2023 23:00:00 GMT+0:00');
     let currentDate = new Date();
     let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
@@ -259,4 +259,15 @@ exports.nextevent = () => {
       .setThumbnail('https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/wilderness.png')
       .setTimestamp()
       .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
+}
+
+exports.nextEvent = () => {
+    let firstRotationDate = new Date('July 17, 2023 23:00:00 GMT+0:00');
+    let currentDate = new Date();
+    let timeDifference = currentDate.getTime() - firstRotationDate.getTime();
+    let hoursDifference = Math.floor(timeDifference / (1000 * 3600));
+
+    let currentRotation = hoursDifference % 13;
+
+    return constants.wildyEvents[currentRotation]
 }

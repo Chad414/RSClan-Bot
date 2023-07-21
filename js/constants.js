@@ -155,6 +155,17 @@ exports.vosRoles = (district) => {
     }
 };
 
+exports.wildyRoles = (event) => {
+    switch (event) {
+        case 'King Black Dragon Rampage':
+            return '<@&1118328688132493392>';
+        case 'Infernal Star':
+            return '<@&1118327534266896394>';
+        case 'Evil Bloodwood Tree':
+            return '<@&1118329991382442045>';
+    }
+};
+
 exports.wildyEvents = [
     "Spider Swarm",
     "Unnatural Outcrop",

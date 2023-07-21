@@ -217,9 +217,14 @@ cron.schedule('00 55 * * * *', () => {
 
   for (let i = 0; i < constants.eventChannels.length; i++) {
     let channel = client.channels.cache.get(constants.eventChannels[i]);
-    let nextEventEmbed = auto.nextevent();
+    let nextEventEmbed = auto.nextEventEmbed();
+    let nextEvent = auto.nextEvent();
 
     channel.send({ embeds: [nextEventEmbed] });
+
+    if (constants.wildyRoles(nextEvent) != null) {
+      channel.send(constants.wildyRoles(nextEvent));
+    }
   }
 
 }, {
