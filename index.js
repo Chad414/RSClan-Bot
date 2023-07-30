@@ -220,6 +220,8 @@ cron.schedule('00 55 * * * *', () => {
     let nextEventEmbed = auto.nextEventEmbed();
     let nextEvent = auto.nextEvent();
 
+    channel.bulkDelete(10)
+
     channel.send({ embeds: [nextEventEmbed] });
 
     if (constants.wildyRoles(nextEvent) != null) {
