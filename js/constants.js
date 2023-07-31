@@ -130,7 +130,7 @@ exports.dailyChannels = [
 ];
 
 exports.eventChannels = [
-    "1122577008900198541"
+    "1135356980614135878"
 ]
 
 // TODO: Move to config file
