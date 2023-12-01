@@ -31,14 +31,14 @@ module.exports = {
       rsn = rsn.replace('+', '-');
     }
 
-    await rp(`https://runepixels.com:5000/players/${rsn}`).then(async function (playerJSON) {
+    await rp(`https://api.runepixels.com/players/${rsn}`).then(async function (playerJSON) {
       const playerData = JSON.parse(playerJSON);
       let playerID = playerData.id;
 
-      await rp(`https://runepixels.com:5000/players/${playerID}/xp?timeperiod=1`).then(async function (yesterdayJSON) {
+      await rp(`https://api.runepixels.com/players/${playerID}/xp?timeperiod=1`).then(async function (yesterdayJSON) {
         const yesterdayData = JSON.parse(yesterdayJSON);
 
-        await rp(`https://runepixels.com:5000/players/${playerID}/xp?timeperiod=2`).then(function (weeklyJSON) {
+        await rp(`https://api.runepixels.com/players/${playerID}/xp?timeperiod=2`).then(function (weeklyJSON) {
           const weeklyData = JSON.parse(weeklyJSON);
           let yesterdayData = this.yesterdayData
           let playerData = this.playerData
