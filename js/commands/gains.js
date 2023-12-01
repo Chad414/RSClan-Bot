@@ -50,7 +50,7 @@ module.exports = {
           // Format RSN if spaced
           rsn = (rsn.includes('-')) ? _.startCase(rsn.replace('-', ' ')) : _.upperFirst(rsn)
     
-          for (let i = 0; i < 29; i++) {
+          for (let i = 0; i < 30; i++) {
             if (i == 0) {
               daily.push(playerData.overall.xpDelta);
               yesterday.push(yesterdayData[i].xp);
@@ -104,7 +104,9 @@ module.exports = {
 | Divination    |${daily[26]} |${yesterday[26]} |${weekly[26]} |
 | Invention     |${daily[27]} |${yesterday[27]} |${weekly[27]} |
 | Archaeology   |${daily[28]} |${yesterday[28]} |${weekly[28]} |
+| Necromancy    |${daily[29]} |${yesterday[29]} |${weekly[29]} |
 ✚-------------------------------------------------✚
+// Provided by https://runepixels.com
     \`\`\``;
     
           interaction.reply({ content: result });

@@ -105,6 +105,7 @@ module.exports = {
 | Divination    |${levels[25]} | ${exp[25]} |
 | Invention     |${levels[26]} | ${exp[26]} |
 | Archaeology   |${levels[27]} | ${exp[27]} |
+| Necromancy    |${levels[28]} | ${exp[28]} |
 ✚-----------------------------------------✚
 \`\`\``;
 

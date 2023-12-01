@@ -59,7 +59,8 @@ exports.skills = [
     'Dungeoneering',
     'Divination',
     'Invention',
-    'Archaeology'
+    'Archaeology',
+    'Necromancy'
 ];
 
 exports.months = [
@@ -203,7 +204,7 @@ exports.runeClanError = new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setTitle('❌ Gains Error')
     .setURL('https://runepixels.com')
-    .setDescription(`Please make sure you're being tracked by RunePixels`)
+    .setDescription(`User not found`)
     .setTimestamp()
     .setFooter({ text: 'RSClan', iconURL: 'https://raw.githubusercontent.com/Chad414/RSClan-Bot/main/img/icon.png' });
 
